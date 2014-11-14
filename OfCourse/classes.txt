@@ -1,0 +1,932 @@
+1.1
+50
+0
+9
+101
+Introduction to Software Engineering 2
+Introduction to Software Engineering 2
+Owen Reed
+0
+40
+13
+3
+1
+9
+101
+Introduction to Software Engineering 2
+Introduction to Software Engineering 2
+Alma Kelly
+1
+24
+10
+2
+1
+8
+400
+Special Topics in Music 1
+Special Topics in Music 1
+Felicia Davis
+0
+38
+15
+3
+2
+8
+400
+Special Topics in Music 1
+Special Topics in Music 1
+Stacey Manning
+2
+14
+16
+2
+2
+7
+402
+Special Topics in Math 3
+Special Topics in Math 3
+Theodore Larson
+0
+50
+10
+1
+3
+7
+402
+Special Topics in Math 3
+Special Topics in Math 3
+Mercedes Fields
+2
+34
+15
+0
+3
+3
+501
+Work Term in Computer Science 2
+Work Term in Computer Science 2
+Molly Cohen
+0
+22
+12
+1
+4
+3
+501
+Work Term in Computer Science 2
+Work Term in Computer Science 2
+Theodore Larson
+1
+34
+15
+1
+5
+3
+501
+Work Term in Computer Science 2
+Work Term in Computer Science 2
+Molly Cohen
+2
+32
+14
+1
+4
+5
+200
+Applications of Engineering 1
+Applications of Engineering 1
+Alma Kelly
+0
+36
+10
+2
+5
+1
+200
+Applications of Biology 1
+Applications of Biology 1
+Catherine Abbott
+0
+36
+8
+2
+6
+1
+200
+Applications of Biology 1
+Applications of Biology 1
+Conrad Diaz
+1
+26
+16
+1
+6
+2
+500
+Work Term in Business and Environment 1
+Work Term in Business and Environment 1
+Angie Reid
+0
+60
+14
+2
+7
+2
+500
+Work Term in Business and Environment 1
+Work Term in Business and Environment 1
+Clarence Crawford
+1
+56
+14
+0
+7
+8
+401
+Special Topics in Music 2
+Special Topics in Music 2
+Clark Mccarthy
+0
+52
+8
+1
+8
+8
+401
+Special Topics in Music 2
+Special Topics in Music 2
+Jordan Allison
+2
+22
+14
+0
+9
+8
+401
+Special Topics in Music 2
+Special Topics in Music 2
+Edmund Wallace
+1
+0
+7
+2
+8
+3
+500
+Work Term in Computer Science 1
+Work Term in Computer Science 1
+Nelson Knight
+0
+2
+14
+2
+9
+7
+202
+Applications of Math 3
+Applications of Math 3
+Catherine Abbott
+0
+34
+16
+1
+10
+7
+202
+Applications of Math 3
+Applications of Math 3
+Elijah Barrett
+2
+58
+10
+1
+10
+1
+202
+Applications of Biology 3
+Applications of Biology 3
+Julian Hardy
+0
+8
+13
+2
+11
+7
+101
+Introduction to Math 2
+Introduction to Math 2
+Tomas Bryant
+0
+48
+15
+2
+12
+1
+500
+Work Term in Biology 1
+Work Term in Biology 1
+Darnell Phillips
+0
+40
+16
+3
+13
+6
+402
+Special Topics in English 3
+Special Topics in English 3
+Alonzo Douglas
+0
+10
+10
+2
+14
+6
+402
+Special Topics in English 3
+Special Topics in English 3
+Jimmy Owen
+2
+56
+10
+0
+14
+4
+400
+Special Topics in Education 1
+Special Topics in Education 1
+Tomas Bryant
+0
+62
+16
+1
+15
+2
+101
+Introduction to Business and Environment 2
+Introduction to Business and Environment 2
+Johanna Wood
+0
+22
+15
+1
+16
+2
+101
+Introduction to Business and Environment 2
+Introduction to Business and Environment 2
+Jordan Allison
+2
+62
+14
+0
+16
+6
+302
+Advanced Topics in English 3
+Advanced Topics in English 3
+Alonzo Douglas
+0
+34
+16
+3
+17
+6
+302
+Advanced Topics in English 3
+Advanced Topics in English 3
+Jacqueline Tate
+2
+22
+11
+1
+18
+6
+302
+Advanced Topics in English 3
+Advanced Topics in English 3
+Olga Stewart
+1
+44
+10
+1
+17
+6
+400
+Special Topics in English 1
+Special Topics in English 1
+Jeannie Romero
+0
+10
+15
+1
+18
+6
+400
+Special Topics in English 1
+Special Topics in English 1
+Owen Reed
+1
+36
+7
+2
+18
+3
+300
+Advanced Topics in Computer Science 1
+Advanced Topics in Computer Science 1
+Vicki Woods
+0
+0
+13
+2
+19
+3
+300
+Advanced Topics in Computer Science 1
+Advanced Topics in Computer Science 1
+Mae Dunn
+1
+50
+7
+0
+20
+3
+300
+Advanced Topics in Computer Science 1
+Advanced Topics in Computer Science 1
+Edmund Wallace
+2
+42
+16
+1
+19
+2
+501
+Work Term in Business and Environment 2
+Work Term in Business and Environment 2
+Arturo Miles
+0
+54
+14
+1
+20
+2
+501
+Work Term in Business and Environment 2
+Work Term in Business and Environment 2
+Nelson Knight
+1
+62
+12
+0
+20
+8
+100
+Introduction to Music 1
+Introduction to Music 1
+Mercedes Fields
+0
+24
+12
+2
+21
+8
+100
+Introduction to Music 1
+Introduction to Music 1
+Johanna Wood
+2
+14
+10
+0
+21
+6
+302
+Advanced Topics in English 3
+Advanced Topics in English 3
+Mercedes Fields
+0
+12
+12
+1
+22
+6
+302
+Advanced Topics in English 3
+Advanced Topics in English 3
+Mattie Hogan
+2
+30
+14
+0
+22
+7
+300
+Advanced Topics in Math 1
+Advanced Topics in Math 1
+Garry Copeland
+0
+18
+11
+3
+23
+1
+402
+Special Topics in Biology 3
+Special Topics in Biology 3
+Molly Cohen
+0
+8
+15
+3
+24
+8
+401
+Special Topics in Music 2
+Special Topics in Music 2
+Elijah Barrett
+0
+24
+8
+2
+25
+3
+301
+Advanced Topics in Computer Science 2
+Advanced Topics in Computer Science 2
+Catherine Abbott
+0
+38
+11
+3
+26
+3
+301
+Advanced Topics in Computer Science 2
+Advanced Topics in Computer Science 2
+Mattie Hogan
+1
+12
+9
+0
+26
+9
+500
+Work Term in Software Engineering 1
+Work Term in Software Engineering 1
+Wendy Thornton
+0
+40
+8
+2
+27
+9
+500
+Work Term in Software Engineering 1
+Work Term in Software Engineering 1
+Mercedes Fields
+1
+30
+7
+2
+28
+9
+500
+Work Term in Software Engineering 1
+Work Term in Software Engineering 1
+Jacqueline Tate
+2
+26
+14
+2
+27
+4
+202
+Applications of Education 3
+Applications of Education 3
+Steve Peters
+0
+44
+15
+3
+28
+4
+202
+Applications of Education 3
+Applications of Education 3
+Clarence Crawford
+1
+28
+11
+1
+29
+4
+202
+Applications of Education 3
+Applications of Education 3
+Tara Howard
+1
+28
+10
+1
+28
+1
+500
+Work Term in Biology 1
+Work Term in Biology 1
+Timothy Jenkins
+0
+52
+10
+3
+29
+7
+502
+Work Term in Math 3
+Work Term in Math 3
+Edmund Wallace
+0
+52
+12
+1
+30
+0
+401
+Special Topics in Art 2
+Special Topics in Art 2
+Clarence Crawford
+0
+6
+16
+1
+31
+0
+401
+Special Topics in Art 2
+Special Topics in Art 2
+Elijah Barrett
+2
+42
+11
+1
+31
+4
+302
+Advanced Topics in Education 3
+Advanced Topics in Education 3
+Nelson Knight
+0
+44
+15
+2
+32
+4
+302
+Advanced Topics in Education 3
+Advanced Topics in Education 3
+Felicia Davis
+2
+10
+15
+1
+32
+5
+502
+Work Term in Engineering 3
+Work Term in Engineering 3
+Elsa Malone
+0
+54
+12
+1
+33
+5
+200
+Applications of Engineering 1
+Applications of Engineering 1
+Angie Reid
+0
+36
+16
+2
+34
+5
+200
+Applications of Engineering 1
+Applications of Engineering 1
+Vicki Woods
+2
+14
+13
+2
+35
+5
+200
+Applications of Engineering 1
+Applications of Engineering 1
+Owen Reed
+1
+4
+15
+0
+34
+5
+302
+Advanced Topics in Engineering 3
+Advanced Topics in Engineering 3
+Tara Howard
+0
+42
+13
+1
+35
+5
+100
+Introduction to Engineering 1
+Introduction to Engineering 1
+Courtney Smith
+0
+42
+16
+1
+36
+5
+100
+Introduction to Engineering 1
+Introduction to Engineering 1
+Julian Hardy
+2
+38
+14
+0
+37
+5
+100
+Introduction to Engineering 1
+Introduction to Engineering 1
+Vincent James
+2
+40
+14
+1
+36
+7
+101
+Introduction to Math 2
+Introduction to Math 2
+Elijah Barrett
+0
+52
+11
+2
+37
+7
+101
+Introduction to Math 2
+Introduction to Math 2
+Alma Kelly
+1
+32
+10
+2
+37
+2
+101
+Introduction to Business and Environment 2
+Introduction to Business and Environment 2
+Clarence Crawford
+0
+58
+7
+2
+38
+2
+101
+Introduction to Business and Environment 2
+Introduction to Business and Environment 2
+Owen Reed
+2
+32
+16
+1
+39
+2
+101
+Introduction to Business and Environment 2
+Introduction to Business and Environment 2
+Vicki Woods
+1
+14
+7
+2
+38
+2
+102
+Introduction to Business and Environment 3
+Introduction to Business and Environment 3
+Simon Osborne
+0
+50
+15
+1
+39
+2
+102
+Introduction to Business and Environment 3
+Introduction to Business and Environment 3
+Molly Cohen
+1
+38
+11
+0
+39
+1
+301
+Advanced Topics in Biology 2
+Advanced Topics in Biology 2
+Elsa Malone
+0
+62
+7
+3
+40
+9
+301
+Advanced Topics in Software Engineering 2
+Advanced Topics in Software Engineering 2
+Taylor Oliver
+0
+30
+11
+2
+41
+9
+301
+Advanced Topics in Software Engineering 2
+Advanced Topics in Software Engineering 2
+Jacqueline Tate
+1
+12
+10
+2
+41
+4
+201
+Applications of Education 2
+Applications of Education 2
+Audrey Morton
+0
+52
+13
+2
+42
+9
+402
+Special Topics in Software Engineering 3
+Special Topics in Software Engineering 3
+Arturo Miles
+0
+0
+9
+1
+43
+9
+402
+Special Topics in Software Engineering 3
+Special Topics in Software Engineering 3
+Mercedes Fields
+1
+0
+7
+1
+44
+9
+402
+Special Topics in Software Engineering 3
+Special Topics in Software Engineering 3
+Elijah Barrett
+1
+34
+12
+2
+43
+7
+202
+Applications of Math 3
+Applications of Math 3
+Mae Dunn
+0
+6
+9
+1
+44
+4
+302
+Advanced Topics in Education 3
+Advanced Topics in Education 3
+Ivan Harrington
+0
+44
+7
+3
+45
+4
+302
+Advanced Topics in Education 3
+Advanced Topics in Education 3
+Nina Hudson
+1
+42
+7
+2
+45
+0
+501
+Work Term in Art 2
+Work Term in Art 2
+Johanna Wood
+0
+50
+14
+1
+46
+0
+501
+Work Term in Art 2
+Work Term in Art 2
+Courtney Smith
+1
+60
+16
+2
+46
+5
+202
+Applications of Engineering 3
+Applications of Engineering 3
+Angie Reid
+0
+18
+15
+2
+47
+5
+202
+Applications of Engineering 3
+Applications of Engineering 3
+Clark Mccarthy
+2
+34
+11
+1
+47
+1
+100
+Introduction to Biology 1
+Introduction to Biology 1
+Jeannie Romero
+0
+32
+7
+1
+48
+1
+100
+Introduction to Biology 1
+Introduction to Biology 1
+Timothy Jenkins
+1
+40
+13
+1
+49
+1
+100
+Introduction to Biology 1
+Introduction to Biology 1
+Lydia Bowen
+2
+16
+11
+2
+48
+1
+501
+Work Term in Biology 2
+Work Term in Biology 2
+Johanna Wood
+0
+18
+10
+1
+49
+5
+500
+Work Term in Engineering 1
+Work Term in Engineering 1
+Alonzo Douglas
+0
+12
+12
+1

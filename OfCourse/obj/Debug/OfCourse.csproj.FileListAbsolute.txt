@@ -1,0 +1,15 @@
+c:\users\default.default-pc\documents\visual studio 2013\Projects\OfCourse\OfCourse\bin\Debug\OfCourse.exe.config
+c:\users\default.default-pc\documents\visual studio 2013\Projects\OfCourse\OfCourse\obj\Debug\OfCourse.csprojResolveAssemblyReference.cache
+c:\users\default.default-pc\documents\visual studio 2013\Projects\OfCourse\OfCourse\obj\Debug\MainWindow.baml
+c:\users\default.default-pc\documents\visual studio 2013\Projects\OfCourse\OfCourse\obj\Debug\MainWindow.g.cs
+c:\users\default.default-pc\documents\visual studio 2013\Projects\OfCourse\OfCourse\obj\Debug\App.g.cs
+c:\users\default.default-pc\documents\visual studio 2013\Projects\OfCourse\OfCourse\obj\Debug\OfCourse_MarkupCompile.cache
+c:\users\default.default-pc\documents\visual studio 2013\Projects\OfCourse\OfCourse\obj\Debug\OfCourse.g.resources
+c:\users\default.default-pc\documents\visual studio 2013\Projects\OfCourse\OfCourse\obj\Debug\OfCourse.Properties.Resources.resources
+c:\users\default.default-pc\documents\visual studio 2013\Projects\OfCourse\OfCourse\obj\Debug\OfCourse.csproj.GenerateResource.Cache
+c:\users\default.default-pc\documents\visual studio 2013\Projects\OfCourse\OfCourse\bin\Debug\OfCourse.exe
+c:\users\default.default-pc\documents\visual studio 2013\Projects\OfCourse\OfCourse\bin\Debug\OfCourse.pdb
+c:\users\default.default-pc\documents\visual studio 2013\Projects\OfCourse\OfCourse\obj\Debug\OfCourse.exe
+c:\users\default.default-pc\documents\visual studio 2013\Projects\OfCourse\OfCourse\obj\Debug\OfCourse.pdb
+C:\Users\default.default-PC\Documents\Visual Studio 2013\Projects\OfCourse\OfCourse\obj\Debug\SearchResult.baml
+C:\Users\default.default-PC\Documents\Visual Studio 2013\Projects\OfCourse\OfCourse\obj\Debug\SearchResult.g.cs
