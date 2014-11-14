@@ -1,5 +1,4 @@
 ﻿/* TODO: 
- *    - Figure out how to get the scrollbar appearing/disappearing to stop affecting control placement
  *    - Get the schedule done
  *    - Get the cart running
  *    - Get drag-and-drop working
@@ -100,12 +99,12 @@ namespace OfCourse
                     {
                         r.CTime.Content += "F";
                     }
-                    r.CTime.Content += "  " + c.startTime + ":00 - " + (c.startTime+c.duration) + ":00";
+                    r.CTime.Content += "  " + c.startTime + ":00 - " + (c.startTime + c.duration) + ":00";
 
-                    Results.Children.Add(r);
+
                     results.Add(r);
                 }
-                while(inFile.Peek() != -1);
+                while (inFile.Peek() != -1);
             }
             catch
             {
@@ -115,6 +114,12 @@ namespace OfCourse
             finally
             {
                 inFile.Close();
+            }
+
+            results = results.OrderBy(o => o.CName.Content).ToList(); // Huzzah! Sorts the list of courses. LINQ.
+            foreach (SearchResult r in results)
+            {
+                Results.Children.Add(r);
             }
         }
 
