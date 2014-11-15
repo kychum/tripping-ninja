@@ -20,7 +20,7 @@
 		<Storyboard x:Key="MouseOff">
 			<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
 				<EasingColorKeyFrame KeyTime="0" Value="#FFDBDBF9"/>
-				<EasingColorKeyFrame KeyTime="0:0:0.3" Value="White"/>
+				<EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FFF4F4F5"/>
 			</ColorAnimationUsingKeyFrames>
 			<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
 				<EasingColorKeyFrame KeyTime="0" Value="White"/>
