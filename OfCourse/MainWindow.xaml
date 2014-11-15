@@ -1,11 +1,11 @@
 ﻿<Window x:Class="OfCourse.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:local="clr-namespace:OfCourse"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="OfCourse Registration" Height="499.254" Width="798.134" Background="#FFF1F1F1">
-    <Grid>
-
-        <DockPanel Height="32" VerticalAlignment="Top" LastChildFill="False">
-            <TextBox Width="240" Height="23" Margin="5,4" TextChanged="Search" DockPanel.Dock="Left"/>
+        Title="OfCourse Registration" Height="750" Width="1000" Background="#FFF1F1F1">
+    <DockPanel>
+        <DockPanel Height="32" VerticalAlignment="Top" LastChildFill="False" DockPanel.Dock="Top">
+            <TextBox Width="240" Margin="5,4" TextChanged="Search" DockPanel.Dock="Left"/>
             <ComboBox Width="115" Height="23" Margin="0,0,5,0" DockPanel.Dock="Left">
                 <ComboBoxItem Content="Faculty" HorizontalAlignment="Left" Width="88" IsSelected="True" Visibility="Collapsed"/>
                 <ComboBoxItem Content="All Faculties" HorizontalAlignment="Left" Width="113"/>
@@ -20,20 +20,22 @@
             <Button Content="Finalize" Width="75" Height="23" DockPanel.Dock="Right" Margin="0,0,5,0"/>
             
         </DockPanel>
-        <ScrollViewer Name="ResultsPane" Margin="5,37,511,0" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left">
+        <ScrollViewer Name="ResultsPane" Margin="5,5,0,0" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" DockPanel.Dock="Left" Visibility="Collapsed">
             <Grid HorizontalAlignment="Left" Width="247">
                 <StackPanel Name="Results">
+                    <Label Name="NotFoundLabel" Content="No results found!" HorizontalAlignment="Center" Visibility="Collapsed"/>
                 </StackPanel>
             </Grid>
         </ScrollViewer>
-        <DockPanel Margin="257,37,0,0">
-            <Grid DockPanel.Dock="Top" x:Name="SchedulePanel" Margin="10,0,0,0" Height="332" ShowGridLines="True">
-                <Label Content="Schedule goes here" HorizontalAlignment="Left" Margin="194,125,0,0" VerticalAlignment="Top"/>
+        <DockPanel Margin="2,0,0,0" DockPanel.Dock="Right">
+            <local:ExpandTab x:Name="Expander"/>
+            <Grid Margin="10,0,0,0" DockPanel.Dock="Bottom">
+                <Label Content="Cart Goes Here?" HorizontalAlignment="Center" Margin="0,25" VerticalAlignment="Center"/>
             </Grid>
-            <Grid Margin="10,0,0,0">
-                <Label Content="Cart Goes Here?" HorizontalAlignment="Left" Margin="199,36,0,0" VerticalAlignment="Top"/>
+            <Grid DockPanel.Dock="Top" x:Name="SchedulePanel" Margin="10,0,0,0" ShowGridLines="True">
+                <Label Content="Schedule goes here (Remove as needed)" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
             </Grid>
         </DockPanel>
 
-    </Grid>
+    </DockPanel>
 </Window>

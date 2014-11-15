@@ -6,9 +6,39 @@
 	mc:Ignorable="d"
 	x:Class="OfCourse.SearchResult"
 	x:Name="UserControl" Height="148.821" Width="255.739">
+	<UserControl.Resources>
+		<Storyboard x:Key="MouseOver">
+			<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
+				<EasingColorKeyFrame KeyTime="0" Value="#FFF4F4F5"/>
+				<EasingColorKeyFrame KeyTime="0:0:0.2" Value="#FFDBDBF9"/>
+			</ColorAnimationUsingKeyFrames>
+			<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
+				<EasingColorKeyFrame KeyTime="0" Value="Black"/>
+				<EasingColorKeyFrame KeyTime="0:0:0.2" Value="White"/>
+			</ColorAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Key="MouseOff">
+			<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
+				<EasingColorKeyFrame KeyTime="0" Value="#FFDBDBF9"/>
+				<EasingColorKeyFrame KeyTime="0:0:0.3" Value="White"/>
+			</ColorAnimationUsingKeyFrames>
+			<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
+				<EasingColorKeyFrame KeyTime="0" Value="White"/>
+				<EasingColorKeyFrame KeyTime="0:0:0.3" Value="Black"/>
+			</ColorAnimationUsingKeyFrames>
+		</Storyboard>
+	</UserControl.Resources>
+	<UserControl.Triggers>
+		<EventTrigger RoutedEvent="Mouse.MouseEnter">
+			<BeginStoryboard x:Name="MouseOver_BeginStoryboard" Storyboard="{StaticResource MouseOver}"/>
+		</EventTrigger>
+		<EventTrigger RoutedEvent="Mouse.MouseLeave">
+			<BeginStoryboard Storyboard="{StaticResource MouseOff}"/>
+		</EventTrigger>
+	</UserControl.Triggers>
 
 	<Grid x:Name="LayoutRoot" Margin="0,0,10,-9" ClipToBounds="True">
-		<Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="135.821" Stroke="Black" VerticalAlignment="Top" Width="240" Margin="2,5,0,0" RadiusX="15" RadiusY="15"/>
+		<Rectangle x:Name="rectangle" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="135.821" Stroke="Black" VerticalAlignment="Top" Width="240" Margin="2,5,0,0" RadiusX="15" RadiusY="15"/>
 		<Grid ClipToBounds="True" Margin="1,0,19,0">
 			<Label x:Name="CName" Content="Course Number - Course Name" HorizontalAlignment="Left" Margin="11.5,10,0,0" VerticalAlignment="Top" FontSize="14.667"/>
 			<Label x:Name="CProf" Content="Professor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11.5,29.42,0,0" FontSize="13.333"/>

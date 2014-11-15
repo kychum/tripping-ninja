@@ -1,11 +1,22 @@
 ﻿/* TODO: 
  *    - Get the schedule done
+ *          - Find something better than a grid for the schedule
  *    - Get the cart running
  *    - Get drag-and-drop working
  *    - Add in the rest of the search options
  *    - Make the thing look nice (?)
  *    - Have a button to clear the faculty filter?
- *    - Find something better than a StackViewer
+ *    - Stop the scrollbar from messing with contol placement (ref. http://stackoverflow.com/questions/24694723/reserve-space-for-scrollviewer )
+ *    - Keyboard accessiblity?
+ *    - Get some borders up to make things look better
+ *    
+ *  Comments from Richard:
+ *    - What is the relationship between the cart and schedule?
+ *          - How will the cart look?
+ *    - Deal with switching semesters?
+ *    - Prereqs, coreqs, antireqs?
+ *    - Use more space, a bigger window won't hurt
+ *    - How much of a course registration system do we want this to become?
  */
 
 using System;
@@ -45,6 +56,28 @@ namespace OfCourse
         {
             InitializeComponent();
             LoadClasses();
+            Expander.Toggle.Click += Toggle_Click;
+        }
+
+        void Toggle_Click(object sender, RoutedEventArgs e)
+        {
+            if (ResultsPane.Visibility == Visibility.Visible)
+            {
+                ToggleResults(Visibility.Collapsed);
+            }
+            else
+            {
+                ToggleResults(Visibility.Visible);
+            }
+        }
+
+        void ToggleResults(Visibility v)
+        {
+            ResultsPane.Visibility = v;
+            if (v == Visibility.Visible)
+                Expander.Arrow.Content = "<";
+            else
+                Expander.Arrow.Content = ">";
         }
 
         public void LoadClasses()
@@ -138,8 +171,9 @@ namespace OfCourse
 
         private void Search(object sender, TextChangedEventArgs e)
         {
-            ResultsPane.Visibility = Visibility.Visible;
+            ToggleResults(Visibility.Visible);
             string query = ((TextBox)sender).Text;
+            int amountFound = 0;
             foreach (SearchResult res in results)
             {
                 if ((Regex.IsMatch(res.CName.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
@@ -148,11 +182,19 @@ namespace OfCourse
                     query != "")
                 {
                     res.Visibility = Visibility.Visible;
+                    amountFound++;
                 }
                 else
                 {
                     res.Visibility = Visibility.Collapsed;
                 }
+            }
+            if (amountFound > 0)
+            {
+                NotFoundLabel.Visibility = Visibility.Collapsed;
+            }
+            else{
+                NotFoundLabel.Visibility = Visibility.Visible;
             }
         }
     }
