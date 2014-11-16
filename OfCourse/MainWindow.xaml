@@ -33,7 +33,7 @@
                 <Label Content="Cart Goes Here?" HorizontalAlignment="Center" Margin="0,25" VerticalAlignment="Center"/>
             </Grid>
             <Grid DockPanel.Dock="Top" x:Name="SchedulePanel" Margin="10,0,0,0" ShowGridLines="True">
-                <Label Content="Schedule goes here (Remove as needed)" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
+                <local:TimeSchedule x:Name="Schedule" />
             </Grid>
         </DockPanel>
 

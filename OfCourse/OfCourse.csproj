@@ -55,11 +55,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Types.cs" />
     <Compile Include="ExpandTab.xaml.cs">
       <DependentUpon>ExpandTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ScheduleItem.xaml.cs">
+      <DependentUpon>ScheduleItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SearchResult.xaml.cs">
       <DependentUpon>SearchResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TimeSchedule.xaml.cs">
+      <DependentUpon>TimeSchedule.xaml</DependentUpon>
     </Compile>
     <Page Include="ExpandTab.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -77,7 +84,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ScheduleItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SearchResult.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TimeSchedule.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

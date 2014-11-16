@@ -1,0 +1,16 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="OfCourse.ScheduleItem"
+	x:Name="UserControl"
+	d:DesignWidth="277" d:DesignHeight="139.5" BorderThickness="2" Background="#FFE2FFFB" BorderBrush="#FFB2B2B2">
+
+	<StackPanel x:Name="LayoutRoot" VerticalAlignment="Center" >
+		<Label x:Name="CNum" Content="Course Number" HorizontalAlignment="Center" Margin="89.656,0" VerticalAlignment="Center"/>
+		<Label x:Name="CType" Content="Class Type" HorizontalAlignment="Center" Margin="103.83,0" VerticalAlignment="Center"/>
+		<Label x:Name="CTimes" Content="Times" HorizontalAlignment="Center" Margin="116.05,0" VerticalAlignment="Center"/>
+	</StackPanel>
+</UserControl>
