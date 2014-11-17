@@ -1,14 +1,13 @@
 ﻿/* TODO: 
- *    - Get the schedule done
- *          - Find something better than a grid for the schedule
  *    - Get the cart running
  *    - Get drag-and-drop working
  *    - Add in the rest of the search options
  *    - Make the thing look nice (?)
  *    - Have a button to clear the faculty filter?
- *    - Stop the scrollbar from messing with contol placement (ref. http://stackoverflow.com/questions/24694723/reserve-space-for-scrollviewer )
  *    - Keyboard accessiblity?
  *    - Get some borders up to make things look better
+ *    - Get mouse hover when disabled to highlight the course somehow
+ *    - Update class definitions to include faculty somehow and filter it
  *    
  *  Comments from Richard:
  *    - What is the relationship between the cart and schedule?
