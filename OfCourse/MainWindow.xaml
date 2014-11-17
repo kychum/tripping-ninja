@@ -3,6 +3,31 @@
         xmlns:local="clr-namespace:OfCourse"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="OfCourse Registration" Height="750" Width="1000" Background="#FFF1F1F1">
+	<Window.Resources>
+		<Storyboard x:Key="ExpandResults">
+			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ResultsPane">
+				<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+			</ObjectAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="ResultsPane">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="265"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Key="HideResults">
+			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ResultsPane">
+				<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+				<DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Collapsed}"/>
+			</ObjectAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="ResultsPane">
+				<EasingDoubleKeyFrame KeyTime="0" Value="265"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="247"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+	</Window.Resources>
+	<Window.Triggers>
+		<EventTrigger RoutedEvent="Mouse.MouseUp" SourceName="Expander"/>
+	</Window.Triggers>
     <DockPanel>
         <DockPanel Height="32" VerticalAlignment="Top" LastChildFill="False" DockPanel.Dock="Top">
             <TextBox Width="240" Margin="5,4" TextChanged="Search" DockPanel.Dock="Left"/>
@@ -20,7 +45,7 @@
             <Button Content="Finalize" Width="75" Height="23" DockPanel.Dock="Right" Margin="0,0,5,0"/>
             
         </DockPanel>
-        <ScrollViewer Name="ResultsPane" Margin="5,5,0,0" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" DockPanel.Dock="Left" Visibility="Collapsed">
+        <ScrollViewer Name="ResultsPane" Margin="5,5,0,0" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" DockPanel.Dock="Left" Width="265" Visibility="Collapsed">
             <Grid HorizontalAlignment="Left" Width="247">
                 <StackPanel Name="Results">
                     <Label Name="NotFoundLabel" Content="No results found!" HorizontalAlignment="Center" Visibility="Collapsed"/>

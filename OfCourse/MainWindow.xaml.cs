@@ -68,11 +68,17 @@ namespace OfCourse
 
         void ToggleResults(Visibility v)
         {
-            ResultsPane.Visibility = v;
+            // Animations! Because I'm bored.
             if (v == Visibility.Visible)
+            {
                 Expander.Arrow.Content = "<";
+                ((System.Windows.Media.Animation.Storyboard)this.FindResource("ExpandResults")).Begin();
+            }
             else
+            {
                 Expander.Arrow.Content = ">";
+                ((System.Windows.Media.Animation.Storyboard)this.FindResource("HideResults")).Begin();
+            }
         }
 
         public void LoadClasses()
@@ -162,7 +168,8 @@ namespace OfCourse
 
         private void Search(object sender, TextChangedEventArgs e)
         {
-            ToggleResults(Visibility.Visible);
+            if(!ResultsPane.IsVisible)
+                ToggleResults(Visibility.Visible);
             string query = ((TextBox)sender).Text;
             int amountFound = 0;
             foreach (SearchResult res in results)
