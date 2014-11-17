@@ -13,6 +13,10 @@
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="265"/>
 			</DoubleAnimationUsingKeyFrames>
+			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="ResultsPane">
+				<EasingThicknessKeyFrame KeyTime="0" Value="0,5,0,0"/>
+				<EasingThicknessKeyFrame KeyTime="0:0:0.1" Value="5,5,0,0"/>
+			</ThicknessAnimationUsingKeyFrames>
 		</Storyboard>
 		<Storyboard x:Key="HideResults">
 			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ResultsPane">
@@ -22,7 +26,7 @@
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="ResultsPane">
 				<EasingDoubleKeyFrame KeyTime="0" Value="265"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="260"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="265"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 		<LinearGradientBrush x:Key="TextBoxBorder" StartPoint="0,0" MappingMode="Absolute" EndPoint="0,20">
@@ -154,7 +158,7 @@
 			<Button Content="Finalize" Width="75" Height="23" DockPanel.Dock="Right" Margin="0,0,5,0"/>
             
 		</DockPanel>
-		<ScrollViewer x:Name="ResultsPane" Margin="5,5,0,0" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" DockPanel.Dock="Left" Width="265" Visibility="Collapsed">
+		<ScrollViewer x:Name="ResultsPane" Margin="0,5,0,0" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" DockPanel.Dock="Left" Width="0" Visibility="Hidden">
 			<Grid HorizontalAlignment="Left" Width="247">
 				<StackPanel x:Name="Results">
 					<Label x:Name="NotFoundLabel" Content="No results found!" HorizontalAlignment="Center" Visibility="Collapsed"/>

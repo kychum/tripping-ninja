@@ -46,6 +46,7 @@ namespace OfCourse
     {
         private List<SearchResult> results = new List<SearchResult>();
         private List<Border> hoverBorders = new List<Border>();
+        private List<ScheduleItem> schedItems = new List<ScheduleItem>();
 
         public MainWindow()
         {
@@ -107,6 +108,7 @@ namespace OfCourse
                     r.SetLabels();
                     r.MouseEnter += r_MouseEnter;
                     r.MouseLeave += r_MouseLeave;
+                    r.MouseDoubleClick += r_MouseDoubleClick;
                     results.Add(r);
                 }
                 while (inFile.Peek() != -1);
@@ -125,6 +127,18 @@ namespace OfCourse
             foreach (SearchResult r in results)
             {
                 Results.Children.Add(r);
+            }
+        }
+
+        void r_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            SearchResult r = (SearchResult)sender;
+            foreach (Day d in Enum.GetValues(typeof(Day)))
+            {
+                if ((r.days & (int)d) > 0)
+                {
+                    MakeScheduleItem(r.id, r.startTime - 6, (int)Math.Log((int)d, 2), r.duration, SearchResult.departmentNames[(int)r.department] + r.courseNum, r.typeName());
+                }
             }
         }
 
@@ -199,6 +213,22 @@ namespace OfCourse
         private void ClearSearch(object sender, System.Windows.RoutedEventArgs e)
         {
             SearchBox.Text = "";
+        }
+
+        public void MakeScheduleItem(int newId, int row, int col, int span, string name, string type)
+        {
+            ScheduleItem i = new ScheduleItem();
+            i.id = newId;
+            Grid.SetRow(i, row);
+            Grid.SetColumn(i, col);
+            Grid.SetRowSpan(i, span);
+
+            i.CNum.Content = name;
+            i.CTimes.Content = (row+6) + ":00 - " + (row+6+span) + ":00";
+            i.CType.Content = type;
+
+            schedItems.Add(i);
+            Schedule.LayoutRoot.Children.Add(i);
         }
     }
 }

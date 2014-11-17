@@ -18,6 +18,8 @@ namespace OfCourse
 	/// </summary>
 	public partial class ScheduleItem : UserControl
 	{
+        public int id { get; set; }
+
 		public ScheduleItem()
 		{
 			this.InitializeComponent();

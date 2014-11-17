@@ -29,7 +29,7 @@ namespace OfCourse
 		public short startTime { get; set; }
 		public short duration { get; set; }
 
-        public string[] departmentNames = {
+        public static string[] departmentNames = {
             "ART",
             "BIOL",
             "BSEN",
@@ -63,6 +63,19 @@ namespace OfCourse
             }
 
             CTime.Content += "  " + startTime + ":00 - " + (startTime + duration) + ":00";
+        }
+
+        public string typeName()
+        {
+            if (type == ClassType.Lecture)
+            {
+                return "Lecture";
+            }
+            else if (type == ClassType.Tutorial)
+            {
+                return "Tutorial";
+            }
+            return "Laboratory";
         }
 	}
 }

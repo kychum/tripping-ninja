@@ -6,11 +6,16 @@
 	mc:Ignorable="d"
 	x:Class="OfCourse.ScheduleItem"
 	x:Name="UserControl"
-	d:DesignWidth="277" d:DesignHeight="139.5" BorderThickness="2" Background="#FFE2FFFB" BorderBrush="#FFB2B2B2">
+	d:DesignWidth="185" d:DesignHeight="52.5" BorderThickness="2" Background="#FFE2FFFB" BorderBrush="#FFB2B2B2">
 
-	<StackPanel x:Name="LayoutRoot" VerticalAlignment="Center" >
-		<Label x:Name="CNum" Content="Course Number" HorizontalAlignment="Center" Margin="89.656,0" VerticalAlignment="Center"/>
-		<Label x:Name="CType" Content="Class Type" HorizontalAlignment="Center" Margin="103.83,0" VerticalAlignment="Center"/>
-		<Label x:Name="CTimes" Content="Times" HorizontalAlignment="Center" Margin="116.05,0" VerticalAlignment="Center"/>
-	</StackPanel>
+	<Grid x:Name="LayoutRoot" VerticalAlignment="Center" >
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<Label x:Name="CNum" Content="Course Number" Margin="0" FontSize="10.667" VerticalAlignment="Top" Padding="0" HorizontalContentAlignment="Center"/>
+		<Label x:Name="CType" Content="Class Type" Margin="0" VerticalAlignment="Center" FontSize="9.333" Padding="0" HorizontalContentAlignment="Center" Grid.Row="1"/>
+		<Label x:Name="CTimes" Content="Times" Margin="0" VerticalAlignment="Center" FontSize="9.333" Grid.Row="2" Padding="0" HorizontalContentAlignment="Center"/>
+	</Grid>
 </UserControl>
