@@ -45,6 +45,7 @@ namespace OfCourse
     public partial class MainWindow : Window
     {
         private List<SearchResult> results = new List<SearchResult>();
+        private List<Border> hoverBorders = new List<Border>();
 
         public MainWindow()
         {
@@ -98,6 +99,8 @@ namespace OfCourse
                     r.startTime = Convert.ToInt16(inFile.ReadLine());
                     r.duration = Convert.ToInt16(inFile.ReadLine());
                     r.SetLabels();
+                    r.MouseEnter += r_MouseEnter;
+                    r.MouseLeave += r_MouseLeave;
                     results.Add(r);
                 }
                 while (inFile.Peek() != -1);
@@ -117,6 +120,44 @@ namespace OfCourse
             {
                 Results.Children.Add(r);
             }
+        }
+
+        void r_MouseLeave(object sender, MouseEventArgs e)
+        {
+            foreach (Border b in hoverBorders)
+            {
+                Schedule.LayoutRoot.Children.Remove(b);
+            }
+
+            hoverBorders.Clear();
+        }
+
+        void r_MouseEnter(object sender, MouseEventArgs e)
+        {
+            SearchResult r = (SearchResult)sender;
+            int row = r.startTime-6;
+            int span = r.duration;
+
+            foreach (Day d in Enum.GetValues(typeof(Day)))
+            {
+                if ((r.days & (int)d) > 0)
+                {
+                    SetBorder(row, (int)(Math.Log((int)d,2)), span);
+                }
+            }
+        }
+
+        void SetBorder(int row, int col, int span)
+        {
+            Border b = new Border();
+            b.BorderThickness = new Thickness(5.0);
+            b.BorderBrush = Brushes.Pink;
+            Grid.SetColumn(b, col);
+            Grid.SetRow(b, row);
+            Grid.SetRowSpan(b, span);
+            hoverBorders.Add(b);
+
+            Schedule.LayoutRoot.Children.Add(b);
         }
 
         private void Search(object sender, TextChangedEventArgs e)

@@ -22,4 +22,13 @@ namespace OfCourse
         Tutorial,
         Laboratory,
     };
+
+    public enum Day
+    {
+        M = 2,
+        T = 4,
+        W = 8,
+        R = 16,
+        F = 32
+    }
 }

@@ -29,11 +29,6 @@ namespace OfCourse
 		public short startTime { get; set; }
 		public short duration { get; set; }
 
-        const int MON = 2;
-        const int TUES = 4;
-        const int WEDS = 8;
-        const int THURS = 16;
-        const int FRI = 32;
         public string[] departmentNames = {
             "ART",
             "BIOL",
@@ -61,11 +56,18 @@ namespace OfCourse
             CTime.Content = "";
 
             // ew.
-            if ((days & MON) > 0)
+            foreach(Day d in Enum.GetValues(typeof(Day))){
+                if ((days & (int)d) > 0)
+                {
+                    CTime.Content += Enum.GetName(typeof(Day), d);
+                }
+            }
+            /*
+            if ((days & (int)Days.MON) > 0)
             {
                 CTime.Content += "M";
             }
-            if ((days & TUES) > 0)
+            if ((days & (int)Days.TUES) > 0)
             {
                 CTime.Content += "T";
             }
@@ -81,6 +83,7 @@ namespace OfCourse
             {
                 CTime.Content += "F";
             }
+             * */
             CTime.Content += "  " + startTime + ":00 - " + (startTime + duration) + ":00";
         }
 	}
