@@ -42,7 +42,7 @@
 		<Grid ClipToBounds="True" Margin="1,0,19,0">
 			<Label x:Name="CName" Content="Course Number - Course Name" HorizontalAlignment="Left" Margin="11.5,10,0,0" VerticalAlignment="Top" FontSize="14.667"/>
 			<Label x:Name="CProf" Content="Professor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11.5,29.42,0,0" FontSize="13.333"/>
-			<TextBlock x:Name="CDesc" Text="Description" HorizontalAlignment="Left" Margin="26.5,51.96,0,0" VerticalAlignment="Top" Height="56.24" Width="180.253" TextWrapping="Wrap"/>
+			<TextBlock x:Name="CDesc" Text="Description" HorizontalAlignment="Left" Margin="26.5,51.96,0,0" VerticalAlignment="Top" Height="56.24" Width="180.253" TextWrapping="Wrap" Foreground="{Binding Foreground, ElementName=CName, Mode=OneWay}"/>
 			<Label x:Name="CTime" Content="Days - Time" HorizontalAlignment="Left" Margin="11.5,102.2,0,0" VerticalAlignment="Top"/>
 			<Label x:Name="CType" Content="ClassType" HorizontalAlignment="Right" Margin="0,31.01,3,0" VerticalAlignment="Top"/>
 		</Grid>

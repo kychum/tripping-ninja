@@ -20,6 +20,11 @@ namespace OfCourse
 	{
         public int id { get; set; }
 
+        // Seems like too much of a bother to use dependency values
+        public int row { get; set; }
+        public int col { get; set; }
+        public int span { get; set; }
+
 		public ScheduleItem()
 		{
 			this.InitializeComponent();

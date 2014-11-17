@@ -133,6 +133,7 @@ namespace OfCourse
         void r_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             SearchResult r = (SearchResult)sender;
+            r.IsEnabled = false;
             foreach (Day d in Enum.GetValues(typeof(Day)))
             {
                 if ((r.days & (int)d) > 0)
@@ -162,7 +163,7 @@ namespace OfCourse
             {
                 if ((r.days & (int)d) > 0)
                 {
-                    SetBorder(row, (int)(Math.Log((int)d,2)), span);
+                    SetBorder(row, (int)(Math.Log((int)d, 2)), span);
                 }
             }
         }
@@ -171,7 +172,14 @@ namespace OfCourse
         {
             Border b = new Border();
             b.BorderThickness = new Thickness(5.0);
-            b.BorderBrush = Brushes.Pink;
+            if (HasConflict(row, col, span))
+            {
+                b.BorderBrush = Brushes.Red;
+            }
+            else
+            {
+                b.BorderBrush = Brushes.Pink;
+            }
             Grid.SetColumn(b, col);
             Grid.SetRow(b, row);
             Grid.SetRowSpan(b, span);
@@ -220,15 +228,52 @@ namespace OfCourse
             ScheduleItem i = new ScheduleItem();
             i.id = newId;
             Grid.SetRow(i, row);
+            i.row = row;
             Grid.SetColumn(i, col);
+            i.col = col;
             Grid.SetRowSpan(i, span);
+            i.span = span;
 
             i.CNum.Content = name;
             i.CTimes.Content = (row+6) + ":00 - " + (row+6+span) + ":00";
             i.CType.Content = type;
 
+            // Here's an idea for when we get classes at half-hour (or more) intervals
+            // Can also be useful for shifting things horizontally during conflicts.
+            //double h = Schedule.LayoutRoot.RowDefinitions[1].ActualHeight;
+            //i.Margin = new Thickness(0,h/2,0,h/2);
+
             schedItems.Add(i);
             Schedule.LayoutRoot.Children.Add(i);
+        }
+
+        public void RemoveCourse(int id)
+        {
+            foreach (ScheduleItem i in schedItems)
+            {
+                if (i.id == id)
+                {
+                    Schedule.LayoutRoot.Children.Remove(i);
+                }
+            }
+            schedItems.RemoveAll(i => i.id == id);
+            results.Find(s => s.id == id).IsEnabled = true;
+        }
+
+        public bool HasConflict(int row, int col, int span)
+        {
+            foreach(ScheduleItem si in schedItems)
+            {
+                if (si.col == col)
+                {
+                    if ((si.row <= row && (si.row + si.span - 1) >= row) || (row <= si.row && (row + span - 1)  >= si.row))
+                    {
+                        return true;
+                    }
+                        //(si.row <= row+span-1 && si.row+span-1 >= row+span-1)) 
+                }
+            }
+            return false;
         }
     }
 }
