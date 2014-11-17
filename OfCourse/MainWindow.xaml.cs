@@ -195,5 +195,10 @@ namespace OfCourse
                 NotFoundLabel.Visibility = Visibility.Visible;
             }
         }
+
+        private void ClearSearch(object sender, System.Windows.RoutedEventArgs e)
+        {
+            SearchBox.Text = "";
+        }
     }
 }

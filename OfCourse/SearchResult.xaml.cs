@@ -55,35 +55,13 @@ namespace OfCourse
             CType.Content = (type == ClassType.Lecture ? "Lecture" : type == ClassType.Tutorial ? "Tutorial" : "Laboratory");
             CTime.Content = "";
 
-            // ew.
             foreach(Day d in Enum.GetValues(typeof(Day))){
                 if ((days & (int)d) > 0)
                 {
                     CTime.Content += Enum.GetName(typeof(Day), d);
                 }
             }
-            /*
-            if ((days & (int)Days.MON) > 0)
-            {
-                CTime.Content += "M";
-            }
-            if ((days & (int)Days.TUES) > 0)
-            {
-                CTime.Content += "T";
-            }
-            if ((days & WEDS) > 0)
-            {
-                CTime.Content += "W";
-            }
-            if ((days & THURS) > 0)
-            {
-                CTime.Content += "R";
-            }
-            if ((days & FRI) > 0)
-            {
-                CTime.Content += "F";
-            }
-             * */
+
             CTime.Content += "  " + startTime + ":00 - " + (startTime + duration) + ":00";
         }
 	}
