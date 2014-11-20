@@ -141,7 +141,7 @@ int main(int argc, char** argv){
 			for(int r = 0; r < numReqs; r++){
 				c.prereqs += to_string(rand()%10) + "." + to_string((((rand()%5)+1)*100) + (rand()%3));
 				if(r+1 < numReqs){
-					c.prereqs += (rand()%2 == 0 ? "," : "||");
+					c.prereqs += (rand()%2 == 0 ? "," : "|");
 				}
 			}
 		}
@@ -158,7 +158,7 @@ int main(int argc, char** argv){
 				}
 		}
 
-		c.enrollable = (rand()%100 < 75 ? 1 : rand()%2+1);
+		c.enrollable = (rand()%100 < 75 ? 0 : rand()%2+1);
 
 		cout << c;
 
