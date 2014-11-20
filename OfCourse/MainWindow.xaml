@@ -128,9 +128,6 @@
 		<DockPanel VerticalAlignment="Top" LastChildFill="False" DockPanel.Dock="Top">
 			<TextBox x:Name="SearchBox" Width="240" Margin="6" TextChanged="Search" DockPanel.Dock="Left" Style="{DynamicResource SearchBoxStyle}"/>
 			<ComboBox DockPanel.Dock="Left" Width="200" Margin="6" Padding="8" FontSize="14">
-				<ComboBox.BitmapEffect>
-					<DropShadowBitmapEffect Color="Black" Direction="315" Softness="0.2" ShadowDepth="3" Opacity="0.25" />
-				</ComboBox.BitmapEffect>
 				<ComboBoxItem Content="Faculty" IsSelected="True" Visibility="Collapsed"/>
 				<ComboBoxItem Content="All Faculties"/>
 				<ComboBoxItem Content="Arts"/>
@@ -161,14 +158,14 @@
 				</Button.Style>
 			</Button>
 		</DockPanel>
-		<ScrollViewer x:Name="ResultsPane" Margin="0,5,0,0" HorizontalAlignment="Left" DockPanel.Dock="Left" Width="0" Visibility="Hidden">
-			<Grid HorizontalAlignment="Left" Width="247">
+		<ScrollViewer x:Name="ResultsPane" Margin="0" HorizontalAlignment="Left" DockPanel.Dock="Left" Width="0" Visibility="Hidden">
+			<Grid HorizontalAlignment="Left" Width="248">
 				<StackPanel x:Name="Results">
 					<Label x:Name="NotFoundLabel" Content="No results found!" HorizontalAlignment="Center" Visibility="Collapsed"/>
 				</StackPanel>
 			</Grid>
 		</ScrollViewer>
-		<DockPanel Margin="2,0,0,0" DockPanel.Dock="Right">
+		<DockPanel Margin="0" DockPanel.Dock="Right">
 			<local:ExpandTab x:Name="Expander"/>
 			<Grid Margin="10,0,0,0" DockPanel.Dock="Bottom">
 				<Label Content="Cart Goes Here?" HorizontalAlignment="Center" Margin="0,25" VerticalAlignment="Center"/>
@@ -177,6 +174,5 @@
 				<local:TimeSchedule x:Name="Schedule" />
 			</Grid>
 		</DockPanel>
-
 	</DockPanel>
 </Window>
