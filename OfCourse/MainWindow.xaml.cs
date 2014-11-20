@@ -1,5 +1,4 @@
 ﻿/* TODO: 
- *    - Get the cart running
  *    - Get drag-and-drop working
  *    - Add in the rest of the search options
  *    - Make the thing look nice (?)
@@ -246,5 +245,18 @@ namespace OfCourse
 					.Where(si => si.col == col)
 					.Any(si => (si.row <= row && (si.row + si.span - 1) >= row) || (row <= si.row && (row + span - 1) >= si.row));
 		}
+
+        private void SchedulePanel_Drop(object sender, DragEventArgs e)
+        {
+            SearchResult r = (SearchResult)e.Data.GetData("Object");
+            r.IsEnabled = false;
+            foreach (Day d in Enum.GetValues(typeof(Day)))
+            {
+                if ((r.days & (int)d) > 0)
+                {
+                    MakeScheduleItem(r.id, r.startTime - 6, (int)Math.Log((int)d, 2), r.duration, SearchResult.departmentNames[(int)r.department] + r.courseNum, r.typeName());
+                }
+            }
+        }
 	}
 }

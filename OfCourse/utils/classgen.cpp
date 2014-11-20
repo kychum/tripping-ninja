@@ -16,7 +16,7 @@ using namespace std; //bite me
 #define THU 16
 #define FRI 32
 #define SAT 64
-#define VERSION "1.1"
+#define VERSION "1.2"
 
 enum Faculty{
 	Arts = 0,
@@ -70,7 +70,7 @@ string ClassTypes[] = {
 	"Laboratory",
 };
 
-string Profs[] = {
+string Profs[] = { // Randomly generated names
 	"Stacey Manning", "Ivan Harrington", "Jacqueline Tate", "Nina Hudson", "Nelson Knight",
 	"Julian Hardy", "Audrey Morton", "Vicki Woods", "Roxanne Hansen", "Tamara Mason",
 	"Mattie Hogan", "Lydia Bowen", "Mae Dunn", "Clark Mccarthy", "Simon Osborne",
@@ -103,9 +103,11 @@ struct Course{
 	unsigned short days; // use the first 7 bits
 	unsigned short startTime; // 00 - 23 ?? Probably restrict between 7 and 5
 	unsigned short duration; // Assume exact hours, between 1-3.
+	string prereqs; // Dept.Num; ORs denote by ||, AND by commas
+	string antireqs; // comma-delimited
 
 	friend ostream& operator<<(ostream& o, const Course& c){
-		o << c.id << "\n" << c.department << "\n" << c.courseNum << "\n" << c.name+"\n" << c.desc+"\n" << c.prof+"\n" << c.type << "\n" << c.days << "\n" << c.startTime << "\n" << c.duration << endl;
+		o << c.id << "\n" << c.department << "\n" << c.courseNum << "\n" << c.name+"\n" << c.desc+"\n" << c.prof+"\n" << c.type << "\n" << c.days << "\n" << c.startTime << "\n" << c.duration << "\n" << c.prereqs << "\n" << c.antireqs << endl;
 		return o;
 	}
 };
@@ -131,9 +133,36 @@ int main(int argc, char** argv){
 		c.days = rand() & 62; //msvc doesn't accept binary literals //0b00111110; // Let's just assume M-F
 		c.startTime = (rand()%10)+7;
 		c.duration = rand()%3 + 1; // Up to 3 hours long
+		
+		//prereq logic (Should really make more sense but we just need something that works for now
+		if(c.courseNum >= 200){
+			int numReqs = rand() % 5; // Up to 5 prereqs for now.
+			for(int r = 0; r < numReqs; r++){
+				c.prereqs += to_string(rand()%10) + "." + to_string((((rand()%5)+1)*100) + (rand()%3));
+				if(r+1 < numReqs){
+					c.prereqs += (rand()%2 == 0 ? "," : "||");
+				}
+			}
+		}
+		else{
+			c.prereqs="";
+		}
+
+		//antireq logic
+		int numAnti = rand() % 3; // Let's say 2 antireqs. Just to test things out
+		for(int a = 0; a < numAnti; a++){
+				c.antireqs += to_string(rand()%10) + "." + to_string((((rand()%5)+1)*100) + (rand()%3));
+				if(a+1 < numAnti){
+					c.antireqs += ",";
+				}
+		}
+
+
 		cout << c;
+
+		// Add tutorials and labs
 		int numLinked = rand()%3;
-		if(numLinked > 0 && numLinked+i < outAmt){
+		if(numLinked > 0 && numLinked+i < outAmt){ // The idea is to force enrollment in these when the main lecture is selected.
 			for(int j = 0; j < numLinked; j++){
 				c.id++;
 				c.prof = Profs[rand()%50];

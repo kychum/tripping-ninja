@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows;
 
 namespace OfCourse
 {
@@ -72,5 +74,17 @@ namespace OfCourse
 
 			return "Laboratory";
 		}
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DataObject data = new DataObject();
+                data.SetData("Object", this);
+
+                DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
+            }
+        }
 	}
 }
