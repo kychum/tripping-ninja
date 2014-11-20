@@ -71,12 +71,12 @@ namespace OfCourse
 			var inFile = new StreamReader("..\\..\\classes.txt");
 			try
 			{
-				if (inFile.ReadLine() != "1.1") // Get Version
+				if (inFile.ReadLine() != "1.3") // Get Version
 				{
 					// Version mismatch! Probably should do something here. Or not.
 				}
 
-				inFile.ReadLine(); // Discard numClasses
+				//inFile.ReadLine(); // Discard numClasses
 				do
 				{
 					var r = new SearchResult
@@ -90,7 +90,10 @@ namespace OfCourse
 						type = (ClassType) Convert.ToInt32(inFile.ReadLine()),
 						days = Convert.ToInt16(inFile.ReadLine()),
 						startTime = Convert.ToInt16(inFile.ReadLine()),
-						duration = Convert.ToInt16(inFile.ReadLine())
+						duration = Convert.ToInt16(inFile.ReadLine()),
+                        prereqs = inFile.ReadLine(),
+                        antireqs = inFile.ReadLine(),
+                        status = Convert.ToInt16(inFile.ReadLine())
 					};
 					r.SetLabels();
 					r.MouseEnter += r_MouseEnter;

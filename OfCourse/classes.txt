@@ -1,1022 +1,1236 @@
-1.1
-50
+1.3
 0
 7
-100
-Introduction to Math 1
-Introduction to Math 1
-Catherine Abbott
+101
+Introduction to Math 2
+Introduction to Math 2
+Lydia Bowen
 0
-62
-8
-3
+12
+10
+2
+
+1.302,3.201
+2
 1
 7
-100
-Introduction to Math 1
-Introduction to Math 1
-Molly Cohen
+101
+Introduction to Math 2
+Introduction to Math 2
+Clark Mccarthy
+1
+52
+9
+1
+
+1.302,3.201
+1
 2
-4
+7
+101
+Introduction to Math 2
+Introduction to Math 2
+Ivan Harrington
+1
+16
 15
 1
-2
-7
-100
-Introduction to Math 1
-Introduction to Math 1
-Garry Copeland
+
+1.302,3.201
 1
-36
-11
+1
 3
-1
-4
-201
-Applications of Education 2
-Applications of Education 2
-Alonzo Douglas
+302
+Advanced Topics in Computer Science 3
+Advanced Topics in Computer Science 3
+Taylor Oliver
 0
-46
-8
+30
+9
+2
+8.202,6.502
+0.400,6.300
 1
 2
-4
-201
-Applications of Education 2
-Applications of Education 2
-Vincent James
-2
-56
-16
-2
-2
-5
-301
-Advanced Topics in Engineering 2
-Advanced Topics in Engineering 2
-Mercedes Fields
-0
-34
-11
-3
-3
-4
-102
-Introduction to Education 3
-Introduction to Education 3
-Edmund Wallace
-0
-36
-11
 1
-4
-3
-301
-Advanced Topics in Computer Science 2
-Advanced Topics in Computer Science 2
-Timothy Jenkins
+400
+Special Topics in Biology 1
+Special Topics in Biology 1
+Taylor Oliver
 0
 24
-14
-1
-5
-3
-301
-Advanced Topics in Computer Science 2
-Advanced Topics in Computer Science 2
-Elsa Malone
-1
-50
-15
-2
-5
-0
-100
-Introduction to Art 1
-Introduction to Art 1
-Wendy Thornton
-0
-22
-8
-1
-6
-0
-100
-Introduction to Art 1
-Introduction to Art 1
-Mae Dunn
-2
-50
 13
-3
-6
-3
-101
-Introduction to Computer Science 2
-Introduction to Computer Science 2
-Edmund Wallace
-0
-12
-14
-2
-7
-3
-101
-Introduction to Computer Science 2
-Introduction to Computer Science 2
-Jack Ramos
 1
-4
-13
+6.400,5.101,8.202
+3.400,6.202
+0
 3
-7
-0
-300
-Advanced Topics in Art 1
-Advanced Topics in Art 1
-Elsa Malone
-0
-34
-15
 1
-8
-0
-300
-Advanced Topics in Art 1
-Advanced Topics in Art 1
-Taylor Oliver
-1
-58
-7
-2
-8
-8
-300
-Advanced Topics in Music 1
-Advanced Topics in Music 1
-Arturo Miles
-0
-50
-12
-3
-9
-8
-300
-Advanced Topics in Music 1
-Advanced Topics in Music 1
+400
+Special Topics in Biology 1
+Special Topics in Biology 1
 Vincent James
-1
+2
 48
 14
+1
+6.400,5.101,8.202
+3.400,6.202
+0
 3
-9
-1
-402
-Special Topics in Biology 3
-Special Topics in Biology 3
-Alonzo Douglas
+4
+100
+Introduction to Education 1
+Introduction to Education 1
+Olga Stewart
 0
-60
-9
-2
-10
+56
+8
 1
-402
-Special Topics in Biology 3
-Special Topics in Biology 3
-Vincent James
-1
-44
-14
-2
-11
-1
-402
-Special Topics in Biology 3
-Special Topics in Biology 3
-Clarence Crawford
-2
-58
-10
-2
-10
-7
-201
-Applications of Math 2
-Applications of Math 2
-Courtney Smith
+
+
 0
-22
+4
+4
+100
+Introduction to Education 1
+Introduction to Education 1
+Jack Ramos
+2
+8
 14
 1
-11
-7
-201
-Applications of Math 2
-Applications of Math 2
-Vincent James
-2
-12
-14
-1
-11
-6
-102
-Introduction to English 3
-Introduction to English 3
-Mattie Hogan
+
+
 0
-42
-9
-3
-12
-6
-102
-Introduction to English 3
-Introduction to English 3
-Tamara Mason
+5
+4
+100
+Introduction to Education 1
+Introduction to Education 1
+Diana Steele
 2
-34
+46
 16
 1
-13
-6
+
+
+1
+4
+7
+100
+Introduction to Math 1
+Introduction to Math 1
+Alma Kelly
+0
+38
+10
+2
+
+0.101,9.100
+0
+5
+7
+100
+Introduction to Math 1
+Introduction to Math 1
+Conrad Diaz
+1
+22
+16
+1
+
+0.101,9.100
+1
+5
+1
 102
-Introduction to English 3
-Introduction to English 3
+Introduction to Biology 3
+Introduction to Biology 3
+Preston Webb
+0
+50
+11
+1
+
+
+2
+6
+2
+301
+Advanced Topics in Business and Environment 2
+Advanced Topics in Business and Environment 2
+Jimmy Owen
+0
+34
+15
+3
+3.201,9.301
+7.201,5.201
+0
+7
+2
+301
+Advanced Topics in Business and Environment 2
+Advanced Topics in Business and Environment 2
+Catherine Abbott
+1
+6
+11
+1
+3.201,9.301
+7.201,5.201
+0
+8
+2
+301
+Advanced Topics in Business and Environment 2
+Advanced Topics in Business and Environment 2
 Johanna Wood
 1
-22
+30
+15
+3
+3.201,9.301
+7.201,5.201
+1
+7
+7
+300
+Advanced Topics in Math 1
+Advanced Topics in Math 1
+Audrey Morton
+0
+38
 16
+1
+3.301
+1.300,3.302
+0
+8
+7
+300
+Advanced Topics in Math 1
+Advanced Topics in Math 1
+Johanna Wood
+1
 2
+8
+3
+3.301
+1.300,3.302
+0
+9
+7
+300
+Advanced Topics in Math 1
+Advanced Topics in Math 1
+Angie Reid
+1
+32
+15
+1
+3.301
+1.300,3.302
+0
+8
+1
+201
+Applications of Biology 2
+Applications of Biology 2
+Jacqueline Tate
+0
+58
+15
+3
+
+9.302
+0
+9
+1
+201
+Applications of Biology 2
+Applications of Biology 2
+Clark Mccarthy
+1
+52
 12
+2
+
+9.302
+1
+9
+0
+402
+Special Topics in Art 3
+Special Topics in Art 3
+Owen Reed
+0
+2
+15
+2
+1.202
+9.501
+1
+10
+0
+402
+Special Topics in Art 3
+Special Topics in Art 3
+Vicki Woods
+2
+52
+10
+3
+1.202
+9.501
+1
+10
 7
 502
 Work Term in Math 3
 Work Term in Math 3
 Elijah Barrett
 0
+26
+11
+1
+7.501||4.301||5.102
+5.302,7.102
+1
+11
+1
+202
+Applications of Biology 3
+Applications of Biology 3
+Ivan Harrington
+0
+26
+9
+3
+3.401,5.400
+9.401
+0
 12
+1
+202
+Applications of Biology 3
+Applications of Biology 3
+Courtney Smith
+2
+26
+16
+2
+3.401,5.400
+9.401
+0
+13
+1
+202
+Applications of Biology 3
+Applications of Biology 3
+Mae Dunn
+1
+14
 12
 1
+3.401,5.400
+9.401
+0
+12
+5
+100
+Introduction to Engineering 1
+Introduction to Engineering 1
+Darnell Phillips
+0
+34
+11
+2
+
+1.401,4.201
+0
 13
-7
-502
-Work Term in Math 3
-Work Term in Math 3
-Clarence Crawford
-1
-30
-14
-2
-13
-9
-101
-Introduction to Software Engineering 2
-Introduction to Software Engineering 2
-Arturo Miles
-0
-54
-16
-1
-14
-9
-101
-Introduction to Software Engineering 2
-Introduction to Software Engineering 2
-Timothy Jenkins
-1
-6
-7
-2
-15
-9
-101
-Introduction to Software Engineering 2
-Introduction to Software Engineering 2
-Wendy Thornton
-2
-38
-7
-2
-14
 5
-300
-Advanced Topics in Engineering 1
-Advanced Topics in Engineering 1
-Jack Ramos
-0
-40
-16
-3
-15
-5
-400
-Special Topics in Engineering 1
-Special Topics in Engineering 1
-Simon Osborne
-0
-52
-10
-3
-16
-5
-400
-Special Topics in Engineering 1
-Special Topics in Engineering 1
-Roxanne Hansen
-2
-16
-10
-3
-16
-8
-401
-Special Topics in Music 2
-Special Topics in Music 2
-Guadalupe Gomez
-0
-42
-14
-1
-17
-8
-401
-Special Topics in Music 2
-Special Topics in Music 2
-Alma Kelly
-2
-28
-9
-2
-17
-4
-200
-Applications of Education 1
-Applications of Education 1
+302
+Advanced Topics in Engineering 3
+Advanced Topics in Engineering 3
 Preston Webb
 0
 52
-12
-2
-18
-1
-302
-Advanced Topics in Biology 3
-Advanced Topics in Biology 3
-Alma Kelly
-0
-24
-16
-2
-19
-1
-302
-Advanced Topics in Biology 3
-Advanced Topics in Biology 3
-Mattie Hogan
-2
-60
-16
-2
-20
-1
-302
-Advanced Topics in Biology 3
-Advanced Topics in Biology 3
-Wendy Thornton
-2
-44
-7
+11
 3
-19
+7.202||9.201||3.500
+5.302
 2
-402
-Special Topics in Business and Environment 3
-Special Topics in Business and Environment 3
-Courtney Smith
-0
-42
-7
-3
-20
-2
-402
-Special Topics in Business and Environment 3
-Special Topics in Business and Environment 3
-Johanna Wood
-1
-48
-7
-3
-21
-2
-402
-Special Topics in Business and Environment 3
-Special Topics in Business and Environment 3
-Darnell Phillips
-2
-10
-13
-1
-20
-8
-400
-Special Topics in Music 1
-Special Topics in Music 1
-Felicia Davis
-0
 14
-8
+5
+302
+Advanced Topics in Engineering 3
+Advanced Topics in Engineering 3
+Roxanne Hansen
 1
-21
-8
-400
-Special Topics in Music 1
-Special Topics in Music 1
-Steve Peters
-2
-48
+28
+15
+1
+7.202||9.201||3.500
+5.302
+1
+14
+4
+401
+Special Topics in Education 2
+Special Topics in Education 2
+Mercedes Fields
+0
+18
 13
-3
-22
-8
-400
-Special Topics in Music 1
-Special Topics in Music 1
-Simon Osborne
 1
-6
-10
-1
-21
-6
-300
-Advanced Topics in English 1
-Advanced Topics in English 1
+1.402
+
+0
+15
+4
+401
+Special Topics in Education 2
+Special Topics in Education 2
 Jimmy Owen
-0
-18
-8
-1
-22
-6
-300
-Advanced Topics in English 1
-Advanced Topics in English 1
-Mae Dunn
 2
-4
-14
-1
-23
-6
-300
-Advanced Topics in English 1
-Advanced Topics in English 1
-Jack Ramos
-2
-26
-11
-3
-22
-2
-501
-Work Term in Business and Environment 2
-Work Term in Business and Environment 2
-Lydia Bowen
-0
-60
-12
-3
-23
-2
-501
-Work Term in Business and Environment 2
-Work Term in Business and Environment 2
-Nathan Gordon
-2
-4
-13
-2
-23
-1
-100
-Introduction to Biology 1
-Introduction to Biology 1
-Julian Hardy
-0
-36
-9
-3
-24
-1
-100
-Introduction to Biology 1
-Introduction to Biology 1
-Nathan Gordon
-1
-58
-15
-2
-25
-1
-100
-Introduction to Biology 1
-Introduction to Biology 1
-Tomas Bryant
-2
-38
-11
-2
-24
-4
-201
-Applications of Education 2
-Applications of Education 2
-Simon Osborne
-0
-12
-8
-1
-25
-4
-201
-Applications of Education 2
-Applications of Education 2
-Clark Mccarthy
-1
-4
-10
-3
-25
-0
-300
-Advanced Topics in Art 1
-Advanced Topics in Art 1
-Vincent James
-0
-18
-7
-2
-26
-1
-300
-Advanced Topics in Biology 1
-Advanced Topics in Biology 1
-Alma Kelly
-0
-50
-14
-2
-27
-1
-300
-Advanced Topics in Biology 1
-Advanced Topics in Biology 1
-Elsa Malone
-2
-6
-15
-1
-27
-4
-401
-Special Topics in Education 2
-Special Topics in Education 2
-Guadalupe Gomez
-0
-24
-7
-3
-28
-4
-401
-Special Topics in Education 2
-Special Topics in Education 2
-Olga Stewart
-1
-16
-15
-2
-28
-7
-502
-Work Term in Math 3
-Work Term in Math 3
-Catherine Abbott
-0
 44
-13
+16
 2
-29
-7
-502
-Work Term in Math 3
-Work Term in Math 3
-Felicia Davis
-1
-22
-7
-3
-30
-7
-502
-Work Term in Math 3
-Work Term in Math 3
-Molly Cohen
-1
-10
-12
-3
-29
-8
-401
-Special Topics in Music 2
-Special Topics in Music 2
-Mattie Hogan
+1.402
+
 0
-52
-9
-3
-30
-8
-401
-Special Topics in Music 2
-Special Topics in Music 2
-Stacey Manning
-2
-6
-10
-2
-30
-1
+15
+7
 201
-Applications of Biology 2
-Applications of Biology 2
-Edmund Wallace
+Applications of Math 2
+Applications of Math 2
+Jack Ramos
 0
 54
-12
+10
 2
-31
-1
-201
-Applications of Biology 2
-Applications of Biology 2
-Mae Dunn
-2
-50
-12
-2
-31
+2.500
+8.200
 0
-201
-Applications of Art 2
-Applications of Art 2
-Tomas Bryant
-0
-34
-15
-1
-32
-0
-201
-Applications of Art 2
-Applications of Art 2
-Timothy Jenkins
-2
 16
-15
-3
-32
-2
-502
-Work Term in Business and Environment 3
-Work Term in Business and Environment 3
-Taylor Oliver
-0
-38
-15
-2
-33
-4
+7
 201
-Applications of Education 2
-Applications of Education 2
-Mattie Hogan
-0
+Applications of Math 2
+Applications of Math 2
+Theodore Larson
+1
 2
 7
-3
-34
-4
-101
-Introduction to Education 2
-Introduction to Education 2
-Edmund Wallace
+2
+2.500
+8.200
 0
-36
-12
-2
-35
-4
+16
+9
 101
-Introduction to Education 2
-Introduction to Education 2
-Wendy Thornton
-1
-10
-13
-2
-36
-4
-101
-Introduction to Education 2
-Introduction to Education 2
+Introduction to Software Engineering 2
+Introduction to Software Engineering 2
 Mercedes Fields
-1
-30
-10
-3
-35
-1
-400
-Special Topics in Biology 1
-Special Topics in Biology 1
-Edmund Wallace
 0
 14
-16
-1
-36
-1
-400
-Special Topics in Biology 1
-Special Topics in Biology 1
-Nathan Gordon
-1
-42
-8
-3
-36
-7
-101
-Introduction to Math 2
-Introduction to Math 2
-Courtney Smith
-0
-38
-9
-3
-37
-1
-101
-Introduction to Biology 2
-Introduction to Biology 2
-Courtney Smith
-0
 10
-7
-1
-38
-1
+2
+
+
+2
+17
+9
 101
-Introduction to Biology 2
-Introduction to Biology 2
-Alonzo Douglas
+Introduction to Software Engineering 2
+Introduction to Software Engineering 2
+Diana Steele
+1
+60
+8
+2
+
+
+1
+17
+6
+201
+Applications of English 2
+Applications of English 2
+Darnell Phillips
+0
+40
+10
+1
+0.500,0.101||1.400,5.301
+
 1
 18
-12
-3
-38
-1
-201
-Applications of Biology 2
-Applications of Biology 2
-Theodore Larson
 0
-48
-11
-3
-39
-1
-201
-Applications of Biology 2
-Applications of Biology 2
-Tamara Mason
-1
-26
-8
-2
-39
-5
-201
-Applications of Engineering 2
-Applications of Engineering 2
-Alma Kelly
-0
-8
-15
-1
-40
-3
-402
-Special Topics in Computer Science 3
-Special Topics in Computer Science 3
-Jimmy Owen
-0
-58
-11
-1
-41
-3
-402
-Special Topics in Computer Science 3
-Special Topics in Computer Science 3
-Diana Steele
-1
-42
-7
-2
-42
-3
-402
-Special Topics in Computer Science 3
-Special Topics in Computer Science 3
+400
+Special Topics in Art 1
+Special Topics in Art 1
 Wendy Thornton
-1
-8
-10
-2
-41
-6
-202
-Applications of English 3
-Applications of English 3
-Ivan Harrington
 0
-42
-11
-1
-42
-6
-202
-Applications of English 3
-Applications of English 3
-Diana Steele
-2
 28
+10
+1
+6.101,6.101
+2.302,7.200
+2
+19
+0
+400
+Special Topics in Art 1
+Special Topics in Art 1
+Nathan Gordon
+2
+4
 12
 1
-43
-6
-202
-Applications of English 3
-Applications of English 3
+6.101,6.101
+2.302,7.200
+1
+20
+0
+400
+Special Topics in Art 1
+Special Topics in Art 1
+Clarence Crawford
+1
+20
+12
+1
+6.101,6.101
+2.302,7.200
+1
+19
+7
+302
+Advanced Topics in Math 3
+Advanced Topics in Math 3
 Garry Copeland
-2
+0
+10
 8
+1
+
+6.102,3.301
+1
+20
+7
+302
+Advanced Topics in Math 3
+Advanced Topics in Math 3
+Lydia Bowen
+1
+62
+11
+1
+
+6.102,3.301
+1
+20
+0
+301
+Advanced Topics in Art 2
+Advanced Topics in Art 2
+Roxanne Hansen
+0
+44
 11
 2
-42
-3
-502
-Work Term in Computer Science 3
-Work Term in Computer Science 3
-Mattie Hogan
-0
-26
-16
+
+
 1
-43
-2
-401
-Special Topics in Business and Environment 2
-Special Topics in Business and Environment 2
-Molly Cohen
+21
+7
+502
+Work Term in Math 3
+Work Term in Math 3
+Preston Webb
 0
-58
-15
-3
-44
 2
-401
-Special Topics in Business and Environment 2
-Special Topics in Business and Environment 2
-Timothy Jenkins
+16
+3
+1.102||6.102,7.501||4.402
+
+0
+22
+7
+502
+Work Term in Math 3
+Work Term in Math 3
+Alonzo Douglas
+2
+22
+7
+3
+1.102||6.102,7.501||4.402
+
+1
+22
+6
+200
+Applications of English 1
+Applications of English 1
+Mae Dunn
+0
+20
+14
+1
+8.302||8.101
+4.200,4.201
+0
+23
+6
+200
+Applications of English 1
+Applications of English 1
+Catherine Abbott
+2
+46
+9
+1
+8.302||8.101
+4.200,4.201
 1
 24
-9
-3
-45
+6
+200
+Applications of English 1
+Applications of English 1
+Audrey Morton
 2
-401
-Special Topics in Business and Environment 2
-Special Topics in Business and Environment 2
-Elijah Barrett
+22
+15
+2
+8.302||8.101
+4.200,4.201
 1
-36
-11
-3
-44
-7
-202
-Applications of Math 3
-Applications of Math 3
-Felicia Davis
+23
+6
+101
+Introduction to English 2
+Introduction to English 2
+Steve Peters
 0
-42
+6
 13
 1
-45
-7
-202
-Applications of Math 3
-Applications of Math 3
+
+
+1
+24
+6
+101
+Introduction to English 2
+Introduction to English 2
+Arturo Miles
+1
+48
+11
+1
+
+
+1
+25
+6
+101
+Introduction to English 2
+Introduction to English 2
+Clark Mccarthy
+2
+16
+10
+2
+
+
+1
+24
+3
+401
+Special Topics in Computer Science 2
+Special Topics in Computer Science 2
+Guadalupe Gomez
+0
+60
+9
+3
+3.202||8.102
+1.401,2.100
+2
+25
+3
+501
+Work Term in Computer Science 2
+Work Term in Computer Science 2
+Arturo Miles
+0
+22
+12
+2
+0.502,7.400
+3.201,6.401
+2
+26
+3
+501
+Work Term in Computer Science 2
+Work Term in Computer Science 2
+Clarence Crawford
+1
+54
+13
+2
+0.502,7.400
+3.201,6.401
+1
+27
+3
+501
+Work Term in Computer Science 2
+Work Term in Computer Science 2
+Olga Stewart
+1
+4
+14
+3
+0.502,7.400
+3.201,6.401
+1
+26
+0
+500
+Work Term in Art 1
+Work Term in Art 1
+Mattie Hogan
+0
+8
+9
+3
+4.300
+9.500,9.500
+1
+27
+8
+301
+Advanced Topics in Music 2
+Advanced Topics in Music 2
+Julian Hardy
+0
+60
+15
+1
+0.501||7.301,8.201||3.301
+
+2
+28
+8
+301
+Advanced Topics in Music 2
+Advanced Topics in Music 2
+Wendy Thornton
+1
+20
+15
+1
+0.501||7.301,8.201||3.301
+
+1
+29
+8
+301
+Advanced Topics in Music 2
+Advanced Topics in Music 2
+Mae Dunn
+2
+26
+13
+3
+0.501||7.301,8.201||3.301
+
+1
+28
+2
+100
+Introduction to Business and Environment 1
+Introduction to Business and Environment 1
 Nina Hudson
+0
+32
+16
+2
+
+8.101,1.301
+2
+29
+2
+100
+Introduction to Business and Environment 1
+Introduction to Business and Environment 1
+Theodore Larson
+1
+44
+12
+3
+
+8.101,1.301
+1
+30
+2
+100
+Introduction to Business and Environment 1
+Introduction to Business and Environment 1
+Alma Kelly
 2
 38
 8
 2
+
+8.101,1.301
+1
+29
+7
+201
+Applications of Math 2
+Applications of Math 2
+Nina Hudson
+0
+2
+14
+2
+6.402,6.102||3.502,1.302
+
+2
+30
+2
+201
+Applications of Business and Environment 2
+Applications of Business and Environment 2
+Angie Reid
+0
+42
+8
+2
+4.501||3.400,2.501
+2.400,5.102
+2
+31
+2
+201
+Applications of Business and Environment 2
+Applications of Business and Environment 2
+Wendy Thornton
+1
+4
+11
+1
+4.501||3.400,2.501
+2.400,5.102
+1
+31
+7
+400
+Special Topics in Math 1
+Special Topics in Math 1
+Angie Reid
+0
+30
+15
+2
+8.300
+
+1
+32
+0
+401
+Special Topics in Art 2
+Special Topics in Art 2
+Jeannie Romero
+0
+56
+9
+2
+
+3.301
+1
+33
+0
+501
+Work Term in Art 2
+Work Term in Art 2
+Jack Ramos
+0
+38
+9
+3
+7.500||6.100
+8.100
+0
+34
+0
+501
+Work Term in Art 2
+Work Term in Art 2
+Edmund Wallace
+2
+26
+13
+1
+7.500||6.100
+8.100
+0
+34
+3
+101
+Introduction to Computer Science 2
+Introduction to Computer Science 2
+Diana Steele
+0
 46
+7
+3
+
+6.302,7.300
+1
+35
+7
+300
+Advanced Topics in Math 1
+Advanced Topics in Math 1
+Tara Howard
+0
+38
+7
+1
+0.400,1.101,7.102||1.102
+1.400,1.300
+1
+36
+7
+200
+Applications of Math 1
+Applications of Math 1
+Mercedes Fields
+0
+56
+11
+2
+5.201,8.200||1.502||9.402
+8.301
+1
+37
+1
+502
+Work Term in Biology 3
+Work Term in Biology 3
+Arturo Miles
+0
+16
+7
+2
+1.200||3.101||3.200||5.100
+4.300
+1
+38
+1
+502
+Work Term in Biology 3
+Work Term in Biology 3
+Catherine Abbott
+2
+26
+12
+1
+1.200||3.101||3.200||5.100
+4.300
+1
+39
+1
+502
+Work Term in Biology 3
+Work Term in Biology 3
+Steve Peters
+1
+20
+7
+1
+1.200||3.101||3.200||5.100
+4.300
+1
+38
+2
+102
+Introduction to Business and Environment 3
+Introduction to Business and Environment 3
+Tomas Bryant
+0
+32
+14
+2
+
+0.301
+0
+39
+5
+501
+Work Term in Engineering 2
+Work Term in Engineering 2
+Clark Mccarthy
+0
+12
+13
+2
+2.101||3.501||0.500,8.300
+5.402,5.201
+0
+40
+5
+501
+Work Term in Engineering 2
+Work Term in Engineering 2
+Edmund Wallace
+2
+40
+7
+2
+2.101||3.501||0.500,8.300
+5.402,5.201
+0
+40
+9
+302
+Advanced Topics in Software Engineering 3
+Advanced Topics in Software Engineering 3
+Steve Peters
+0
+32
+8
+3
+8.402||4.201
+7.202,4.402
+2
+41
+9
+302
+Advanced Topics in Software Engineering 3
+Advanced Topics in Software Engineering 3
+Edmund Wallace
+1
+8
+10
+1
+8.402||4.201
+7.202,4.402
+1
+42
+9
+302
+Advanced Topics in Software Engineering 3
+Advanced Topics in Software Engineering 3
+Audrey Morton
+1
+54
+16
+1
+8.402||4.201
+7.202,4.402
+1
+41
+1
+201
+Applications of Biology 2
+Applications of Biology 2
+Ivan Harrington
+0
+4
+16
+1
+4.502,5.101,2.301,4.500
+9.100,9.500
+2
+42
+1
+201
+Applications of Biology 2
+Applications of Biology 2
+Clarence Crawford
+2
+6
+16
+2
+4.502,5.101,2.301,4.500
+9.100,9.500
+1
+42
+2
+101
+Introduction to Business and Environment 2
+Introduction to Business and Environment 2
+Audrey Morton
+0
+20
+13
+1
+
+2.202
+0
+43
+2
+101
+Introduction to Business and Environment 2
+Introduction to Business and Environment 2
+Vicki Woods
+2
+50
+7
+1
+
+2.202
+0
+43
+4
+402
+Special Topics in Education 3
+Special Topics in Education 3
+Felicia Davis
+0
+16
+10
+2
+0.101||7.201||8.500||4.101
+7.101
+2
+44
 7
 202
 Applications of Math 3
 Applications of Math 3
-Alma Kelly
+Elsa Malone
+0
+6
+13
 2
-14
-16
+4.402,4.401
+7.201
 1
 45
+7
+202
+Applications of Math 3
+Applications of Math 3
+Guadalupe Gomez
+2
+30
 8
-302
-Advanced Topics in Music 3
-Advanced Topics in Music 3
-Mattie Hogan
-0
-50
-10
 3
-46
+4.402,4.401
+7.201
 1
+45
+9
 201
-Applications of Biology 2
-Applications of Biology 2
-Timothy Jenkins
+Applications of Software Engineering 2
+Applications of Software Engineering 2
+Tara Howard
+0
+30
+11
+1
+2.100||4.102,0.100
+5.301,3.101
+0
+46
+9
+201
+Applications of Software Engineering 2
+Applications of Software Engineering 2
+Garry Copeland
+2
+14
+13
+1
+2.100||4.102,0.100
+5.301,3.101
+0
+46
+0
+502
+Work Term in Art 3
+Work Term in Art 3
+Angie Reid
+0
+62
+7
+2
+1.400||7.401,3.300,9.501
+9.202
+2
+47
+3
+401
+Special Topics in Computer Science 2
+Special Topics in Computer Science 2
+Roxanne Hansen
+0
+42
+16
+2
+8.202||5.302,7.101,2.202
+9.302
+1
+48
+3
+401
+Special Topics in Computer Science 2
+Special Topics in Computer Science 2
+Johanna Wood
+2
+10
+15
+1
+8.202||5.302,7.101,2.202
+9.302
+1
+49
+3
+401
+Special Topics in Computer Science 2
+Special Topics in Computer Science 2
+Steve Peters
+1
+30
+11
+1
+8.202||5.302,7.101,2.202
+9.302
+1
+48
+7
+501
+Work Term in Math 2
+Work Term in Math 2
+Molly Cohen
 0
 12
 10
-3
-47
 1
-201
-Applications of Biology 2
-Applications of Biology 2
-Vicki Woods
-1
-26
-7
-3
-48
-1
-201
-Applications of Biology 2
-Applications of Biology 2
-Steve Peters
+8.400,3.102||6.201
+2.201,9.501
 2
-24
-8
-3
-47
-5
-502
-Work Term in Engineering 3
-Work Term in Engineering 3
-Simon Osborne
-0
-24
-10
-2
-48
-7
-201
-Applications of Math 2
-Applications of Math 2
-Jack Ramos
-0
-6
-16
-3
 49
-1
-500
-Work Term in Biology 1
-Work Term in Biology 1
-Angie Reid
+9
+401
+Special Topics in Software Engineering 2
+Special Topics in Software Engineering 2
+Tomas Bryant
 0
-24
-8
 2
+16
+1
+9.300||2.400
+6.102
+1

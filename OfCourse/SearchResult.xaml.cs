@@ -39,6 +39,9 @@ namespace OfCourse
 		public short days { get; set; }
 		public short startTime { get; set; }
 		public short duration { get; set; }
+        public string prereqs { get; set; }
+        public string antireqs { get; set; }
+        public short status { get; set; }
 
 		public void SetLabels()
 		{
