@@ -82,16 +82,16 @@ namespace OfCourse
                 if (value == 1)
                 {
                     this.ToolTip = "This course is closed";
-                    this.Rectangle.Fill = Brushes.Pink;
+                    //this.Rectangle.Fill = Brushes.Pink;
                 }
                 else if (value == 2) 
                 {
                     this.ToolTip = "This course is under a waitlist;";
-                    this.Rectangle.Fill = Brushes.LightYellow;
+                    //this.Rectangle.Fill = Brushes.LightYellow;
                 }
                 else
                 {
-                    this.Rectangle.Fill = Brushes.LightGreen;
+                    //this.Rectangle.Fill = Brushes.LightGreen;
                 }
             }
         }

@@ -1,12 +1,10 @@
 ﻿/* TODO: 
- *    - Get drag-and-drop working
- *    - Add in the rest of the search options
- *    - Make the thing look nice (?)
- *    - Have a button to clear the faculty filter?
+ *    - Add in advanced search options
  *    - Keyboard accessiblity?
- *    - Get some borders up to make things look better
  *    - Get mouse hover when disabled to highlight the course somehow
- *    - Update class definitions to include faculty somehow and filter it
+ *    - Integrate requisites to the program
+ *    - Integrate different terms to the program
+ *    - (Would be nice) Get drag-and-drop to dynamically update [Alex]
  *    
  *  Comments from Richard:
  *    - What is the relationship between the cart and schedule?

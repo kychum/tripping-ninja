@@ -158,7 +158,7 @@ int main(int argc, char** argv){
 				}
 		}
 
-		c.enrollable = rand()%3;
+		c.enrollable = (rand()%100 < 75 ? 1 : rand()%2+1);
 
 		cout << c;
 
