@@ -1,23 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace OfCourse
 {
 	/// <summary>
-	/// Interaction logic for SearchResult.xaml
+	///     Interaction logic for SearchResult.xaml
 	/// </summary>
 	public partial class SearchResult : UserControl
 	{
+		public static string[] departmentNames =
+		{
+			"ART",
+			"BIOL",
+			"BSEN",
+			"CPSC",
+			"EDUC",
+			"ENGG",
+			"ENGL",
+			"MATH",
+			"MUSI",
+			"SENG"
+		};
+
+		public SearchResult()
+		{
+			InitializeComponent();
+		}
+
 		public int id { get; set; }
 		public Dept department { get; set; }
 		public int courseNum { get; set; }
@@ -29,53 +38,39 @@ namespace OfCourse
 		public short startTime { get; set; }
 		public short duration { get; set; }
 
-        public static string[] departmentNames = {
-            "ART",
-            "BIOL",
-            "BSEN",
-            "CPSC",
-            "EDUC",
-            "ENGG",
-            "ENGL",
-            "MATH",
-            "MUSI",
-            "SENG",
-        };
-		
-		public SearchResult()
+		public void SetLabels()
 		{
-			this.InitializeComponent();
+			CNum.Content = departmentNames[(int) department] + " " + courseNum;
+			CName.Content = name;
+			CProf.Content = prof;
+			CDesc.Text = desc;
+			CType.Content = (type == ClassType.Lecture ? "Lecture" : type == ClassType.Tutorial ? "Tutorial" : "Laboratory");
+			CTime.Content = "";
+
+			foreach (Day d in Enum.GetValues(typeof (Day)))
+			{
+				if ((days & (int) d) > 0)
+				{
+					CTime.Content += Enum.GetName(typeof (Day), d);
+				}
+			}
+
+			CTime.Content += "  " + startTime + ":00 - " + (startTime + duration) + ":00";
 		}
 
-        public void SetLabels()
-        {
-            CName.Content = departmentNames[(int)department] + " " + courseNum + " - " + name;
-            CProf.Content = prof;
-            CDesc.Text = desc;
-            CType.Content = (type == ClassType.Lecture ? "Lecture" : type == ClassType.Tutorial ? "Tutorial" : "Laboratory");
-            CTime.Content = "";
+		public string typeName()
+		{
+			if (type == ClassType.Lecture)
+			{
+				return "Lecture";
+			}
 
-            foreach(Day d in Enum.GetValues(typeof(Day))){
-                if ((days & (int)d) > 0)
-                {
-                    CTime.Content += Enum.GetName(typeof(Day), d);
-                }
-            }
+			if (type == ClassType.Tutorial)
+			{
+				return "Tutorial";
+			}
 
-            CTime.Content += "  " + startTime + ":00 - " + (startTime + duration) + ":00";
-        }
-
-        public string typeName()
-        {
-            if (type == ClassType.Lecture)
-            {
-                return "Lecture";
-            }
-            else if (type == ClassType.Tutorial)
-            {
-                return "Tutorial";
-            }
-            return "Laboratory";
-        }
+			return "Laboratory";
+		}
 	}
 }

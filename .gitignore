@@ -4,3 +4,4 @@ OfCourse/obj/*
 *.obj
 *~
 *.DS_Store
+*.suo
