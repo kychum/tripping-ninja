@@ -3,7 +3,7 @@
         xmlns:local="clr-namespace:OfCourse"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Class="OfCourse.MainWindow"
-        Title="OfCourse Registration" Height="750" Width="1000" Background="#FFF1F1F1">
+        Title="OfCourse Registration" Height="900" Width="1440" Background="#FFF1F1F1">
 	<Window.Resources>
 		<Storyboard x:Key="ExpandResults">
 			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ResultsPane">
@@ -50,11 +50,9 @@
 						<Themes:ListBoxChrome x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderFocused="{TemplateBinding IsKeyboardFocusWithin}" SnapsToDevicePixels="true">
 							<Grid>
 								<Label Content="🔍" Height="Auto" VerticalAlignment="Center" Width="Auto" HorizontalAlignment="Stretch" Padding="0" BorderThickness="0" HorizontalContentAlignment="Center" Margin="3,1.02,221,3.02"/>
-								<Canvas x:Name="Underlay" Width="Auto" Cursor="IBeam" Margin="18.335,0,174.602,0" Visibility="Hidden">
-									<TextBlock Height="Auto" TextWrapping="Wrap" Text="Search..." VerticalAlignment="Center" Foreground="#FFC1C1C1" Margin="0" Canvas.Top="2.02" Width="Auto"/>
-								</Canvas>
+								<TextBlock x:Name="Underlay" Visibility="Hidden" Height="Auto" Width="Auto" TextWrapping="Wrap" Text="Search..." Margin="20,0,20,0" VerticalAlignment="Center" Foreground="#FFC1C1C1"/>
 								<ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="15,1.02,19.803,1.02" Width="Auto" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch" Visibility="Visible"/>
-								<Button x:Name="ClearButton" Background="{x:Null}" BorderBrush="{x:Null}" Content="✖" VerticalAlignment="Center" HorizontalAlignment="Right" VerticalContentAlignment="Center" BorderThickness="0" Padding="7,0,3,1" Foreground="#FF8F8F8F" Style="{DynamicResource ClearButtonStyle}" Focusable="False" Margin="0" Click="ClearSearch" />
+								<Button x:Name="ClearButton" Content="✖" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Right" BorderThickness="0" Foreground="#FF8F8F8F" Style="{DynamicResource ClearButtonStyle}" Focusable="False" Margin="0" Click="ClearSearch"  />
 							</Grid>
 						</Themes:ListBoxChrome>
 						<ControlTemplate.Triggers>
@@ -64,14 +62,8 @@
 							</Trigger>
 							<Trigger Property="Text" Value="">
 								<Setter Property="Visibility" TargetName="ClearButton" Value="Collapsed"/>
-							</Trigger>
-							<MultiTrigger>
-								<MultiTrigger.Conditions>
-									<Condition Property="Text" Value=""/>
-									<Condition Property="IsKeyboardFocusWithin" Value="False"/>
-								</MultiTrigger.Conditions>
 								<Setter Property="Visibility" TargetName="Underlay" Value="Visible"/>
-							</MultiTrigger>
+							</Trigger>
 						</ControlTemplate.Triggers>
 					</ControlTemplate>
 				</Setter.Value>
@@ -86,17 +78,23 @@
 				</MultiTrigger>
 			</Style.Triggers>
 		</Style>
+		<Style TargetType="{x:Type ComboBox}">
+			<Setter Property="FontFamily" Value="/OfCourse;component/Fonts/#Roboto" />
+		</Style>
 		<Style TargetType="{x:Type Button}">
-			<Setter Property="Foreground" Value="#111" />
+			<Setter Property="Background" Value="{x:Null}" />
+			<Setter Property="Cursor" Value="Hand" />
 			<Setter Property="FontFamily" Value="/OfCourse;component/Fonts/#Roboto" />
 			<Setter Property="FontWeight" Value="Bold" />
+			<Setter Property="Foreground" Value="#111" />
 			<Setter Property="Margin" Value="6" />
-			<Setter Property="Background" Value="{x:Null}" />
+			<Setter Property="MinWidth" Value="88" />
+			<Setter Property="Padding" Value="10,0,10,0" />
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type Button}">
 						<Border Background="{TemplateBinding Background}">
-							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+							<ContentPresenter Margin="{TemplateBinding Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 						</Border>
 					</ControlTemplate>
 				</Setter.Value>
@@ -110,56 +108,17 @@
 				</Trigger>
 			</Style.Triggers>
 		</Style>
-		<Style x:Key="ButtonFocusVisual">
-			<Setter Property="Control.Template">
-				<Setter.Value>
-					<ControlTemplate>
-						<Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-		<LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
-			<GradientStop Color="#F3F3F3" Offset="0"/>
-			<GradientStop Color="#EBEBEB" Offset="0.5"/>
-			<GradientStop Color="#DDDDDD" Offset="0.5"/>
-			<GradientStop Color="#CDCDCD" Offset="1"/>
-		</LinearGradientBrush>
-		<SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
 		<Style x:Key="ClearButtonStyle" TargetType="{x:Type Button}">
-			<!--
-			<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
-			-->
-			<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
-			<Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
-			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Background" Value="{x:Null}"/>
+			<Setter Property="BorderBrush" Value="{x:Null}"/>
 			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
 			<Setter Property="HorizontalContentAlignment" Value="Center"/>
 			<Setter Property="VerticalContentAlignment" Value="Center"/>
-			<Setter Property="Padding" Value="1"/>
+			<Setter Property="Padding" Value="6"/>
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type Button}">
 						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-						<!--
-						<Themes:ButtonChrome x:Name="Chrome" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderPressed="{TemplateBinding IsPressed}" RenderDefaulted="{TemplateBinding IsDefaulted}" SnapsToDevicePixels="true">
-							<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-						</Themes:ButtonChrome>
-						
-						<ControlTemplate.Triggers>
-							<Trigger Property="IsKeyboardFocused" Value="true">
-								<Setter Property="RenderDefaulted" TargetName="Chrome" Value="true"/>
-								<Setter Property="Focusable" Value="False"/>
-								<Setter Property="AllowDrop" Value="False"/>
-							</Trigger>
-							<Trigger Property="ToggleButton.IsChecked" Value="true">
-								<Setter Property="RenderPressed" TargetName="Chrome" Value="true"/>
-							</Trigger>
-							<Trigger Property="IsEnabled" Value="false">
-								<Setter Property="Foreground" Value="#ADADAD"/>
-							</Trigger>
-						</ControlTemplate.Triggers> 
-						-->
 					</ControlTemplate>
 				</Setter.Value>
 			</Setter>
@@ -167,38 +126,29 @@
 	</Window.Resources>
 	<DockPanel>
 		<DockPanel VerticalAlignment="Top" LastChildFill="False" DockPanel.Dock="Top">
-			<TextBox x:Name="SearchBox" Width="240" Margin="5,4" TextChanged="Search" DockPanel.Dock="Left" Style="{DynamicResource SearchBoxStyle}"/>
-			<ComboBox Width="115" Height="23" Margin="0,0,5,0" DockPanel.Dock="Left">
-				<ComboBoxItem Content="Faculty" HorizontalAlignment="Left" Width="88" IsSelected="True" Visibility="Collapsed"/>
-				<ComboBoxItem Content="All Faculties" HorizontalAlignment="Left" Width="113"/>
-				<ComboBoxItem Content="Arts" HorizontalAlignment="Left" Width="113"/>
-				<ComboBoxItem Content="Business" HorizontalAlignment="Left" Width="113"/>
-				<ComboBoxItem Content="Education" HorizontalAlignment="Left" Width="113"/>
-				<ComboBoxItem Content="Engineering" HorizontalAlignment="Left" Width="113"/>
-				<ComboBoxItem Content="Science" HorizontalAlignment="Left" Width="113"/>
+			<TextBox x:Name="SearchBox" Width="240" Margin="6" TextChanged="Search" DockPanel.Dock="Left" Style="{DynamicResource SearchBoxStyle}"/>
+			<ComboBox DockPanel.Dock="Left" Width="200" Margin="6" Padding="8" FontSize="14">
+				<ComboBox.BitmapEffect>
+					<DropShadowBitmapEffect Color="Black" Direction="315" Softness="0.2" ShadowDepth="3" Opacity="0.25" />
+				</ComboBox.BitmapEffect>
+				<ComboBoxItem Content="Faculty" IsSelected="True" Visibility="Collapsed"/>
+				<ComboBoxItem Content="All Faculties"/>
+				<ComboBoxItem Content="Arts"/>
+				<ComboBoxItem Content="Business"/>
+				<ComboBoxItem Content="Education"/>
+				<ComboBoxItem Content="Engineering"/>
+				<ComboBoxItem Content="Science"/>
 			</ComboBox>
-			<Button Content="OPTIONS" Height="36" Width="88" DockPanel.Dock="Left" FontSize="14"/>
+			<Button Content="OPTIONS" Height="36" DockPanel.Dock="Left" FontSize="14"/>
 			<GridSplitter DockPanel.Dock="Right"/>
-			<Button Content="FINALIZE" Width="88" DockPanel.Dock="Right" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" Height="36" BorderBrush="{x:Null}">
+			<Button Content="FINALIZE" Height="36" DockPanel.Dock="Right" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{x:Null}">
 				<Button.BitmapEffect>
 					<DropShadowBitmapEffect Color="Black" Direction="315" Softness="0.2" ShadowDepth="3" Opacity="0.25" />
 				</Button.BitmapEffect>
 				<Button.Style>
-					<Style TargetType="{x:Type Button}">
+					<Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
 						<Setter Property="Foreground" Value="#fff" />
-						<Setter Property="FontFamily" Value="/OfCourse;component/Fonts/#Roboto" />
-						<Setter Property="FontWeight" Value="Bold" />
-						<Setter Property="Margin" Value="6" />
 						<Setter Property="Background" Value="#FF4CAF50" />
-						<Setter Property="Template">
-							<Setter.Value>
-								<ControlTemplate TargetType="{x:Type Button}">
-									<Border Background="{TemplateBinding Background}">
-										<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-									</Border>
-								</ControlTemplate>
-							</Setter.Value>
-						</Setter>
 						<Style.Triggers>
 							<Trigger Property="IsMouseOver" Value="True">
 								<Setter Property="Background" Value="#FF43A047"/>
