@@ -177,27 +177,7 @@ namespace OfCourse
 
 		private void Search(object sender, TextChangedEventArgs e)
 		{
-			if (!ResultsPane.IsVisible)
-				ToggleResults(Visibility.Visible);
-			string query = ((TextBox) sender).Text;
-			int amountFound = 0;
-			foreach (SearchResult res in results)
-			{
-				if ((Regex.IsMatch(res.CName.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
-					(Regex.IsMatch(res.CProf.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
-					(Regex.IsMatch(res.CDesc.Text, query, RegexOptions.IgnoreCase)) ||
-                    (Regex.IsMatch(res.CNum.Content.ToString(), query, RegexOptions.IgnoreCase)))
-				{
-					res.Visibility = Visibility.Visible;
-					amountFound++;
-				}
-				else
-				{
-					res.Visibility = Visibility.Collapsed;
-				}
-			}
-
-			NotFoundLabel.Visibility = amountFound > 0 ? Visibility.Collapsed : Visibility.Visible;
+            FilterResults();
 		}
 
 		private void ClearSearch(object sender, RoutedEventArgs e)
@@ -260,6 +240,39 @@ namespace OfCourse
                     MakeScheduleItem(r.id, r.startTime - 6, (int)Math.Log((int)d, 2), r.duration, SearchResult.departmentNames[(int)r.department] + r.courseNum, r.typeName());
                 }
             }
+        }
+
+        private void ComboboxChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(ResultsPane != null)
+                FilterResults();
+        }
+
+        private void FilterResults()
+        {
+            if (!ResultsPane.IsVisible)
+                ToggleResults(Visibility.Visible);
+            string query = SearchBox.Text;
+            int faculty = FacultyFilter.SelectedIndex;
+            int amountFound = 0;
+            foreach (SearchResult res in results)
+            {
+                if (((Regex.IsMatch(res.CName.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
+                    (Regex.IsMatch(res.CProf.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
+                    (Regex.IsMatch(res.CDesc.Text, query, RegexOptions.IgnoreCase)) ||
+                    (Regex.IsMatch(res.CNum.Content.ToString(), query, RegexOptions.IgnoreCase))) &&
+                    ((faculty == 0) || ((Faculty)faculty == res.faculty)))
+                {
+                    res.Visibility = Visibility.Visible;
+                    amountFound++;
+                }
+                else
+                {
+                    res.Visibility = Visibility.Collapsed;
+                }
+            }
+
+            NotFoundLabel.Visibility = amountFound > 0 ? Visibility.Collapsed : Visibility.Visible;
         }
 	}
 }

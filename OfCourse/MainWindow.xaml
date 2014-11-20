@@ -127,9 +127,9 @@
 	<DockPanel>
 		<DockPanel VerticalAlignment="Top" LastChildFill="False" DockPanel.Dock="Top">
 			<TextBox x:Name="SearchBox" Width="240" Margin="6" TextChanged="Search" DockPanel.Dock="Left" Style="{DynamicResource SearchBoxStyle}"/>
-			<ComboBox DockPanel.Dock="Left" Width="200" Margin="6" Padding="8" FontSize="14">
-				<ComboBoxItem Content="Faculty" IsSelected="True" Visibility="Collapsed"/>
-				<ComboBoxItem Content="All Faculties"/>
+			<ComboBox x:Name="FacultyFilter" DockPanel.Dock="Left" Width="200" Margin="6" Padding="8" FontSize="14" SelectionChanged="ComboboxChanged">
+				<!--<ComboBoxItem Content="Faculty" IsSelected="True" Visibility="Collapsed"/>-->
+				<ComboBoxItem Content="All Faculties" IsSelected="True"/>
 				<ComboBoxItem Content="Arts"/>
 				<ComboBoxItem Content="Business"/>
 				<ComboBoxItem Content="Education"/>

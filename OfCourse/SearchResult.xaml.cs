@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows;
+using System.Windows.Media;
 
 namespace OfCourse
 {
@@ -30,7 +31,38 @@ namespace OfCourse
 		}
 
 		public int id { get; set; }
-		public Dept department { get; set; }
+        private Dept m_department;
+		public Dept department 
+        {
+            get { return m_department; }
+            set
+            {
+                m_department = value;
+                switch (value)
+                {
+                    case Dept.ART:
+                    case Dept.ENGL:
+                    case Dept.MUSI:
+                        faculty = Faculty.Arts;
+                        break;
+                    case Dept.BIOL:
+                    case Dept.CPSC:
+                    case Dept.MATH:
+                        faculty = Faculty.Science;
+                        break;
+                    case Dept.BSEN:
+                        faculty = Faculty.Business;
+                        break;
+                    case Dept.EDUC:
+                        faculty = Faculty.Education;
+                        break;
+                    case Dept.ENGG:
+                    case Dept.SENG:
+                        faculty = Faculty.Engineering;
+                        break;
+                }
+            }
+        }
 		public int courseNum { get; set; }
 		public string name { get; set; }
 		public string desc { get; set; }
@@ -41,7 +73,29 @@ namespace OfCourse
 		public short duration { get; set; }
         public string prereqs { get; set; }
         public string antireqs { get; set; }
-        public short status { get; set; }
+        private short m_status;
+        public short status {
+            get { return m_status; } 
+            set
+            {
+                m_status = value;
+                if (value == 1)
+                {
+                    this.ToolTip = "This course is closed";
+                    this.Rectangle.Fill = Brushes.Pink;
+                }
+                else if (value == 2) 
+                {
+                    this.ToolTip = "This course is under a waitlist;";
+                    this.Rectangle.Fill = Brushes.LightYellow;
+                }
+                else
+                {
+                    this.Rectangle.Fill = Brushes.LightGreen;
+                }
+            }
+        }
+        public Faculty faculty { get; set; }
 
 		public void SetLabels()
 		{

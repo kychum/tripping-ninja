@@ -16,6 +16,15 @@ namespace OfCourse
         SENG,
     }
 
+    public enum Faculty
+    {
+        Arts = 1,
+        Business,
+        Education,
+        Engineering,
+        Science
+    }
+
     public enum ClassType
     {
         Lecture = 0,
