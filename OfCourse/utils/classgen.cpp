@@ -16,7 +16,7 @@ using namespace std; //bite me
 #define THU 16
 #define FRI 32
 #define SAT 64
-#define VERSION "1.2"
+#define VERSION "1.3"
 
 enum Faculty{
 	Arts = 0,
@@ -121,7 +121,7 @@ int main(int argc, char** argv){
 	srand(time(NULL));
 	int outAmt = atoi(argv[1]);
 
-	cout << VERSION << endl << outAmt << endl; // I'm lazy, actually. just redirect the stream
+	cout << VERSION << endl;// << outAmt << endl; // I'm lazy, actually. just redirect the stream
 	for(int i = 0; i < outAmt; i++){
 		Course c;
 		c.id = i;
