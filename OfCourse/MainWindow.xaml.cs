@@ -110,7 +110,7 @@ namespace OfCourse
 				inFile.Close();
 			}
 
-			results = results.OrderBy(o => o.CName.Content).ToList(); // Huzzah! Sorts the list of courses. LINQ.
+			results = results.OrderBy(o => o.CNum.Content).ToList(); // Huzzah! Sorts the list of courses. LINQ.
 			foreach (SearchResult r in results)
 			{
 				Results.Children.Add(r);
@@ -183,8 +183,8 @@ namespace OfCourse
 			{
 				if ((Regex.IsMatch(res.CName.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
 					(Regex.IsMatch(res.CProf.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
-					(Regex.IsMatch(res.CDesc.Text, query, RegexOptions.IgnoreCase)) &&
-					query != "")
+					(Regex.IsMatch(res.CDesc.Text, query, RegexOptions.IgnoreCase)) ||
+                    (Regex.IsMatch(res.CNum.Content.ToString(), query, RegexOptions.IgnoreCase)))
 				{
 					res.Visibility = Visibility.Visible;
 					amountFound++;
