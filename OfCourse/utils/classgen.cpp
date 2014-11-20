@@ -105,9 +105,10 @@ struct Course{
 	unsigned short duration; // Assume exact hours, between 1-3.
 	string prereqs; // Dept.Num; ORs denote by ||, AND by commas
 	string antireqs; // comma-delimited
+	short enrollable; // 0: open 1: closed 2: waitlist
 
 	friend ostream& operator<<(ostream& o, const Course& c){
-		o << c.id << "\n" << c.department << "\n" << c.courseNum << "\n" << c.name+"\n" << c.desc+"\n" << c.prof+"\n" << c.type << "\n" << c.days << "\n" << c.startTime << "\n" << c.duration << "\n" << c.prereqs << "\n" << c.antireqs << endl;
+		o << c.id << "\n" << c.department << "\n" << c.courseNum << "\n" << c.name+"\n" << c.desc+"\n" << c.prof+"\n" << c.type << "\n" << c.days << "\n" << c.startTime << "\n" << c.duration << "\n" << c.prereqs << "\n" << c.antireqs << "\n" << enrollable << endl;
 		return o;
 	}
 };
@@ -157,6 +158,7 @@ int main(int argc, char** argv){
 				}
 		}
 
+		c.enrollable = rand(3);
 
 		cout << c;
 
@@ -172,6 +174,10 @@ int main(int argc, char** argv){
 					c.days = 26; // default to MTF
 				c.startTime = (rand()%10)+7;
 				c.duration = rand()%3+1;
+				if(c.enrollable == 0)
+					c.enrollable = rand(2);
+				else // waitlisted? or closed?
+					c.enrollable = 1; // closed
 				cout << c;
 			}
 		}
