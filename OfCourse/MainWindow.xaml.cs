@@ -48,6 +48,7 @@ namespace OfCourse
 			LoadClasses();
 			Expander.Toggle.Click += Toggle_Click;
 
+			((Grid)FindName("HelpOverlay")).Visibility = Visibility.Visible;
 			// TODO Load draft, if any
 		}
 

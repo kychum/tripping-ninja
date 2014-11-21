@@ -208,7 +208,7 @@
 				<TextBlock x:Name="ClassStatusButton" Foreground="#FF4CAF50" Height="48" Padding="80,14,20,14" FontSize="14" FontWeight="Bold">UNDO</TextBlock>
 			</WrapPanel>
 		</WrapPanel>
-		<Grid x:Name="HelpOverlay" Background="#b000" MouseUp="HelpOverlay_OnMouseUp">
+		<Grid x:Name="HelpOverlay" Background="#b000" MouseUp="HelpOverlay_OnMouseUp" Visibility="Hidden">
 			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="44,32,0,-31">↖ Looking for a specific course?</TextBlock>
 			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="614,32,0,-31">↖ Need to see this help screen?</TextBlock>
 			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="900,12,0,-11">Want to save your schedule for later? →</TextBlock>
