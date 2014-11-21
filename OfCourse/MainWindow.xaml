@@ -124,69 +124,86 @@
 			</Setter>
 		</Style>
 	</Window.Resources>
-	<DockPanel>
-		<DockPanel VerticalAlignment="Top" LastChildFill="False" DockPanel.Dock="Top">
-			<TextBox x:Name="SearchBox" Width="240" Margin="6" TextChanged="Search" DockPanel.Dock="Left" Style="{DynamicResource SearchBoxStyle}"/>
-			<ComboBox DockPanel.Dock="Left" Width="200" Margin="6" Padding="8" FontSize="14">
-				<ComboBoxItem Content="Faculty" IsSelected="True" Visibility="Collapsed"/>
-				<ComboBoxItem Content="All Faculties"/>
-				<ComboBoxItem Content="Arts"/>
-				<ComboBoxItem Content="Business"/>
-				<ComboBoxItem Content="Education"/>
-				<ComboBoxItem Content="Engineering"/>
-				<ComboBoxItem Content="Science"/>
-			</ComboBox>
-			<Button Content="OPTIONS" Height="36" DockPanel.Dock="Left" FontSize="14"/>
-			<Button Content="HELP" Height="36" DockPanel.Dock="Left" FontSize="14"/>
-			<Button Content="FINALIZE" Height="36" DockPanel.Dock="Right" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{x:Null}">
-				<Button.Style>
-					<Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
-						<Setter Property="Foreground" Value="#fff" />
-						<Setter Property="Background" Value="#FF4CAF50" />
-						<Style.Triggers>
-							<Trigger Property="IsMouseOver" Value="True">
-								<Setter Property="Background" Value="#FF43A047"/>
-							</Trigger>
-							<Trigger Property="IsPressed" Value="True">
-								<Setter Property="Background" Value="#FF388E3C"/>
-							</Trigger>
-						</Style.Triggers>
-					</Style>
-				</Button.Style>
-			</Button>
-			<Button Content="SAVE DRAFT" Height="36" DockPanel.Dock="Right" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{x:Null}">
-				<Button.Style>
-					<Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
-						<Setter Property="Foreground" Value="#FF03A9F4" />
-						<Style.Triggers>
-							<Trigger Property="IsMouseOver" Value="True">
-								<Setter Property="Foreground" Value="#FFFF"/>
-								<Setter Property="Background" Value="#FF039BE5"/>
-							</Trigger>
-							<Trigger Property="IsPressed" Value="True">
-								<Setter Property="Foreground" Value="#FFFF"/>
-								<Setter Property="Background" Value="#FF0288D1"/>
-							</Trigger>
-						</Style.Triggers>
-					</Style>
-				</Button.Style>
-			</Button>
+	<Grid>
+		<DockPanel>
+			<DockPanel VerticalAlignment="Top" LastChildFill="False" DockPanel.Dock="Top">
+				<TextBox x:Name="SearchBox" Width="240" Margin="6" TextChanged="Search" DockPanel.Dock="Left" Style="{DynamicResource SearchBoxStyle}"/>
+				<ComboBox DockPanel.Dock="Left" Width="200" Margin="6" Padding="8" FontSize="14">
+					<ComboBoxItem Content="Faculty" IsSelected="True" Visibility="Collapsed"/>
+					<ComboBoxItem Content="All Faculties"/>
+					<ComboBoxItem Content="Arts"/>
+					<ComboBoxItem Content="Business"/>
+					<ComboBoxItem Content="Education"/>
+					<ComboBoxItem Content="Engineering"/>
+					<ComboBoxItem Content="Science"/>
+				</ComboBox>
+				<Button Content="OPTIONS" Height="36" DockPanel.Dock="Left" FontSize="14"/>
+				<Button Content="HELP" Height="36" DockPanel.Dock="Left" FontSize="14"/>
+				<Button Content="FINALIZE" Height="36" DockPanel.Dock="Right" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{x:Null}">
+					<Button.Style>
+						<Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+							<Setter Property="Foreground" Value="#fff" />
+							<Setter Property="Background" Value="#FF4CAF50" />
+							<Style.Triggers>
+								<Trigger Property="IsMouseOver" Value="True">
+									<Setter Property="Background" Value="#FF43A047"/>
+								</Trigger>
+								<Trigger Property="IsPressed" Value="True">
+									<Setter Property="Background" Value="#FF388E3C"/>
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
+				<Button Content="SAVE DRAFT" Height="36" DockPanel.Dock="Right" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{x:Null}" Click="SaveDraft_OnClick">
+					<Button.Style>
+						<Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+							<Setter Property="Foreground" Value="#FF03A9F4" />
+							<Style.Triggers>
+								<Trigger Property="IsMouseOver" Value="True">
+									<Setter Property="Foreground" Value="#FFFF"/>
+									<Setter Property="Background" Value="#FF039BE5"/>
+								</Trigger>
+								<Trigger Property="IsPressed" Value="True">
+									<Setter Property="Foreground" Value="#FFFF"/>
+									<Setter Property="Background" Value="#FF0288D1"/>
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
+			</DockPanel>
+			<ScrollViewer x:Name="ResultsPane" Margin="0" HorizontalAlignment="Left" DockPanel.Dock="Left" Width="0" Visibility="Hidden">
+				<Grid HorizontalAlignment="Left" Width="248">
+					<StackPanel x:Name="Results">
+						<Label x:Name="NotFoundLabel" Content="No results found!" HorizontalAlignment="Center" Visibility="Collapsed"/>
+					</StackPanel>
+				</Grid>
+			</ScrollViewer>
+			<DockPanel Margin="0" DockPanel.Dock="Right">
+				<local:ExpandTab x:Name="Expander"/>
+				<Grid Margin="10,0,0,0" DockPanel.Dock="Bottom">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="328*"/>
+						<ColumnDefinition Width="373*"/>
+					</Grid.ColumnDefinitions>
+					<Label Content="Cart Goes Here?" HorizontalAlignment="Center" Margin="653,25" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+				</Grid>
+				<Grid DockPanel.Dock="Top" x:Name="SchedulePanel" Margin="10,0,0,0" ShowGridLines="True">
+					<local:TimeSchedule x:Name="Schedule" />
+				</Grid>
+			</DockPanel>
 		</DockPanel>
-		<ScrollViewer x:Name="ResultsPane" Margin="0" HorizontalAlignment="Left" DockPanel.Dock="Left" Width="0" Visibility="Hidden">
-			<Grid HorizontalAlignment="Left" Width="248">
-				<StackPanel x:Name="Results">
-					<Label x:Name="NotFoundLabel" Content="No results found!" HorizontalAlignment="Center" Visibility="Collapsed"/>
-				</StackPanel>
-			</Grid>
-		</ScrollViewer>
-		<DockPanel Margin="0" DockPanel.Dock="Right">
-			<local:ExpandTab x:Name="Expander"/>
-			<Grid Margin="10,0,0,0" DockPanel.Dock="Bottom">
-				<Label Content="Cart Goes Here?" HorizontalAlignment="Center" Margin="0,25" VerticalAlignment="Center"/>
-			</Grid>
-			<Grid DockPanel.Dock="Top" x:Name="SchedulePanel" Margin="10,0,0,0" ShowGridLines="True">
-				<local:TimeSchedule x:Name="Schedule" />
-			</Grid>
-		</DockPanel>
-	</DockPanel>
+		<WrapPanel x:Name="ButtonStatus" Margin="16,56" HorizontalAlignment="Right" Visibility="Hidden">
+			<WrapPanel Background="#FF323232">
+				<TextBlock x:Name="ButtonStatusText" Background="{x:Null}" Foreground="#FFFF" Height="48" Padding="20,14" FontSize="14"></TextBlock>
+			</WrapPanel>
+		</WrapPanel>
+		<WrapPanel x:Name="ClassStatus" Margin="16,56" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Hidden">
+			<WrapPanel Background="#FF323232">
+				<TextBlock x:Name="ClassStatusText" Background="{x:Null}" Foreground="#FFFF" Height="48" Padding="20,14" FontSize="14"></TextBlock>
+				<TextBlock x:Name="ClassStatusButton" Background="{x:Null}" Foreground="#FF4CAF50" Height="48" Padding="80,14,20,14" FontSize="14" FontWeight="Bold">UNDO</TextBlock>
+			</WrapPanel>
+		</WrapPanel>
+	</Grid>
 </Window>
