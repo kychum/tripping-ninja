@@ -274,6 +274,36 @@ namespace OfCourse
 			aTimer.Start();
 		}
 
+		private void DiscardDraft_OnClick(object sender, RoutedEventArgs e)
+		{
+			MessageBoxResult rsltMessageBox = MessageBox.Show("Are you sure you want to discard all unsaved changes? This CANNOT be undone.", "Discard draft?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+			switch (rsltMessageBox)
+			{
+				case MessageBoxResult.No:
+					return;
+			}
+
+			var statusPanel = (WrapPanel)FindName("ButtonStatus");
+			var statusText = (TextBlock)FindName("ButtonStatusText");
+
+			statusPanel.Visibility = Visibility.Visible;
+			statusText.Text = "Saving...";
+
+			// TODO Reload draft from previous, or wipe it if none is found
+
+			statusText.Text = "All unsaved changes have been discarded.";
+
+			var aTimer = new DispatcherTimer();
+			aTimer.Tick += (timerSender, timerEventArgs) =>
+			{
+				statusPanel.Visibility = Visibility.Hidden;
+				aTimer.Stop();
+			};
+			aTimer.Interval = new TimeSpan(0, 0, 3);
+			aTimer.Start();
+		}
+
 		private void HelpOverlay_OnMouseUp(object sender, MouseButtonEventArgs e)
 		{
 			((Grid)sender).Visibility = Visibility.Hidden;
