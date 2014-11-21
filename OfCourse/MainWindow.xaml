@@ -215,7 +215,9 @@
 			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="614,32,0,-31">↖ Need to see this help screen?</TextBlock>
 			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="900,12,0,-11">Want to save your schedule for later? →</TextBlock>
 			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="1170,46,0,-45">Finished everything? ↗</TextBlock>
-			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="27,448,0,-447">← Want to see a list of courses?</TextBlock>
+			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="43,435,0,-437">Click the tab on the left to <LineBreak/> view course listings.</TextBlock>
+			<TextBlock Foreground="#FFB3E5FC" HorizontalAlignment="Left" FontSize="18" Margin="44,203,0,-205">← You can drag courses from this list onto the schedule...</TextBlock>
+			<TextBlock Foreground="#FFB3E5FC" HorizontalAlignment="Left" FontSize="18" Margin="301,230,0,-232">... or onto the cart at the bottom!</TextBlock>
 			<TextBlock Foreground="#FF03A9F4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">Click anywhere to get started!</TextBlock>
 		</Grid>
 	</Grid>
