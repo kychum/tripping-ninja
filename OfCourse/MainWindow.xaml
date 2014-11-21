@@ -11,12 +11,8 @@
 			</ObjectAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="ResultsPane">
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="265"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="276"/>
 			</DoubleAnimationUsingKeyFrames>
-			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="ResultsPane">
-				<EasingThicknessKeyFrame KeyTime="0" Value="0,5,0,0"/>
-				<EasingThicknessKeyFrame KeyTime="0:0:0.1" Value="5,5,0,0"/>
-			</ThicknessAnimationUsingKeyFrames>
 		</Storyboard>
 		<Storyboard x:Key="HideResults">
 			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ResultsPane">
@@ -129,7 +125,10 @@
 	</Window.Resources>
 	<Grid>
 		<DockPanel>
-			<DockPanel VerticalAlignment="Top" LastChildFill="False" DockPanel.Dock="Top">
+			<DockPanel VerticalAlignment="Top" LastChildFill="False" DockPanel.Dock="Top" Background="#ffff" ZIndex="3">
+				<DockPanel.BitmapEffect>
+					<DropShadowBitmapEffect Color="Black" Direction="270" Softness="0.2" ShadowDepth="3" Opacity="0.2" />
+				</DockPanel.BitmapEffect>
 				<TextBox x:Name="SearchBox" Width="240" Margin="6" TextChanged="Search" DockPanel.Dock="Left" Style="{DynamicResource SearchBoxStyle}"/>
 				<ComboBox DockPanel.Dock="Left" Width="200" Margin="6" Padding="8" FontSize="14">
 					<ComboBoxItem Content="Faculty" IsSelected="True" Visibility="Collapsed"/>
@@ -176,23 +175,24 @@
 					</Button.Style>
 				</Button>
 			</DockPanel>
-			<ScrollViewer x:Name="ResultsPane" Margin="0" HorizontalAlignment="Left" DockPanel.Dock="Left" Width="0" Visibility="Hidden">
-				<Grid HorizontalAlignment="Left" Width="248">
-					<StackPanel x:Name="Results">
-						<Label x:Name="NotFoundLabel" Content="No results found!" HorizontalAlignment="Center" Visibility="Collapsed"/>
-					</StackPanel>
-				</Grid>
-			</ScrollViewer>
-			<DockPanel Margin="0" DockPanel.Dock="Right">
+			<Grid x:Name="ResultsPane" Margin="0" Background="#ffff" HorizontalAlignment="Left" DockPanel.Dock="Left" Width="0" Visibility="Hidden" ZIndex="2">
+				<Grid.BitmapEffect>
+					<DropShadowBitmapEffect Color="Black" Direction="0" Softness="0.2" ShadowDepth="3" Opacity="0.2" />
+				</Grid.BitmapEffect>
+				<ScrollViewer Margin="4">
+					<Grid HorizontalAlignment="Left" Width="248">
+						<StackPanel x:Name="Results">
+							<Label x:Name="NotFoundLabel" Content="No results found!" HorizontalAlignment="Center" Visibility="Collapsed"/>
+						</StackPanel>
+					</Grid>
+				</ScrollViewer>
+			</Grid>
+			<DockPanel Margin="0" DockPanel.Dock="Right" ZIndex="1">
 				<local:ExpandTab x:Name="Expander"/>
-				<Grid Margin="10,0,0,0" DockPanel.Dock="Bottom">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="328*"/>
-						<ColumnDefinition Width="373*"/>
-					</Grid.ColumnDefinitions>
-					<Label Content="Cart Goes Here?" HorizontalAlignment="Center" Margin="653,25" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+				<Grid Margin="0,10,10,10" DockPanel.Dock="Bottom">
+					<Label Content="Cart Goes Here?" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 				</Grid>
-				<Grid DockPanel.Dock="Top" x:Name="SchedulePanel" Margin="10,0,0,0" ShowGridLines="True">
+				<Grid DockPanel.Dock="Top" x:Name="SchedulePanel" Margin="0,10,10,0" ShowGridLines="True">
 					<local:TimeSchedule x:Name="Schedule" />
 				</Grid>
 			</DockPanel>
