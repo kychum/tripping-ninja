@@ -24,7 +24,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -248,8 +247,8 @@ namespace OfCourse
 		public bool HasConflict(int row, int col, int span)
 		{
 			return schedItems
-					.Where(si => si.col == col)
-					.Any(si => (si.row <= row && (si.row + si.span - 1) >= row) || (row <= si.row && (row + span - 1) >= si.row));
+				.Where(si => si.col == col)
+				.Any(si => (si.row <= row && (si.row + si.span - 1) >= row) || (row <= si.row && (row + span - 1) >= si.row));
 		}
 
 		private void SaveDraft_OnClick(object sender, RoutedEventArgs e)

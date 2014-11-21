@@ -199,12 +199,12 @@
 		</DockPanel>
 		<WrapPanel x:Name="ButtonStatus" Margin="16,56" HorizontalAlignment="Right" Visibility="Hidden">
 			<WrapPanel Background="#FF323232">
-				<TextBlock x:Name="ButtonStatusText" Background="{x:Null}" Foreground="#FFFF" Height="48" Padding="20,14" FontSize="14"></TextBlock>
+				<TextBlock x:Name="ButtonStatusText" Background="{x:Null}" Foreground="#FFFF" Height="48" Padding="20,16" FontSize="14"></TextBlock>
 			</WrapPanel>
 		</WrapPanel>
 		<WrapPanel x:Name="ClassStatus" Margin="16,56" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Hidden">
 			<WrapPanel Background="#FF323232">
-				<TextBlock x:Name="ClassStatusText" Foreground="#FFFF" Height="48" Padding="20,14" FontSize="14"></TextBlock>
+				<TextBlock x:Name="ClassStatusText" Foreground="#FFFF" Height="48" Padding="20,16" FontSize="14"></TextBlock>
 				<TextBlock x:Name="ClassStatusButton" Foreground="#FF4CAF50" Height="48" Padding="80,14,20,14" FontSize="14" FontWeight="Bold">UNDO</TextBlock>
 			</WrapPanel>
 		</WrapPanel>
