@@ -36,6 +36,7 @@ namespace OfCourse
 		private readonly List<Border> hoverBorders = new List<Border>();
 		private readonly List<ScheduleItem> schedItems = new List<ScheduleItem>();
 		private List<SearchResult> results = new List<SearchResult>();
+        int[,] itemsInSlot = new int[12,5];
 
 		public MainWindow()
 		{
@@ -119,17 +120,7 @@ namespace OfCourse
 
 		private void r_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			var r = (SearchResult) sender;
-			r.IsEnabled = false;
-
-			foreach (Day d in Enum.GetValues(typeof (Day)))
-			{
-				if ((r.days & (int) d) > 0)
-				{
-					MakeScheduleItem(r.id, r.startTime - 6, (int) Math.Log((int) d, 2), r.duration,
-						SearchResult.departmentNames[(int) r.department] + r.courseNum, r.typeName());
-				}
-			}
+            AddResult((SearchResult)sender);
 		}
 
 		private void r_MouseLeave(object sender, MouseEventArgs e)
@@ -144,17 +135,17 @@ namespace OfCourse
 
 		private void r_MouseEnter(object sender, MouseEventArgs e)
 		{
-			var r = (SearchResult) sender;
-			int row = r.startTime - 6;
-			int span = r.duration;
+            SearchResult r = (SearchResult)sender;
+            int row = r.startTime - 6;
+            int span = r.duration;
 
-			foreach (Day d in Enum.GetValues(typeof (Day)))
-			{
-				if ((r.days & (int) d) > 0)
-				{
-					SetBorder(row, (int) (Math.Log((int) d, 2)), span);
-				}
-			}
+            foreach (Day d in Enum.GetValues(typeof(Day)))
+            {
+                if ((r.days & (int)d) > 0)
+                {
+                    SetBorder(row, (int)(Math.Log((int)d, 2)), span);
+                }
+            }
 		}
 
 		private void SetBorder(int row, int col, int span)
@@ -173,6 +164,20 @@ namespace OfCourse
 			Schedule.LayoutRoot.Children.Add(b);
 		}
 
+        private void AddResult(SearchResult result)
+        {
+            result.IsEnabled = false;
+
+            foreach (Day d in Enum.GetValues(typeof(Day)))
+            {
+                if ((result.days & (int)d) > 0)
+                {
+                    MakeScheduleItem(result.id, result.startTime - 6, (int)Math.Log((int)d, 2), result.duration,
+                        SearchResult.departmentNames[(int)result.department] + result.courseNum, result.typeName());
+                }
+            }
+            ResizeItems();
+        }
 		private void Search(object sender, TextChangedEventArgs e)
 		{
             FilterResults();
@@ -205,7 +210,56 @@ namespace OfCourse
 
 			schedItems.Add(i);
 			Schedule.LayoutRoot.Children.Add(i);
+            for (int cnt = 0; cnt < span; cnt++)
+            {
+                itemsInSlot[row + cnt - 1, col - 1]++;
+            }
+
+            // Edit width of items to fit schedule
+            /*
+            int itemNum = 0;
+            double scheduleWidth = Schedule.LayoutRoot.ColumnDefinitions[1].ActualWidth;
+            var conflictItems = schedItems.Where(si => ((si.col == col) && ((si.row <= row && (si.row + si.span - 1) >= row) || (row <= si.row && (row + span - 1) >= si.row))));
+            int total = 0;
+            foreach (var v in conflictItems) // Apparently LINQ doesn't count well
+            {
+                total++;
+            }
+            foreach (ScheduleItem sch in conflictItems)
+            {
+                double  test = scheduleWidth * itemNum * (1.0 / total);
+                sch.Margin = new Thickness(scheduleWidth * itemNum * (1.0 / total), 0, scheduleWidth * (total - itemNum - 1) * (1.0 / total), 0);
+                itemNum++;
+            }
+            */
 		}
+
+        public void ResizeItems()
+        {
+            double scheduleWidth = Schedule.LayoutRoot.ColumnDefinitions[1].ActualWidth;
+            foreach (var item in schedItems)
+            {
+                int maxConflicts = 0;
+                for (int cnt = 0; cnt < item.span; cnt++)
+                {
+                    if (itemsInSlot[cnt + item.row - 1, item.col - 1] > maxConflicts)
+                    {
+                        maxConflicts = itemsInSlot[cnt + item.row - 1, item.col - 1];
+                    }
+                }
+                var conflictItems = schedItems.Where(si => ((si.col == item.col) && ((si.row <= item.row && (si.row + si.span - 1) >= item.row) || (item.row <= si.row && (item.row + item.span - 1) >= si.row))));
+                int itemNum = 0;
+                foreach (var sch in conflictItems)
+                {
+                    if (sch != item)
+                        if(sch.Margin.Right != 0)
+                            itemNum++;
+                    else
+                        break;
+                }
+                item.Margin = new Thickness(scheduleWidth * itemNum / maxConflicts, 0, (maxConflicts - itemNum - 1) * scheduleWidth / maxConflicts, 0);
+            }
+        }
 
 		public void RemoveCourse(int id)
 		{
@@ -229,20 +283,12 @@ namespace OfCourse
 
         private void SchedulePanel_Drop(object sender, DragEventArgs e)
         {
-            SearchResult r = (SearchResult)e.Data.GetData("Object");
-            r.IsEnabled = false;
-            foreach (Day d in Enum.GetValues(typeof(Day)))
-            {
-                if ((r.days & (int)d) > 0)
-                {
-                    MakeScheduleItem(r.id, r.startTime - 6, (int)Math.Log((int)d, 2), r.duration, SearchResult.departmentNames[(int)r.department] + r.courseNum, r.typeName());
-                }
-            }
+            AddResult((SearchResult)e.Data.GetData("Object"));
         }
 
         private void ComboboxChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(ResultsPane != null)
+            if(ResultsPane != null) // Needs this since the combobox is loaded before the schedule
                 FilterResults();
         }
 
