@@ -273,5 +273,15 @@ namespace OfCourse
 			aTimer.Interval = new TimeSpan(0, 0, 3);
 			aTimer.Start();
 		}
+
+		private void HelpOverlay_OnMouseUp(object sender, MouseButtonEventArgs e)
+		{
+			((Grid)sender).Visibility = Visibility.Hidden;
+		}
+
+		private void HelpButton_OnClick(object sender, RoutedEventArgs e)
+		{
+			((Grid)FindName("HelpOverlay")).Visibility = Visibility.Visible;
+		}
 	}
 }

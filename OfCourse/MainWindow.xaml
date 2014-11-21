@@ -34,6 +34,9 @@
 			<GradientStop Color="#E2E3EA" Offset="0.07"/>
 			<GradientStop Color="#E3E9EF" Offset="1"/>
 		</LinearGradientBrush>
+		<Style TargetType="{x:Type TextBlock}">
+			<Setter Property="FontFamily" Value="/OfCourse;component/Fonts/#Roboto" />
+		</Style>
 		<Style x:Key="SearchBoxStyle" BasedOn="{x:Null}" TargetType="{x:Type TextBox}">
 			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
 			<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
@@ -138,8 +141,8 @@
 					<ComboBoxItem Content="Science"/>
 				</ComboBox>
 				<Button Content="OPTIONS" Height="36" DockPanel.Dock="Left" FontSize="14"/>
-				<Button Content="HELP" Height="36" DockPanel.Dock="Left" FontSize="14"/>
-				<Button Content="FINALIZE" Height="36" DockPanel.Dock="Right" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{x:Null}">
+				<Button Content="HELP" Height="36" DockPanel.Dock="Left" FontSize="14" Click="HelpButton_OnClick"/>
+				<Button Content="ENROLL" Height="36" DockPanel.Dock="Right" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{x:Null}">
 					<Button.Style>
 						<Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
 							<Setter Property="Foreground" Value="#fff" />
@@ -201,9 +204,17 @@
 		</WrapPanel>
 		<WrapPanel x:Name="ClassStatus" Margin="16,56" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Hidden">
 			<WrapPanel Background="#FF323232">
-				<TextBlock x:Name="ClassStatusText" Background="{x:Null}" Foreground="#FFFF" Height="48" Padding="20,14" FontSize="14"></TextBlock>
-				<TextBlock x:Name="ClassStatusButton" Background="{x:Null}" Foreground="#FF4CAF50" Height="48" Padding="80,14,20,14" FontSize="14" FontWeight="Bold">UNDO</TextBlock>
+				<TextBlock x:Name="ClassStatusText" Foreground="#FFFF" Height="48" Padding="20,14" FontSize="14"></TextBlock>
+				<TextBlock x:Name="ClassStatusButton" Foreground="#FF4CAF50" Height="48" Padding="80,14,20,14" FontSize="14" FontWeight="Bold">UNDO</TextBlock>
 			</WrapPanel>
 		</WrapPanel>
+		<Grid x:Name="HelpOverlay" Background="#b000" MouseUp="HelpOverlay_OnMouseUp">
+			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="44,32,0,-31">↖ Looking for a specific course?</TextBlock>
+			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="614,32,0,-31">↖ Need to see this help screen?</TextBlock>
+			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="900,12,0,-11">Want to save your schedule for later? →</TextBlock>
+			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="1170,46,0,-45">Finished everything? ↗</TextBlock>
+			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="27,448,0,-447">← Want to see a list of courses?</TextBlock>
+			<TextBlock Foreground="#FF03A9F4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">Click anywhere to get started!</TextBlock>
+		</Grid>
 	</Grid>
 </Window>
