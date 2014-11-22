@@ -14,26 +14,26 @@
 	x:Name="UserControl"
 	d:DesignWidth="640" Height="160" Margin="0,5,0,0">
 
-    <Grid>
-        <Canvas x:Name="CartIcon" Margin="0,0,580.313,17" Panel.ZIndex="5" AllowDrop="True">
-			<Border Width="59.687" BorderThickness="1" BorderBrush="#66000000" Padding="4,0,0,0" Background="#FFECECEC" Panel.ZIndex="5" Height="{Binding ActualHeight, ElementName=CartIcon}">
-                <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform" Height="125.687">
-                    <Canvas x:Name="svg3037" Width="24" Height="24">
-                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3039" Fill="#000000">
-                            <Path.Data>
-                                <PathGeometry Figures="M7 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-6-16v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2h-11.58c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1h-14.79l-.94-2h-3.27zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" FillRule="NonZero"/>
-                            </Path.Data>
-                        </Path>
-                    </Canvas>
-                </Viewbox>
-            </Border>
+	<Grid Background="#FFF1F1F1">
+		<Canvas x:Name="CartIcon" Margin="0,0,580,17" Panel.ZIndex="5" AllowDrop="True">
+			<Border Width="60" Margin="0" Padding="4,0,0,0" Background="#FFE0E0E0" Panel.ZIndex="5" Height="143">
+				<Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+					<Canvas x:Name="svg3037" Width="24" Height="24">
+						<Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3039" Fill="#000000">
+							<Path.Data>
+								<PathGeometry Figures="M7 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-6-16v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2h-11.58c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1h-14.79l-.94-2h-3.27zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" FillRule="NonZero"/>
+							</Path.Data>
+						</Path>
+					</Canvas>
+				</Viewbox>
+			</Border>
 		</Canvas>
 
 		<DockPanel x:Name="LayoutRoot" ClipToBounds="True">
-			<Border x:Name="Trash" DockPanel.Dock="Right" BorderThickness="1" Margin="5,0,0,0" Background="#FFE2E2E2" BorderBrush="#FF9C9C9C">
-				<Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform" Width="142.687" AllowDrop="True">
+			<Border x:Name="Trash" DockPanel.Dock="Right" Margin="5,0,0,0" Background="#FFEF5350">
+				<Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform" Width="60" AllowDrop="True">
 					<Canvas x:Name="svg3013" Width="24" Height="24">
-						<Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3015" Fill="#000000">
+						<Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3015" Fill="#FFFF">
 							<Path.Data>
 								<PathGeometry Figures="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-12h-12v12zm13-15h-3.5l-1-1h-5l-1 1h-3.5v2h14v-2z" FillRule="NonZero"/>
 							</Path.Data>
@@ -41,7 +41,7 @@
 					</Canvas>
 				</Viewbox>
 			</Border>
-			<ScrollViewer x:Name="Cart" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Visible" Background="White" AllowDrop="True">
+			<ScrollViewer x:Name="Cart" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Visible" AllowDrop="True">
 				<StackPanel x:Name="DisplayArea" Orientation="Horizontal" Margin="66,0,0,0" />
 			</ScrollViewer>
 		</DockPanel>

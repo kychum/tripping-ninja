@@ -122,6 +122,13 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
+		<Style x:Key="DropTarget" TargetType="{x:Type UserControl}">
+			<Setter Property="Effect">
+				<Setter.Value>
+					<DropShadowEffect Color="#FF03A9F4" Direction="0" ShadowDepth="0" Opacity="0.8" />
+				</Setter.Value>
+			</Setter>
+		</Style>
 	</Window.Resources>
 	<Grid>
 		<DockPanel>
@@ -130,9 +137,9 @@
 					<DropShadowBitmapEffect Color="Black" Direction="270" Softness="0.2" ShadowDepth="3" Opacity="0.2" />
 				</DockPanel.BitmapEffect>
 				<TextBox x:Name="SearchBox" Width="240" Margin="6" TextChanged="Search" DockPanel.Dock="Left" Style="{DynamicResource SearchBoxStyle}"/>
-			<ComboBox x:Name="FacultyFilter" DockPanel.Dock="Left" Width="200" Margin="6" Padding="8" FontSize="14" SelectionChanged="ComboboxChanged">
-				<!--<ComboBoxItem Content="Faculty" IsSelected="True" Visibility="Collapsed"/>-->
-				<ComboBoxItem Content="All Faculties" IsSelected="True"/>
+				<ComboBox x:Name="FacultyFilter" DockPanel.Dock="Left" Width="200" Margin="6" Padding="8" FontSize="14" SelectionChanged="ComboboxChanged">
+					<!--<ComboBoxItem Content="Faculty" IsSelected="True" Visibility="Collapsed"/>-->
+					<ComboBoxItem Content="All Faculties" IsSelected="True"/>
 					<ComboBoxItem Content="Arts"/>
 					<ComboBoxItem Content="Business"/>
 					<ComboBoxItem Content="Education"/>
@@ -207,9 +214,9 @@
 			<Grid ZIndex="3">
 				<local:ExpandTab x:Name="Expander"/>
 			</Grid>
-            <DockPanel Margin="5,0,0,0" DockPanel.Dock="Right" ZIndex="1">
-                <local:ShoppingCart x:Name="Cart" DockPanel.Dock="Bottom" Margin="0,5,5,5"/>
-                <local:TimeSchedule x:Name="Schedule" Drop="SchedulePanel_Drop" AllowDrop="True" SizeChanged="Schedule_OnResize" Margin="0,5,5,0" />
+			<DockPanel Margin="5,0,0,0" DockPanel.Dock="Right" ZIndex="1">
+				<local:ShoppingCart x:Name="Cart" DockPanel.Dock="Bottom" Margin="0,5,5,5" DragEnter="Cart_OnDragEnter" DragLeave="Cart_OnDragLeave"/>
+				<local:TimeSchedule x:Name="Schedule" AllowDrop="True" SizeChanged="Schedule_OnResize" Margin="0,5,5,0" DragEnter="SchedulePanel_OnDragEnter" DragLeave="SchedulePanel_OnDragLeave"/>
 			</DockPanel>
 		</DockPanel>
 		<WrapPanel x:Name="ButtonStatus" Margin="16,56" HorizontalAlignment="Right" Visibility="Hidden">

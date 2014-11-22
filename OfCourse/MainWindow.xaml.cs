@@ -44,6 +44,7 @@ namespace OfCourse
 			InitializeComponent();
 			LoadClasses();
 			Expander.Toggle.Click += Toggle_Click;
+			Schedule.Drop += SchedulePanel_Drop;
 			Cart.Cart.Drop += Cart_Drop;
 			Cart.CartIcon.Drop += Cart_Drop;
 			Cart.Trash.Drop += Trash_Drop;
@@ -370,9 +371,31 @@ namespace OfCourse
 			((Grid)FindName("HelpOverlay")).Visibility = Visibility.Visible;
 		}
 
+		private void SchedulePanel_OnDragEnter(object sender, DragEventArgs e)
+		{
+			Schedule.Style = (Style)this.FindResource("DropTarget");
+		}
+
+		private void SchedulePanel_OnDragLeave(object sender, DragEventArgs e)
+		{
+			Schedule.Style = null;
+		}
+
 		private void SchedulePanel_Drop(object sender, DragEventArgs e)
 		{
 			AddResult((SearchResult)e.Data.GetData("Object"));
+
+			Schedule.Style = null;
+		}
+
+		private void Cart_OnDragEnter(object sender, DragEventArgs e)
+		{
+			Cart.Style = (Style)this.FindResource("DropTarget");
+		}
+
+		private void Cart_OnDragLeave(object sender, DragEventArgs e)
+		{
+			Cart.Style = null;
 		}
 
 		private void Cart_Drop(object sender, DragEventArgs e)
@@ -383,6 +406,8 @@ namespace OfCourse
 				Results.Children.Remove(result);
 				Cart.DisplayArea.Children.Add(result);
 			}
+
+			Cart.Style = null;
 		}
 
 		private void Trash_Drop(object sender, DragEventArgs e)
