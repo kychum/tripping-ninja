@@ -214,24 +214,6 @@ namespace OfCourse
             {
                 itemsInSlot[row + cnt - 1, col - 1]++;
             }
-
-            // Edit width of items to fit schedule
-            /*
-            int itemNum = 0;
-            double scheduleWidth = Schedule.LayoutRoot.ColumnDefinitions[1].ActualWidth;
-            var conflictItems = schedItems.Where(si => ((si.col == col) && ((si.row <= row && (si.row + si.span - 1) >= row) || (row <= si.row && (row + span - 1) >= si.row))));
-            int total = 0;
-            foreach (var v in conflictItems) // Apparently LINQ doesn't count well
-            {
-                total++;
-            }
-            foreach (ScheduleItem sch in conflictItems)
-            {
-                double  test = scheduleWidth * itemNum * (1.0 / total);
-                sch.Margin = new Thickness(scheduleWidth * itemNum * (1.0 / total), 0, scheduleWidth * (total - itemNum - 1) * (1.0 / total), 0);
-                itemNum++;
-            }
-            */
 		}
 
         public void ResizeItems()
@@ -317,6 +299,11 @@ namespace OfCourse
             }
 
             NotFoundLabel.Visibility = amountFound > 0 ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        private void Schedule_OnResize(object sender, SizeChangedEventArgs e)
+        {
+            ResizeItems();
         }
 	}
 }
