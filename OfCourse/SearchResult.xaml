@@ -20,6 +20,18 @@
 			<Setter Property="FontSize" Value="14"/>
 			<Setter Property="Padding" Value="0"/>
 		</Style>
+		<Style x:Key="CourseStatusOpen" TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
+			<Setter Property="Foreground" Value="#FF2E7D32"/>
+			<Setter Property="Background" Value="#FFA5D6A7"/>
+		</Style>
+		<Style x:Key="CourseStatusWait" TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
+			<Setter Property="Foreground" Value="#FFFBC02D"/>
+			<Setter Property="Background" Value="#FFFFF59D"/>
+		</Style>
+		<Style x:Key="CourseStatusClosed" TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
+			<Setter Property="Foreground" Value="#FFD32F2F"/>
+			<Setter Property="Background" Value="#FFEF9A9A"/>
+		</Style>
 	</UserControl.Resources>
 	<UserControl.Triggers>
 		<EventTrigger RoutedEvent="Mouse.MouseEnter">
@@ -42,7 +54,7 @@
 				<Label x:Name="CNum" Content="###" HorizontalAlignment="Left" Margin="0,0,10,0" VerticalAlignment="Top" Foreground="#9111"/>
 				<Label x:Name="CType" Content="ClassType" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#9111"/>
 			</StackPanel>
-			<Label x:Name="CStatus" Content="STATUS" HorizontalAlignment="Right" Margin="0,38,10,0" VerticalAlignment="Top" Foreground="#9111" Background="#2000" Padding="8,4" FontWeight="Bold"/>
+			<Label x:Name="CStatus" Content="STATUS" HorizontalAlignment="Right" Margin="0,38,10,0" VerticalAlignment="Top" Padding="8,4" FontWeight="Bold"/>
 			<Label x:Name="CProf" Content="Professor" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Foreground="#9111"/>
 			<Label x:Name="CTime" Content="Days - Time" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="#9111" Margin="0,64,10,0"/>
 			<TextBlock x:Name="CDesc" Text="Description" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" Height="49" Width="228" TextWrapping="Wrap" Foreground="{Binding Foreground, ElementName=CName, Mode=OneWay}"/>

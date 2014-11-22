@@ -73,28 +73,7 @@ namespace OfCourse
 		public short duration { get; set; }
         public string prereqs { get; set; }
         public string antireqs { get; set; }
-        private short m_status;
-        public short status {
-            get { return m_status; } 
-            set
-            {
-                m_status = value;
-                if (value == 1)
-                {
-                    this.ToolTip = "This course is closed";
-                    //this.Rectangle.Fill = Brushes.Pink;
-                }
-                else if (value == 2) 
-                {
-                    this.ToolTip = "This course is under a waitlist;";
-                    //this.Rectangle.Fill = Brushes.LightYellow;
-                }
-                else
-                {
-                    //this.Rectangle.Fill = Brushes.LightGreen;
-                }
-            }
-        }
+		public short status { get; set; }
         public Faculty faculty { get; set; }
 
 		public void SetLabels()
@@ -104,6 +83,26 @@ namespace OfCourse
 			CProf.Content = prof;
 			CDesc.Text = desc;
 			CType.Content = (type == ClassType.Lecture ? "Lecture" : type == ClassType.Tutorial ? "Tutorial" : "Laboratory");
+
+			if (status == 1)
+			{
+				this.ToolTip = "This course is closed";
+				CStatus.Content = "CLOSED";
+				CStatus.Style = (Style)this.FindResource("CourseStatusClosed");
+			}
+			else if (status == 2)
+			{
+				this.ToolTip = "This course is under a waitlist";
+				CStatus.Content = "WAITLIST";
+				CStatus.Style = (Style)this.FindResource("CourseStatusWait");
+			}
+			else
+			{
+				this.ToolTip = null;
+				CStatus.Content = "OPEN";
+				CStatus.Style = (Style) this.FindResource("CourseStatusOpen");
+			}
+
 			CTime.Content = "";
 
 			foreach (Day d in Enum.GetValues(typeof (Day)))
