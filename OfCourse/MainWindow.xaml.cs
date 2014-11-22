@@ -289,13 +289,19 @@ namespace OfCourse
 			{
 				if (i.id == id)
 				{
+                    for (int cnt = 0; cnt < i.span; cnt++)
+                    {
+                        itemsInSlot[i.row + cnt - 1, i.col - 1]--;
+                    }
 					Schedule.LayoutRoot.Children.Remove(i);
 				}
 			}
+
 			schedItems.RemoveAll(i => i.id == id);
+            ResizeItems();
 
 			var result = results.Find(s => s.id == id);
-			result.Style = (Style)result.FindResource("PlacedOnSchedule");
+            result.Style = null;//(Style)result.FindResource("PlacedOnSchedule");
 		}
 
 		public bool HasConflict(int row, int col, int span)

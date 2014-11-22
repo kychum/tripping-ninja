@@ -166,7 +166,7 @@ int main(int argc, char** argv){
 		int numLinked = rand()%3;
 		if(numLinked > 0 && numLinked+i < outAmt){ // The idea is to force enrollment in these when the main lecture is selected.
 			for(int j = 0; j < numLinked; j++){
-				c.id++;
+				c.id = ++i;
 				c.prof = Profs[rand()%50];
 				c.type = static_cast<ClassType>((rand()%2)+1);
 				c.days = rand() & 62;//0b00111110; // sigh
