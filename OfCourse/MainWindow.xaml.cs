@@ -304,6 +304,36 @@ namespace OfCourse
 			aTimer.Start();
 		}
 
+		private void FinalizeDraft_OnClick(object sender, RoutedEventArgs e)
+		{
+			MessageBoxResult rsltMessageBox = MessageBox.Show("Are you sure you want to enroll in these courses?", "Complete enrollment?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+			switch (rsltMessageBox)
+			{
+				case MessageBoxResult.No:
+					return;
+			}
+
+			var statusPanel = (WrapPanel)FindName("ButtonStatus");
+			var statusText = (TextBlock)FindName("ButtonStatusText");
+
+			statusPanel.Visibility = Visibility.Visible;
+			statusText.Text = "Saving...";
+
+			// TODO What to do here?
+
+			statusText.Text = "You have been enrolled in your selected courses.";
+
+			var aTimer = new DispatcherTimer();
+			aTimer.Tick += (timerSender, timerEventArgs) =>
+			{
+				statusPanel.Visibility = Visibility.Hidden;
+				aTimer.Stop();
+			};
+			aTimer.Interval = new TimeSpan(0, 0, 3);
+			aTimer.Start();
+		}
+
 		private void HelpOverlay_OnMouseUp(object sender, MouseButtonEventArgs e)
 		{
 			((Grid)sender).Visibility = Visibility.Hidden;

@@ -141,7 +141,7 @@
 				</ComboBox>
 				<Button Content="OPTIONS" Height="36" DockPanel.Dock="Left" FontSize="14"/>
 				<Button Content="HELP" Height="36" DockPanel.Dock="Left" FontSize="14" Click="HelpButton_OnClick"/>
-				<Button Content="ENROLL" Height="36" DockPanel.Dock="Right" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{x:Null}">
+				<Button Content="ENROLL" Height="36" DockPanel.Dock="Right" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{x:Null}" Click="FinalizeDraft_OnClick">
 					<Button.Style>
 						<Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
 							<Setter Property="Foreground" Value="#fff" />
@@ -233,8 +233,8 @@
 			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="724,12,0,-11">Undo unsaved changes, or save progress? →</TextBlock>
 			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="1170,46,0,-45">Finished everything? ↗</TextBlock>
 			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="43,435,0,-437">Click the tab on the left to <LineBreak/> view course listings.</TextBlock>
-			<TextBlock Foreground="#FFB3E5FC" HorizontalAlignment="Left" FontSize="18" Margin="44,203,0,-205">← You can drag courses from this list onto the schedule...</TextBlock>
-			<TextBlock Foreground="#FFB3E5FC" HorizontalAlignment="Left" FontSize="18" Margin="301,230,0,-232">... or onto the cart at the bottom!</TextBlock>
+			<TextBlock Foreground="#FFB3E5FC" HorizontalAlignment="Left" FontSize="18" Margin="43,91,0,-93">You can drag courses from this list <LineBreak/> onto the schedule...</TextBlock>
+			<TextBlock Foreground="#FFB3E5FC" HorizontalAlignment="Left" FontSize="18" Margin="61,156,0,-158">... or onto the cart at the bottom!</TextBlock>
 			<TextBlock Foreground="#FF03A9F4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">Click anywhere to get started!</TextBlock>
 		</Grid>
 	</Grid>
