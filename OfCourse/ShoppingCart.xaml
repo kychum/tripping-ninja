@@ -12,11 +12,11 @@
 	mc:Ignorable="d"
 	x:Class="OfCourse.ShoppingCart"
 	x:Name="UserControl"
-	d:DesignWidth="640" Height="142.687" Margin="0,5,0,0">
+	d:DesignWidth="640" Height="160" Margin="0,5,0,0">
 
     <Grid>
-        <Canvas Margin="0,0,580.313,17" Panel.ZIndex="5">
-			<Border Width="59.687" BorderThickness="1" BorderBrush="#66000000" Padding="4,0,0,0" Background="#FFECECEC" Height="125.687" Panel.ZIndex="5">
+        <Canvas x:Name="canvas" Margin="0,0,580.313,17" Panel.ZIndex="5">
+			<Border Width="59.687" BorderThickness="1" BorderBrush="#66000000" Padding="4,0,0,0" Background="#FFECECEC" Panel.ZIndex="5" Height="{Binding ActualHeight, ElementName=canvas}">
                 <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform" Height="125.687">
                     <Canvas x:Name="svg3037" Width="24" Height="24">
                         <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3039" Fill="#000000">
@@ -30,7 +30,7 @@
 		</Canvas>
 
 		<DockPanel x:Name="LayoutRoot" ClipToBounds="True">
-			<Border DockPanel.Dock="Right" BorderThickness="1" Margin="5,0,0,0" Background="#FFE2E2E2" BorderBrush="#FF9C9C9C">
+			<Border x:Name="Trash" DockPanel.Dock="Right" BorderThickness="1" Margin="5,0,0,0" Background="#FFE2E2E2" BorderBrush="#FF9C9C9C">
 				<Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform" Width="142.687" AllowDrop="True">
 					<Canvas x:Name="svg3013" Width="24" Height="24">
 						<Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path3015" Fill="#000000">
@@ -41,8 +41,8 @@
 					</Canvas>
 				</Viewbox>
 			</Border>
-			<ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Visible" Background="White">
-				<StackPanel x:Name="CartArea" Orientation="Horizontal" Margin="66,0,0,0" />
+			<ScrollViewer x:Name="Cart" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Visible" Background="White" AllowDrop="True">
+				<StackPanel x:Name="DisplayArea" Orientation="Horizontal" Margin="66,0,0,0" />
 			</ScrollViewer>
 		</DockPanel>
 	</Grid>

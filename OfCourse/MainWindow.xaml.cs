@@ -44,6 +44,7 @@ namespace OfCourse
 			InitializeComponent();
 			LoadClasses();
 			Expander.Toggle.Click += Toggle_Click;
+            Cart.Cart.Drop += Cart_Drop;
 
 			((Grid)FindName("HelpOverlay")).Visibility = Visibility.Visible;
 			// TODO Load draft, if any
@@ -363,6 +364,16 @@ namespace OfCourse
         private void SchedulePanel_Drop(object sender, DragEventArgs e)
         {
             AddResult((SearchResult)e.Data.GetData("Object"));
+        }
+
+        private void Cart_Drop(object sender, DragEventArgs e)
+        {
+            var result = (SearchResult) e.Data.GetData("Object");
+            if (Results.Children.Contains(result))
+            {
+                Results.Children.Remove(result);
+                Cart.DisplayArea.Children.Add(result);
+            }
         }
 
         private void ComboboxChanged(object sender, SelectionChangedEventArgs e)
