@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:ofCourse="clr-namespace:OfCourse"
 	mc:Ignorable="d"
 	x:Class="OfCourse.SearchResult"
 	x:Name="UserControl"
@@ -31,6 +32,9 @@
 		<Style x:Key="CourseStatusClosed" TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
 			<Setter Property="Foreground" Value="#FFD32F2F"/>
 			<Setter Property="Background" Value="#FFEF9A9A"/>
+		</Style>
+		<Style x:Key="PlacedOnSchedule" TargetType="{x:Type ofCourse:SearchResult}">
+			<Setter Property="Opacity" Value="0.5"/>
 		</Style>
 	</UserControl.Resources>
 	<UserControl.Triggers>

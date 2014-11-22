@@ -175,6 +175,7 @@ namespace OfCourse
 		private void AddResult(SearchResult result)
 		{
 			result.IsEnabled = false;
+			result.Style = (Style)result.FindResource("PlacedOnSchedule");
 
 			foreach (Day d in Enum.GetValues(typeof(Day)))
 			{
@@ -264,7 +265,10 @@ namespace OfCourse
 				}
 			}
 			schedItems.RemoveAll(i => i.id == id);
-			results.Find(s => s.id == id).IsEnabled = true;
+
+			var result = results.Find(s => s.id == id);
+			result.IsEnabled = true;
+			result.Style = (Style)result.FindResource("PlacedOnSchedule");
 		}
 
 		public bool HasConflict(int row, int col, int span)
