@@ -7,6 +7,14 @@
 	x:Class="OfCourse.ScheduleItem"
 	x:Name="UserControl"
 	d:DesignWidth="185" d:DesignHeight="52.5" BorderThickness="2" Background="#FFE2FFFB" BorderBrush="#FFB2B2B2">
+	<UserControl.Resources>
+		<Storyboard x:Key="DoHighlight" AutoReverse="True" RepeatBehavior="Forever">
+			<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="UserControl">
+				<EasingColorKeyFrame KeyTime="0" Value="#FFE2FFFB"/>
+				<EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFA4CFC6"/>
+			</ColorAnimationUsingKeyFrames>
+		</Storyboard>
+	</UserControl.Resources>
 
 	<Grid x:Name="LayoutRoot" VerticalAlignment="Center" >
 		<Grid.RowDefinitions>

@@ -134,10 +134,21 @@ namespace OfCourse
 
 		private void r_MouseLeave(object sender, MouseEventArgs e)
 		{
-			foreach (Border b in hoverBorders)
-			{
-				Schedule.LayoutRoot.Children.Remove(b);
-			}
+            var result = (SearchResult)sender;
+            if (!schedItems.Any(si => si.id == result.id))
+            {
+                foreach (Border b in hoverBorders)
+                {
+                    Schedule.LayoutRoot.Children.Remove(b);
+                }
+            }
+            else
+            {
+                foreach (var item in schedItems.Where(si => si.id == result.id))
+                {
+                    ((Storyboard)item.FindResource("DoHighlight")).Stop();
+                }
+            }
 
 			hoverBorders.Clear();
 		}
@@ -148,13 +159,23 @@ namespace OfCourse
 			int row = r.startTime - 6;
 			int span = r.duration;
 
-			foreach (Day d in Enum.GetValues(typeof(Day)))
-			{
-				if ((r.days & (int)d) > 0)
-				{
-					SetBorder(row, (int)(Math.Log((int)d, 2)), span);
-				}
-			}
+            if (!schedItems.Any(si => si.id == r.id))
+            {
+                foreach (Day d in Enum.GetValues(typeof(Day)))
+                {
+                    if ((r.days & (int)d) > 0)
+                    {
+                        SetBorder(row, (int)(Math.Log((int)d, 2)), span);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var si in schedItems.Where(item => item.id == r.id))
+                {
+                    ((Storyboard)si.FindResource("DoHighlight")).Begin();
+                }
+            }
 		}
 
 		private void SetBorder(int row, int col, int span)
@@ -175,7 +196,6 @@ namespace OfCourse
 
 		private void AddResult(SearchResult result)
 		{
-			result.IsEnabled = false;
 			result.Style = (Style)result.FindResource("PlacedOnSchedule");
 
 			foreach (Day d in Enum.GetValues(typeof(Day)))
@@ -268,7 +288,6 @@ namespace OfCourse
 			schedItems.RemoveAll(i => i.id == id);
 
 			var result = results.Find(s => s.id == id);
-			result.IsEnabled = true;
 			result.Style = (Style)result.FindResource("PlacedOnSchedule");
 		}
 
