@@ -194,21 +194,25 @@ namespace OfCourse
 			Schedule.LayoutRoot.Children.Add(b);
 		}
 
-		private void AddResult(SearchResult result)
-		{
-			result.Style = (Style)result.FindResource("PlacedOnSchedule");
+        private void AddResult(SearchResult result)
+        {
+            if (!schedItems.Any(si => si.id == result.id))
+            {
+                result.Style = (Style)result.FindResource("PlacedOnSchedule");
 
-			foreach (Day d in Enum.GetValues(typeof(Day)))
-			{
-				if ((result.days & (int)d) > 0)
-				{
-					MakeScheduleItem(result.id, result.startTime - 6, (int)Math.Log((int)d, 2), result.duration,
-						SearchResult.departmentNames[(int)result.department] + result.courseNum, result.typeName());
-				}
-			}
+                foreach (Day d in Enum.GetValues(typeof(Day)))
+                {
+                    if ((result.days & (int)d) > 0)
+                    {
+                        MakeScheduleItem(result.id, result.startTime - 6, (int)Math.Log((int)d, 2), result.duration,
+                            SearchResult.departmentNames[(int)result.department] + result.courseNum, result.typeName());
+                    }
+                }
 
-			ResizeItems();
-		}
+                ResizeItems();
+            }
+        }
+
 		private void Search(object sender, TextChangedEventArgs e)
 		{
 			FilterResults();
