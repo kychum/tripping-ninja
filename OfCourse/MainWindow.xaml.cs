@@ -37,17 +37,18 @@ namespace OfCourse
 		private readonly List<Border> hoverBorders = new List<Border>();
 		private readonly List<ScheduleItem> schedItems = new List<ScheduleItem>();
 		private List<SearchResult> results = new List<SearchResult>();
-        int[,] itemsInSlot = new int[12,5];
+		private readonly int[,] itemsInSlot = new int[12, 5];
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			LoadClasses();
 			Expander.Toggle.Click += Toggle_Click;
-            Cart.Cart.Drop += Cart_Drop;
-            Cart.CartIcon.Drop += Cart_Drop;
-            Cart.Trash.Drop += Trash_Drop;
-            ResultsPane.Drop += Trash_Drop;
+			Schedule.Drop += SchedulePanel_Drop;
+			Cart.Cart.Drop += Cart_Drop;
+			Cart.CartIcon.Drop += Cart_Drop;
+			Cart.Trash.Drop += Trash_Drop;
+			ResultsPane.Drop += Trash_Drop;
 
 			((Grid)FindName("HelpOverlay")).Visibility = Visibility.Visible;
 			// TODO Load draft, if any
@@ -98,9 +99,9 @@ namespace OfCourse
 						days = Convert.ToInt16(inFile.ReadLine()),
 						startTime = Convert.ToInt16(inFile.ReadLine()),
 						duration = Convert.ToInt16(inFile.ReadLine()),
-                        prereqs = inFile.ReadLine(),
-                        antireqs = inFile.ReadLine(),
-                        status = Convert.ToInt16(inFile.ReadLine())
+						prereqs = inFile.ReadLine(),
+						antireqs = inFile.ReadLine(),
+						status = Convert.ToInt16(inFile.ReadLine())
 					};
 					r.SetLabels();
 					r.MouseEnter += r_MouseEnter;
@@ -128,7 +129,7 @@ namespace OfCourse
 
 		private void r_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-            AddResult((SearchResult)sender);
+			AddResult((SearchResult)sender);
 		}
 
 		private void r_MouseLeave(object sender, MouseEventArgs e)
@@ -143,17 +144,17 @@ namespace OfCourse
 
 		private void r_MouseEnter(object sender, MouseEventArgs e)
 		{
-			var r = (SearchResult) sender;
-            int row = r.startTime - 6;
-            int span = r.duration;
+			var r = (SearchResult)sender;
+			int row = r.startTime - 6;
+			int span = r.duration;
 
-			foreach (Day d in Enum.GetValues(typeof (Day)))
-            {
-				if ((r.days & (int) d) > 0)
-                {
-					SetBorder(row, (int) (Math.Log((int) d, 2)), span);
-                }
-            }
+			foreach (Day d in Enum.GetValues(typeof(Day)))
+			{
+				if ((r.days & (int)d) > 0)
+				{
+					SetBorder(row, (int)(Math.Log((int)d, 2)), span);
+				}
+			}
 		}
 
 		private void SetBorder(int row, int col, int span)
@@ -172,24 +173,25 @@ namespace OfCourse
 			Schedule.LayoutRoot.Children.Add(b);
 		}
 
-        private void AddResult(SearchResult result)
-        {
-            result.IsEnabled = false;
+		private void AddResult(SearchResult result)
+		{
+			result.IsEnabled = false;
+			result.Style = (Style)result.FindResource("PlacedOnSchedule");
 
-            foreach (Day d in Enum.GetValues(typeof(Day)))
-            {
-                if ((result.days & (int)d) > 0)
-                {
-                    MakeScheduleItem(result.id, result.startTime - 6, (int)Math.Log((int)d, 2), result.duration,
-                        SearchResult.departmentNames[(int)result.department] + result.courseNum, result.typeName());
-                }
-            }
+			foreach (Day d in Enum.GetValues(typeof(Day)))
+			{
+				if ((result.days & (int)d) > 0)
+				{
+					MakeScheduleItem(result.id, result.startTime - 6, (int)Math.Log((int)d, 2), result.duration,
+						SearchResult.departmentNames[(int)result.department] + result.courseNum, result.typeName());
+				}
+			}
 
-            ResizeItems();
-        }
+			ResizeItems();
+		}
 		private void Search(object sender, TextChangedEventArgs e)
 		{
-            FilterResults();
+			FilterResults();
 		}
 
 		private void ClearSearch(object sender, RoutedEventArgs e)
@@ -219,38 +221,40 @@ namespace OfCourse
 
 			schedItems.Add(i);
 			Schedule.LayoutRoot.Children.Add(i);
-            for (int cnt = 0; cnt < span; cnt++)
-            {
-                itemsInSlot[row + cnt - 1, col - 1]++;
-            }
+			for (int cnt = 0; cnt < span; cnt++)
+			{
+				itemsInSlot[row + cnt - 1, col - 1]++;
+			}
 		}
 
-        public void ResizeItems()
-        {
-            double scheduleWidth = Schedule.LayoutRoot.ColumnDefinitions[1].ActualWidth;
-            foreach (var item in schedItems)
-            {
-                int maxConflicts = 0;
-                for (int cnt = 0; cnt < item.span; cnt++)
-                {
-                    if (itemsInSlot[cnt + item.row - 1, item.col - 1] > maxConflicts)
-                    {
-                        maxConflicts = itemsInSlot[cnt + item.row - 1, item.col - 1];
-                    }
-                }
-                var conflictItems = schedItems.Where(si => ((si.col == item.col) && ((si.row <= item.row && (si.row + si.span - 1) >= item.row) || (item.row <= si.row && (item.row + item.span - 1) >= si.row))));
-                int itemNum = 0;
-                foreach (var sch in conflictItems)
-                {
-                    if (sch != item)
-                        if(sch.Margin.Right != 0)
-                            itemNum++;
-                    else
-                        break;
-                }
-                item.Margin = new Thickness(scheduleWidth * itemNum / maxConflicts, 0, (maxConflicts - itemNum - 1) * scheduleWidth / maxConflicts, 0);
-            }
-        }
+		public void ResizeItems()
+		{
+			double scheduleWidth = Schedule.LayoutRoot.ColumnDefinitions[1].ActualWidth;
+			foreach (var item in schedItems)
+			{
+				int maxConflicts = 0;
+				for (int cnt = 0; cnt < item.span; cnt++)
+				{
+					if (itemsInSlot[cnt + item.row - 1, item.col - 1] > maxConflicts)
+					{
+						maxConflicts = itemsInSlot[cnt + item.row - 1, item.col - 1];
+					}
+				}
+				var conflictItems = schedItems.Where(si => ((si.col == item.col) && ((si.row <= item.row && (si.row + si.span - 1) >= item.row) || (item.row <= si.row && (item.row + item.span - 1) >= si.row))));
+				int itemNum = 0;
+				foreach (var sch in conflictItems)
+				{
+					if (sch != item)
+					{
+						if (sch.Margin.Right != 0)
+							itemNum++;
+						else
+							break;
+					}
+				}
+				item.Margin = new Thickness(scheduleWidth * itemNum / maxConflicts, 0, (maxConflicts - itemNum - 1) * scheduleWidth / maxConflicts, 0);
+			}
+		}
 
 		public void RemoveCourse(int id)
 		{
@@ -262,7 +266,10 @@ namespace OfCourse
 				}
 			}
 			schedItems.RemoveAll(i => i.id == id);
-			results.Find(s => s.id == id).IsEnabled = true;
+
+			var result = results.Find(s => s.id == id);
+			result.IsEnabled = true;
+			result.Style = (Style)result.FindResource("PlacedOnSchedule");
 		}
 
 		public bool HasConflict(int row, int col, int span)
@@ -364,76 +371,99 @@ namespace OfCourse
 			((Grid)FindName("HelpOverlay")).Visibility = Visibility.Visible;
 		}
 
-        private void SchedulePanel_Drop(object sender, DragEventArgs e)
-        {
-            AddResult((SearchResult)e.Data.GetData("Object"));
-        }
+		private void SchedulePanel_OnDragEnter(object sender, DragEventArgs e)
+		{
+			Schedule.Style = (Style)this.FindResource("DropTarget");
+		}
 
-        private void Cart_Drop(object sender, DragEventArgs e)
-        {
-            var result = (SearchResult) e.Data.GetData("Object");
-            if (Results.Children.Contains(result))
-            {
-                Results.Children.Remove(result);
-                Cart.DisplayArea.Children.Add(result);
-            }
-        }
+		private void SchedulePanel_OnDragLeave(object sender, DragEventArgs e)
+		{
+			Schedule.Style = null;
+		}
 
-        private void Trash_Drop(object sender, DragEventArgs e)
-        {
-            var result = (SearchResult)e.Data.GetData("Object");
-            if (Cart.DisplayArea.Children.Contains(result))
-            {
-                Cart.DisplayArea.Children.Remove(result);
-                Results.Children.Clear();
+		private void SchedulePanel_Drop(object sender, DragEventArgs e)
+		{
+			AddResult((SearchResult)e.Data.GetData("Object"));
 
-                // Re-sort the children of Results. Otherwise the re-added items are placed at the end.
-                foreach (var r in results.Where(res => !Cart.DisplayArea.Children.Contains(res)))
-                {
-                    Results.Children.Add(r);
-                }
-                
-            }
+			Schedule.Style = null;
+		}
+
+		private void Cart_OnDragEnter(object sender, DragEventArgs e)
+		{
+			Cart.Style = (Style)this.FindResource("DropTarget");
+		}
+
+		private void Cart_OnDragLeave(object sender, DragEventArgs e)
+		{
+			Cart.Style = null;
+		}
+
+		private void Cart_Drop(object sender, DragEventArgs e)
+		{
+			var result = (SearchResult)e.Data.GetData("Object");
+			if (Results.Children.Contains(result))
+			{
+				Results.Children.Remove(result);
+				Cart.DisplayArea.Children.Add(result);
+			}
+
+			Cart.Style = null;
+		}
+
+		private void Trash_Drop(object sender, DragEventArgs e)
+		{
+			var result = (SearchResult)e.Data.GetData("Object");
+			if (Cart.DisplayArea.Children.Contains(result))
+			{
+				Cart.DisplayArea.Children.Remove(result);
+				Results.Children.Clear();
+
+				// Re-sort the children of Results. Otherwise the re-added items are placed at the end.
+				foreach (var r in results.Where(res => !Cart.DisplayArea.Children.Contains(res)))
+				{
+					Results.Children.Add(r);
+				}
+			}
             FilterResults(); // Ensure the filters are followed
-        }
+		}
 
-        private void ComboboxChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if(ResultsPane != null) // Needs this since the combobox is loaded before the schedule
-                FilterResults();
-        }
+		private void ComboboxChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (ResultsPane != null) // Needs this since the combobox is loaded before the schedule
+				FilterResults();
+		}
 
-        private void FilterResults()
-        {
-            if (!ResultsPane.IsVisible)
-                ToggleResults(Visibility.Visible);
-            string query = SearchBox.Text;
-            int faculty = FacultyFilter.SelectedIndex;
-            int amountFound = 0;
-            foreach (SearchResult res in results)
-            {
-                if (((Regex.IsMatch(res.CName.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
-                    (Regex.IsMatch(res.CProf.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
-                    (Regex.IsMatch(res.CDesc.Text, query, RegexOptions.IgnoreCase)) ||
-                    (Regex.IsMatch(res.CNum.Content.ToString(), query, RegexOptions.IgnoreCase))) &&
-                    ((faculty == 0) || ((Faculty)faculty == res.faculty)))
-                {
-                    res.Visibility = Visibility.Visible;
-                    amountFound++;
-                }
-                else
-                {
+		private void FilterResults()
+		{
+			if (!ResultsPane.IsVisible)
+				ToggleResults(Visibility.Visible);
+			string query = SearchBox.Text;
+			int faculty = FacultyFilter.SelectedIndex;
+			int amountFound = 0;
+			foreach (SearchResult res in results)
+			{
+				if (((Regex.IsMatch(res.CName.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
+					(Regex.IsMatch(res.CProf.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
+					(Regex.IsMatch(res.CDesc.Text, query, RegexOptions.IgnoreCase)) ||
+					(Regex.IsMatch(res.CNum.Content.ToString(), query, RegexOptions.IgnoreCase))) &&
+					((faculty == 0) || ((Faculty)faculty == res.faculty)))
+				{
+					res.Visibility = Visibility.Visible;
+					amountFound++;
+				}
+				else
+				{
                     if(Results.Children.Contains(res))
                         res.Visibility = Visibility.Collapsed;
-                }
-            }
+				}
+			}
 
-            NotFoundLabel.Visibility = amountFound > 0 ? Visibility.Collapsed : Visibility.Visible;
-        }
+			NotFoundLabel.Visibility = amountFound > 0 ? Visibility.Collapsed : Visibility.Visible;
+		}
 
-        private void Schedule_OnResize(object sender, SizeChangedEventArgs e)
-        {
-            ResizeItems();
-        }
+		private void Schedule_OnResize(object sender, SizeChangedEventArgs e)
+		{
+			ResizeItems();
+		}
 	}
 }

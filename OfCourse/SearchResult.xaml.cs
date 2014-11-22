@@ -31,38 +31,38 @@ namespace OfCourse
 		}
 
 		public int id { get; set; }
-        private Dept m_department;
-		public Dept department 
-        {
-            get { return m_department; }
-            set
-            {
-                m_department = value;
-                switch (value)
-                {
-                    case Dept.ART:
-                    case Dept.ENGL:
-                    case Dept.MUSI:
-                        faculty = Faculty.Arts;
-                        break;
-                    case Dept.BIOL:
-                    case Dept.CPSC:
-                    case Dept.MATH:
-                        faculty = Faculty.Science;
-                        break;
-                    case Dept.BSEN:
-                        faculty = Faculty.Business;
-                        break;
-                    case Dept.EDUC:
-                        faculty = Faculty.Education;
-                        break;
-                    case Dept.ENGG:
-                    case Dept.SENG:
-                        faculty = Faculty.Engineering;
-                        break;
-                }
-            }
-        }
+		private Dept m_department;
+		public Dept department
+		{
+			get { return m_department; }
+			set
+			{
+				m_department = value;
+				switch (value)
+				{
+					case Dept.ART:
+					case Dept.ENGL:
+					case Dept.MUSI:
+						faculty = Faculty.Arts;
+						break;
+					case Dept.BIOL:
+					case Dept.CPSC:
+					case Dept.MATH:
+						faculty = Faculty.Science;
+						break;
+					case Dept.BSEN:
+						faculty = Faculty.Business;
+						break;
+					case Dept.EDUC:
+						faculty = Faculty.Education;
+						break;
+					case Dept.ENGG:
+					case Dept.SENG:
+						faculty = Faculty.Engineering;
+						break;
+				}
+			}
+		}
 		public int courseNum { get; set; }
 		public string name { get; set; }
 		public string desc { get; set; }
@@ -71,46 +71,45 @@ namespace OfCourse
 		public short days { get; set; }
 		public short startTime { get; set; }
 		public short duration { get; set; }
-        public string prereqs { get; set; }
-        public string antireqs { get; set; }
-        private short m_status;
-        public short status {
-            get { return m_status; } 
-            set
-            {
-                m_status = value;
-                if (value == 1)
-                {
-                    this.ToolTip = "This course is closed";
-                    //this.Rectangle.Fill = Brushes.Pink;
-                }
-                else if (value == 2) 
-                {
-                    this.ToolTip = "This course is under a waitlist;";
-                    //this.Rectangle.Fill = Brushes.LightYellow;
-                }
-                else
-                {
-                    //this.Rectangle.Fill = Brushes.LightGreen;
-                }
-            }
-        }
-        public Faculty faculty { get; set; }
+		public string prereqs { get; set; }
+		public string antireqs { get; set; }
+		public short status { get; set; }
+		public Faculty faculty { get; set; }
 
 		public void SetLabels()
 		{
-			CNum.Content = departmentNames[(int) department] + " " + courseNum;
+			CNum.Content = departmentNames[(int)department] + " " + courseNum;
 			CName.Content = name;
 			CProf.Content = prof;
 			CDesc.Text = desc;
 			CType.Content = (type == ClassType.Lecture ? "Lecture" : type == ClassType.Tutorial ? "Tutorial" : "Laboratory");
+
+			if (status == 1)
+			{
+				this.ToolTip = "This course is closed";
+				CStatus.Content = "CLOSED";
+				CStatus.Style = (Style)this.FindResource("CourseStatusClosed");
+			}
+			else if (status == 2)
+			{
+				this.ToolTip = "This course is under a waitlist";
+				CStatus.Content = "WAITLIST";
+				CStatus.Style = (Style)this.FindResource("CourseStatusWait");
+			}
+			else
+			{
+				this.ToolTip = null;
+				CStatus.Content = "OPEN";
+				CStatus.Style = (Style)this.FindResource("CourseStatusOpen");
+			}
+
 			CTime.Content = "";
 
-			foreach (Day d in Enum.GetValues(typeof (Day)))
+			foreach (Day d in Enum.GetValues(typeof(Day)))
 			{
-				if ((days & (int) d) > 0)
+				if ((days & (int)d) > 0)
 				{
-					CTime.Content += Enum.GetName(typeof (Day), d);
+					CTime.Content += Enum.GetName(typeof(Day), d);
 				}
 			}
 
@@ -132,16 +131,16 @@ namespace OfCourse
 			return "Laboratory";
 		}
 
-        protected override void OnMouseMove(MouseEventArgs e)
-        {
-            base.OnMouseMove(e);
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                DataObject data = new DataObject();
-                data.SetData("Object", this);
+		protected override void OnMouseMove(MouseEventArgs e)
+		{
+			base.OnMouseMove(e);
+			if (e.LeftButton == MouseButtonState.Pressed)
+			{
+				DataObject data = new DataObject();
+				data.SetData("Object", this);
 
-                DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
-            }
-        }
+				DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
+			}
+		}
 	}
 }
