@@ -180,6 +180,7 @@ namespace OfCourse
                         SearchResult.departmentNames[(int)result.department] + result.courseNum, result.typeName());
                 }
             }
+
             ResizeItems();
         }
 		private void Search(object sender, TextChangedEventArgs e)
