@@ -394,6 +394,7 @@ namespace OfCourse
                 }
                 
             }
+            FilterResults(); // Ensure the filters are followed
         }
 
         private void ComboboxChanged(object sender, SelectionChangedEventArgs e)
@@ -422,7 +423,8 @@ namespace OfCourse
                 }
                 else
                 {
-                    res.Visibility = Visibility.Collapsed;
+                    if(Results.Children.Contains(res))
+                        res.Visibility = Visibility.Collapsed;
                 }
             }
 
