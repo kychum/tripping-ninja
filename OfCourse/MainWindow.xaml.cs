@@ -45,6 +45,9 @@ namespace OfCourse
 			LoadClasses();
 			Expander.Toggle.Click += Toggle_Click;
             Cart.Cart.Drop += Cart_Drop;
+            Cart.CartIcon.Drop += Cart_Drop;
+            Cart.Trash.Drop += Trash_Drop;
+            ResultsPane.Drop += Trash_Drop;
 
 			((Grid)FindName("HelpOverlay")).Visibility = Visibility.Visible;
 			// TODO Load draft, if any
@@ -373,6 +376,23 @@ namespace OfCourse
             {
                 Results.Children.Remove(result);
                 Cart.DisplayArea.Children.Add(result);
+            }
+        }
+
+        private void Trash_Drop(object sender, DragEventArgs e)
+        {
+            var result = (SearchResult)e.Data.GetData("Object");
+            if (Cart.DisplayArea.Children.Contains(result))
+            {
+                Cart.DisplayArea.Children.Remove(result);
+                Results.Children.Clear();
+
+                // Re-sort the children of Results. Otherwise the re-added items are placed at the end.
+                foreach (var r in results.Where(res => !Cart.DisplayArea.Children.Contains(res)))
+                {
+                    Results.Children.Add(r);
+                }
+                
             }
         }
 

@@ -192,7 +192,7 @@
 					</Button.Style>
 				</Button>
 			</DockPanel>
-			<Grid x:Name="ResultsPane" Margin="0" Background="#ffff" HorizontalAlignment="Left" DockPanel.Dock="Left" Width="0" Visibility="Hidden" ZIndex="2">
+			<Grid x:Name="ResultsPane" Margin="0" Background="#ffff" HorizontalAlignment="Left" DockPanel.Dock="Left" Width="0" Visibility="Hidden" ZIndex="2" AllowDrop="True">
 				<Grid.BitmapEffect>
 					<DropShadowBitmapEffect Color="Black" Direction="0" Softness="0.2" ShadowDepth="3" Opacity="0.2" />
 				</Grid.BitmapEffect>
