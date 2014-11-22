@@ -25,6 +25,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace OfCourse
 {
@@ -43,6 +44,9 @@ namespace OfCourse
 			InitializeComponent();
 			LoadClasses();
 			Expander.Toggle.Click += Toggle_Click;
+
+			((Grid)FindName("HelpOverlay")).Visibility = Visibility.Visible;
+			// TODO Load draft, if any
 		}
 
 		private void Toggle_Click(object sender, RoutedEventArgs e)
@@ -56,12 +60,12 @@ namespace OfCourse
 			if (v == Visibility.Visible)
 			{
 				Expander.Arrow.Content = "<";
-				((Storyboard) FindResource("ExpandResults")).Begin();
+				((Storyboard)FindResource("ExpandResults")).Begin();
 			}
 			else
 			{
 				Expander.Arrow.Content = ">";
-				((Storyboard) FindResource("HideResults")).Begin();
+				((Storyboard)FindResource("HideResults")).Begin();
 			}
 		}
 
@@ -81,12 +85,12 @@ namespace OfCourse
 					var r = new SearchResult
 					{
 						id = Convert.ToInt32(inFile.ReadLine()),
-						department = (Dept) Convert.ToInt32(inFile.ReadLine()),
+						department = (Dept)Convert.ToInt32(inFile.ReadLine()),
 						courseNum = Convert.ToInt32(inFile.ReadLine()),
 						name = inFile.ReadLine(),
 						desc = inFile.ReadLine(),
 						prof = inFile.ReadLine(),
-						type = (ClassType) Convert.ToInt32(inFile.ReadLine()),
+						type = (ClassType)Convert.ToInt32(inFile.ReadLine()),
 						days = Convert.ToInt16(inFile.ReadLine()),
 						startTime = Convert.ToInt16(inFile.ReadLine()),
 						duration = Convert.ToInt16(inFile.ReadLine()),
@@ -135,15 +139,15 @@ namespace OfCourse
 
 		private void r_MouseEnter(object sender, MouseEventArgs e)
 		{
-            SearchResult r = (SearchResult)sender;
+			var r = (SearchResult) sender;
             int row = r.startTime - 6;
             int span = r.duration;
 
-            foreach (Day d in Enum.GetValues(typeof(Day)))
+			foreach (Day d in Enum.GetValues(typeof (Day)))
             {
-                if ((r.days & (int)d) > 0)
+				if ((r.days & (int) d) > 0)
                 {
-                    SetBorder(row, (int)(Math.Log((int)d, 2)), span);
+					SetBorder(row, (int) (Math.Log((int) d, 2)), span);
                 }
             }
 		}
@@ -259,8 +263,100 @@ namespace OfCourse
 		public bool HasConflict(int row, int col, int span)
 		{
 			return schedItems
-					.Where(si => si.col == col)
-					.Any(si => (si.row <= row && (si.row + si.span - 1) >= row) || (row <= si.row && (row + span - 1) >= si.row));
+				.Where(si => si.col == col)
+				.Any(si => (si.row <= row && (si.row + si.span - 1) >= row) || (row <= si.row && (row + span - 1) >= si.row));
+		}
+
+		private void SaveDraft_OnClick(object sender, RoutedEventArgs e)
+		{
+			var statusPanel = (WrapPanel)FindName("ButtonStatus");
+			var statusText = (TextBlock)FindName("ButtonStatusText");
+
+			statusPanel.Visibility = Visibility.Visible;
+			statusText.Text = "Saving...";
+
+			// TODO Actually save the draft
+
+			statusText.Text = "Your current course setup has been saved.";
+
+			var aTimer = new DispatcherTimer();
+			aTimer.Tick += (timerSender, timerEventArgs) =>
+			{
+				statusPanel.Visibility = Visibility.Hidden;
+				aTimer.Stop();
+			};
+			aTimer.Interval = new TimeSpan(0, 0, 3);
+			aTimer.Start();
+		}
+
+		private void DiscardDraft_OnClick(object sender, RoutedEventArgs e)
+		{
+			MessageBoxResult rsltMessageBox = MessageBox.Show("Are you sure you want to discard all unsaved changes? This CANNOT be undone.", "Discard draft?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+			switch (rsltMessageBox)
+			{
+				case MessageBoxResult.No:
+					return;
+			}
+
+			var statusPanel = (WrapPanel)FindName("ButtonStatus");
+			var statusText = (TextBlock)FindName("ButtonStatusText");
+
+			statusPanel.Visibility = Visibility.Visible;
+			statusText.Text = "Saving...";
+
+			// TODO Reload draft from previous, or wipe it if none is found
+
+			statusText.Text = "All unsaved changes have been discarded.";
+
+			var aTimer = new DispatcherTimer();
+			aTimer.Tick += (timerSender, timerEventArgs) =>
+			{
+				statusPanel.Visibility = Visibility.Hidden;
+				aTimer.Stop();
+			};
+			aTimer.Interval = new TimeSpan(0, 0, 3);
+			aTimer.Start();
+		}
+
+		private void FinalizeDraft_OnClick(object sender, RoutedEventArgs e)
+		{
+			MessageBoxResult rsltMessageBox = MessageBox.Show("Are you sure you want to enroll in these courses?", "Complete enrollment?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+			switch (rsltMessageBox)
+			{
+				case MessageBoxResult.No:
+					return;
+			}
+
+			var statusPanel = (WrapPanel)FindName("ButtonStatus");
+			var statusText = (TextBlock)FindName("ButtonStatusText");
+
+			statusPanel.Visibility = Visibility.Visible;
+			statusText.Text = "Saving...";
+
+			// TODO What to do here?
+
+			statusText.Text = "You have been enrolled in your selected courses.";
+
+			var aTimer = new DispatcherTimer();
+			aTimer.Tick += (timerSender, timerEventArgs) =>
+			{
+				statusPanel.Visibility = Visibility.Hidden;
+				aTimer.Stop();
+			};
+			aTimer.Interval = new TimeSpan(0, 0, 3);
+			aTimer.Start();
+		}
+
+		private void HelpOverlay_OnMouseUp(object sender, MouseButtonEventArgs e)
+		{
+			((Grid)sender).Visibility = Visibility.Hidden;
+		}
+
+		private void HelpButton_OnClick(object sender, RoutedEventArgs e)
+		{
+			((Grid)FindName("HelpOverlay")).Visibility = Visibility.Visible;
 		}
 
         private void SchedulePanel_Drop(object sender, DragEventArgs e)

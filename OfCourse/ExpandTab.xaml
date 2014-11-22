@@ -8,7 +8,7 @@
 	x:Class="OfCourse.ExpandTab"
     xmlns:local="clr-namespace:OfCourse"
 	x:Name="UserControl"
-	d:DesignWidth="640" d:DesignHeight="480" Width="20" Height="50">
+	d:DesignWidth="640" d:DesignHeight="480" Width="25" Height="60" ClipToBounds="True">
 	<UserControl.Resources>
 		<Style x:Key="FocusVisual">
 			<Setter Property="Control.Template">
@@ -21,13 +21,6 @@
 		</Style>
 		<SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
 		<SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
-		<SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
-		<SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
-		<SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
-		<SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
-		<SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
-		<SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
-		<SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
 		<Style x:Key="Invisibutton" TargetType="{x:Type Button}">
 			<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
 			<Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
@@ -49,24 +42,11 @@
 		</Style>
 	</UserControl.Resources>
 
-	<Grid x:Name="LayoutRoot" ClipToBounds="True">
-		<ed:RegularPolygon HorizontalAlignment="Left" Height="50" InnerRadius="1" Margin="-23,0,0,0" PointCount="6" Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="43">
-			<ed:RegularPolygon.Fill>
-				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-					<LinearGradientBrush.RelativeTransform>
-						<TransformGroup>
-							<ScaleTransform CenterY="0.5" CenterX="0.5"/>
-							<SkewTransform CenterY="0.5" CenterX="0.5"/>
-							<RotateTransform CenterY="0.5" CenterX="0.5" Angle="270"/>
-							<TranslateTransform/>
-						</TransformGroup>
-					</LinearGradientBrush.RelativeTransform>
-					<GradientStop Color="#FFCDCDCD" Offset="1"/>
-					<GradientStop Color="White" Offset="0.53"/>
-				</LinearGradientBrush>
-			</ed:RegularPolygon.Fill>
-		</ed:RegularPolygon>
-		<Label x:Name="Arrow" Content="&gt;" HorizontalAlignment="Left" Margin="0,10.5,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
-		<Button x:Name="Toggle" Content="" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="20" Background="#00DDDDDD" Style="{DynamicResource Invisibutton}" BorderThickness="0"/>
+	<Grid x:Name="LayoutRoot" Background="#FFFF" Height="50" Width="20" HorizontalAlignment="Left">
+		<Grid.BitmapEffect>
+			<DropShadowBitmapEffect Color="Black" Direction="0" Softness="0.2" ShadowDepth="1" Opacity="0.5" />
+		</Grid.BitmapEffect>
+		<Label x:Name="Arrow" Content="&gt;" HorizontalAlignment="Left" Margin="-4,-2,0,0" Foreground="#f000" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="28" />
+		<Button x:Name="Toggle" Content="" Cursor="Hand" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="20" Background="#0000" Style="{DynamicResource Invisibutton}" BorderThickness="0" />
 	</Grid>
 </UserControl>

@@ -38,12 +38,13 @@
 		</Rectangle>
 		<Grid ClipToBounds="True">
 			<Label x:Name="CName" Content="Course Name" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" FontSize="24" FontWeight="Light"/>
-			<StackPanel Margin="10,44,10,82" Orientation="Horizontal">
+			<StackPanel Margin="10,42,94,82" Orientation="Horizontal">
 				<Label x:Name="CNum" Content="###" HorizontalAlignment="Left" Margin="0,0,10,0" VerticalAlignment="Top" Foreground="#9111"/>
 				<Label x:Name="CType" Content="ClassType" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#9111"/>
 			</StackPanel>
-			<Label x:Name="CProf" Content="Professor" HorizontalAlignment="Left" Margin="10,62,10,64" VerticalAlignment="Top" Foreground="#9111"/>
-			<Label x:Name="CTime" Content="Days - Time" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="#9111" Margin="0,62,10,0"/>
+			<Label x:Name="CStatus" Content="STATUS" HorizontalAlignment="Right" Margin="0,38,10,0" VerticalAlignment="Top" Foreground="#9111" Background="#2000" Padding="8,4" FontWeight="Bold"/>
+			<Label x:Name="CProf" Content="Professor" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Foreground="#9111"/>
+			<Label x:Name="CTime" Content="Days - Time" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="#9111" Margin="0,64,10,0"/>
 			<TextBlock x:Name="CDesc" Text="Description" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" Height="49" Width="228" TextWrapping="Wrap" Foreground="{Binding Foreground, ElementName=CName, Mode=OneWay}"/>
 		</Grid>
 	</Grid>
