@@ -214,6 +214,8 @@ namespace OfCourse
 			i.CTimes.Content = (row + 6) + ":00 - " + (row + 6 + span) + ":00";
 			i.CType.Content = type;
 
+            i.MouseDoubleClick += i_MouseDoubleClick;
+
 			// Here's an idea for when we get classes at half-hour (or more) intervals
 			// Can also be useful for shifting things horizontally during conflicts.
 			//double h = Schedule.LayoutRoot.RowDefinitions[1].ActualHeight;
@@ -226,6 +228,11 @@ namespace OfCourse
 				itemsInSlot[row + cnt - 1, col - 1]++;
 			}
 		}
+
+        void i_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            RemoveCourse(((ScheduleItem)sender).id);
+        }
 
 		public void ResizeItems()
 		{
