@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -378,12 +379,12 @@ namespace OfCourse
 
 				item.Margin = new Thickness(scheduleWidth * itemNum / maxConflicts, 0, (maxConflicts - itemNum - 1) * scheduleWidth / maxConflicts, 0);
 			}
-            return;
+			return;
 		}
 
 		public void RemoveCourse(int id)
 		{
-            Console.Write("Woo");
+			Console.Write("Woo");
 			foreach (ScheduleItem i in schedItems)
 			{
 				if (i.id == id)
@@ -401,7 +402,7 @@ namespace OfCourse
 
 			var result = results.Find(s => s.id == id);
 			result.Style = null;//(Style)result.FindResource("PlacedOnSchedule");
-            return;
+			return;
 		}
 
 		public bool HasConflict(int row, int col, int span)
@@ -418,37 +419,29 @@ namespace OfCourse
 
 			statusPanel.Visibility = Visibility.Visible;
 			statusText.Text = "Saving...";
-            if (!(File.Exists("xylophone.txt")))
-            {
-                File.Create("xylophone.txt");
-            }
-            try
-            {
-                StringBuilder sb = new StringBuilder();
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter("xylophone.txt",true))
-                {
-                    
-                    foreach(ScheduleItem i in schedItems)
-                    {
 
-                        sb.Append(i.id+" "+i.row+" "+i.col+" "+i.span+" "+i.Name+" "+i.CType+ "\r\n");
-                        //Console.WriteLine("Hello\n"+i.id);
-                        //RemoveCourse(i.id);
-                        Console.Write("Yay");
-                        
-                    }
-                    file.Write(sb.ToString());
-                    file.Close();
-                }
-            }
-            catch (IOException)
-            {
+			try
+			{
+				File.WriteAllText("xylophone.txt", "");
 
-            }
-            catch (InvalidOperationException)
-            {
+				using (var file = new StreamWriter("xylophone.txt", true))
+				{
+					foreach (ScheduleItem i in schedItems)
+					{
+						file.WriteLine(Convert.ToString(i.id));
+					}
 
-            }
+					file.Close();
+				}
+			}
+			catch (IOException)
+			{
+				statusText.Text = "We were unable to save your draft!";
+			}
+			catch (InvalidOperationException)
+			{
+				statusText.Text = "We were unable to save your draft!";
+			}
 
 			statusText.Text = "Your current course setup has been saved.";
 
@@ -464,7 +457,7 @@ namespace OfCourse
 
 		private void DiscardDraft_OnClick(object sender, RoutedEventArgs e)
 		{
-			MessageBoxResult rsltMessageBox = MessageBox.Show("Are you sure you want to discard all unsaved changes? This CANNOT be undone.", "Discard draft?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+			MessageBoxResult rsltMessageBox = MessageBox.Show("Are you sure you want to revert all unsaved changes and revert to the previously saved version?\n\nThis CANNOT be undone.", "Revert changes?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
 			switch (rsltMessageBox)
 			{
@@ -476,11 +469,43 @@ namespace OfCourse
 			var statusText = (TextBlock)FindName("ButtonStatusText");
 
 			statusPanel.Visibility = Visibility.Visible;
-			statusText.Text = "Saving...";
+			statusText.Text = "Loading...";
 
-			// TODO Reload draft from previous, or wipe it if none is found
+			if (!(File.Exists("xylophone.txt")))
+			{
+				File.Create("xylophone.txt");
+			}
 
-			statusText.Text = "All unsaved changes have been discarded.";
+			try
+			{
+				var itemsCopy = new List<ScheduleItem>(this.schedItems); // Allow concurrent modification
+				foreach (var si in itemsCopy)
+				{
+					this.RemoveCourse(si.id);
+				}
+
+				using (var sr = new StreamReader("xylophone.txt"))
+				{
+					string line;
+					while ((line = sr.ReadLine()) != null)
+					{
+						int id = Convert.ToInt32(line);
+						this.AddResult(this.GetSearchResultById(id));
+					}
+
+					sr.Close();
+				}
+
+				statusText.Text = "Draft re-loaded from last saved version.";
+			}
+			catch (IOException)
+			{
+				statusText.Text = "We didn't find any previous drafts, so the schedule has been cleared.";
+			}
+			catch (InvalidOperationException)
+			{
+				statusText.Text = "We didn't find any previous drafts, so the schedule has been cleared.";
+			}
 
 			var aTimer = new DispatcherTimer();
 			aTimer.Tick += (timerSender, timerEventArgs) =>
@@ -506,7 +531,7 @@ namespace OfCourse
 			var statusText = (TextBlock)FindName("ButtonStatusText");
 
 			statusPanel.Visibility = Visibility.Visible;
-			statusText.Text = "Saving...";
+			statusText.Text = "Enrolling...";
 
 			// TODO What to do here?
 
@@ -635,51 +660,5 @@ namespace OfCourse
 			CourseDetailOverlay.Children.Clear();
 			CourseDetailOverlay.Visibility = Visibility.Collapsed;
 		}
-
-
-        private void Load_OnClick(object sender, RoutedEventArgs e)
-        {
-            var statusPanel = (WrapPanel)FindName("ButtonStatus");
-            var statusText = (TextBlock)FindName("ButtonStatusText");
-
-            statusPanel.Visibility = Visibility.Visible;
-            statusText.Text = "Loading...";
-            if (!(File.Exists("xylophone.txt")))
-            {
-                File.Create("xylophone.txt");
-            }
-            try
-            {
-                using (StreamReader sr = new StreamReader("xylophone.txt"))
-                {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        string[] splitter = line.Split(' ');
-                        int tmpId=int.Parse(splitter[0]);
-                        int tmpRow=int.Parse(splitter[1]);
-                        int tmpCol=int.Parse(splitter[2]);
-                        int tmpSpan=int.Parse(splitter[3]);
-                        string tmpName=splitter[4];
-                        string tmp1=splitter[5];
-                        string tmp2=splitter[6];
-                        string tmpType=tmp1+tmp2;
-                        MakeScheduleItem(tmpId,tmpRow,tmpCol,tmpSpan,tmpName,tmpType);
-                    }
-                    sr.Close();
-                }
-            }
-            catch (IOException)
-            {
-
-            }
-            catch (InvalidOperationException)
-            {
-
-            }
-
-            
-        }
-
 	}
 }
