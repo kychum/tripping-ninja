@@ -181,7 +181,24 @@
 						</Style>
 					</Button.Style>
 				</Button>
-				<Button Content="DISCARD DRAFT" Height="36" DockPanel.Dock="Right" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{x:Null}" Click="DiscardDraft_OnClick">
+                <Button Content="Load" Height="36" DockPanel.Dock="Right" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{x:Null}" Click="Load_OnClick">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                            <Setter Property="Foreground" Value="#FF03A9F4" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="#FFFF"/>
+                                    <Setter Property="Background" Value="#FF039BE5"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Foreground" Value="#FFFF"/>
+                                    <Setter Property="Background" Value="#FF0288D1"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Content="DISCARD DRAFT" Height="36" DockPanel.Dock="Right" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{x:Null}" Click="DiscardDraft_OnClick">
 					<Button.Style>
 						<Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
 							<Setter Property="Foreground" Value="#FFF44336" />

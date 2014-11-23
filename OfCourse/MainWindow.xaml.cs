@@ -26,6 +26,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using System.Text;
+
 
 namespace OfCourse
 {
@@ -377,10 +379,12 @@ namespace OfCourse
 
 				item.Margin = new Thickness(scheduleWidth * itemNum / maxConflicts, 0, (maxConflicts - itemNum - 1) * scheduleWidth / maxConflicts, 0);
 			}
+            return;
 		}
 
 		public void RemoveCourse(int id)
 		{
+            Console.Write("Woo");
 			foreach (ScheduleItem i in schedItems)
 			{
 				if (i.id == id)
@@ -398,6 +402,7 @@ namespace OfCourse
 
 			var result = results.Find(s => s.id == id);
 			result.Style = null;//(Style)result.FindResource("PlacedOnSchedule");
+            return;
 		}
 
 		public bool HasConflict(int row, int col, int span)
@@ -414,8 +419,37 @@ namespace OfCourse
 
 			statusPanel.Visibility = Visibility.Visible;
 			statusText.Text = "Saving...";
+            if (!(File.Exists("xylophone.txt")))
+            {
+                File.Create("xylophone.txt");
+            }
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter("xylophone.txt",true))
+                {
+                    
+                    foreach(ScheduleItem i in schedItems)
+                    {
 
-			// TODO Actually save the draft
+                        sb.Append(i.id+" "+i.row+" "+i.col+" "+i.span+" "+i.Name+" "+i.CType+ "\r\n");
+                        //Console.WriteLine("Hello\n"+i.id);
+                        //RemoveCourse(i.id);
+                        Console.Write("Yay");
+                        
+                    }
+                    file.Write(sb.ToString());
+                    file.Close();
+                }
+            }
+            catch (IOException)
+            {
+
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
 
 			statusText.Text = "Your current course setup has been saved.";
 
@@ -603,5 +637,51 @@ namespace OfCourse
             CourseDetailOverlay.Children.Clear();
             CourseDetailOverlay.Visibility = Visibility.Collapsed;
         }
+
+
+        private void Load_OnClick(object sender, RoutedEventArgs e)
+        {
+            var statusPanel = (WrapPanel)FindName("ButtonStatus");
+            var statusText = (TextBlock)FindName("ButtonStatusText");
+
+            statusPanel.Visibility = Visibility.Visible;
+            statusText.Text = "Loading...";
+            if (!(File.Exists("xylophone.txt")))
+            {
+                File.Create("xylophone.txt");
+            }
+            try
+            {
+                using (StreamReader sr = new StreamReader("xylophone.txt"))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        string[] splitter = line.Split(' ');
+                        int tmpId=int.Parse(splitter[0]);
+                        int tmpRow=int.Parse(splitter[1]);
+                        int tmpCol=int.Parse(splitter[2]);
+                        int tmpSpan=int.Parse(splitter[3]);
+                        string tmpName=splitter[4];
+                        string tmp1=splitter[5];
+                        string tmp2=splitter[6];
+                        string tmpType=tmp1+tmp2;
+                        MakeScheduleItem(tmpId,tmpRow,tmpCol,tmpSpan,tmpName,tmpType);
+                    }
+                    sr.Close();
+                }
+            }
+            catch (IOException)
+            {
+
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
+
+            
+        }
+
 	}
 }
