@@ -146,6 +146,10 @@
 					<ComboBoxItem Content="Engineering"/>
 					<ComboBoxItem Content="Science"/>
 				</ComboBox>
+                <ComboBox x:Name="TermSelector" Margin="6" VerticalContentAlignment="Center" Padding="8" Width="115">
+                    <ComboBoxItem Content="Fall 2014" IsSelected="True" />
+                    <ComboBoxItem Content="Winter 2015" />
+                </ComboBox>
 				<Button Content="OPTIONS" Height="36" DockPanel.Dock="Left" FontSize="14"/>
 				<Button Content="HELP" Height="36" DockPanel.Dock="Left" FontSize="14" Click="HelpButton_OnClick"/>
 				<Button Content="ENROLL" Height="36" DockPanel.Dock="Right" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{x:Null}" Click="FinalizeDraft_OnClick">
