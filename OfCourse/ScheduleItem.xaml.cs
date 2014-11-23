@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -56,6 +57,7 @@ namespace OfCourse
 			hoverData.SetLabels();
 
 			hoverData.Visibility = Visibility.Visible;
+			((Button)hoverData.FindName("DetailsButton")).Visibility = Visibility.Hidden;
 
 			hoverData.Margin = new Thickness(point.X, point.Y, 0, 0);
 		}
