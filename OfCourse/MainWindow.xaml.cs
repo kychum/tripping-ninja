@@ -426,8 +426,17 @@ namespace OfCourse
 
 				using (var file = new StreamWriter("xylophone.txt", true))
 				{
+					var savedIds = new HashSet<int>();
+
 					foreach (ScheduleItem i in schedItems)
 					{
+						if (savedIds.Contains(i.id))
+						{
+							continue;
+						}
+
+						savedIds.Add(i.id);
+
 						file.WriteLine(Convert.ToString(i.id));
 					}
 
