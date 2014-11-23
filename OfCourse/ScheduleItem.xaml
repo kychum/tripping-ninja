@@ -14,15 +14,21 @@
 				<EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFA4CFC6"/>
 			</ColorAnimationUsingKeyFrames>
 		</Storyboard>
+		<Style TargetType="{x:Type Label}">
+			<Setter Property="Foreground" Value="#111"/>
+			<Setter Property="FontFamily" Value="/OfCourse;component/Fonts/#Roboto Condensed"/>
+			<Setter Property="FontSize" Value="14"/>
+			<Setter Property="Padding" Value="0"/>
+		</Style>
 	</UserControl.Resources>
 
-	<Grid x:Name="LayoutRoot" VerticalAlignment="Center" >
+	<Grid x:Name="LayoutRoot" VerticalAlignment="Center">
 		<Grid.RowDefinitions>
 			<RowDefinition/>
 			<RowDefinition/>
 			<RowDefinition/>
 		</Grid.RowDefinitions>
-		<Label x:Name="CNum" Content="Course Number" Margin="0" FontSize="10.667" VerticalAlignment="Top" Padding="0" HorizontalContentAlignment="Center"/>
+		<Label x:Name="CNum" Content="Course Number" Margin="0" FontSize="10.667" VerticalAlignment="Top" Padding="0" HorizontalContentAlignment="Center" FontWeight="Bold"/>
 		<Label x:Name="CType" Content="Class Type" Margin="0" VerticalAlignment="Center" FontSize="9.333" Padding="0" HorizontalContentAlignment="Center" Grid.Row="1"/>
 		<Label x:Name="CTimes" Content="Times" Margin="0" VerticalAlignment="Center" FontSize="9.333" Grid.Row="2" Padding="0" HorizontalContentAlignment="Center"/>
 	</Grid>
