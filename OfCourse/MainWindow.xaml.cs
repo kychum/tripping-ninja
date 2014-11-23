@@ -107,6 +107,7 @@ namespace OfCourse
 					r.MouseEnter += r_MouseEnter;
 					r.MouseLeave += r_MouseLeave;
 					r.MouseDoubleClick += r_MouseDoubleClick;
+                    r.DetailsButton.Click += ShowDetails;
 					results.Add(r);
 				} while (inFile.Peek() != -1);
 			}
@@ -126,6 +127,66 @@ namespace OfCourse
 				Results.Children.Add(r);
 			}
 		}
+
+        void ShowDetails(object sender, RoutedEventArgs e)
+        {
+            var details = new CourseDetails();
+            var result = (SearchResult)((Grid)((Grid)((Button)sender).Parent).Parent).Parent; // Oh god.
+            details.CName.Content = result.CName.Content;
+            details.CNum.Content = result.CNum.Content;
+            details.CProf.Content = result.CProf.Content;
+            details.CDesc.Text = result.CDesc.Text;
+            details.CTime.Content = result.CTime.Content;
+            details.CType.Content = result.CType.Content;
+            details.CStatus.Content = result.CStatus.Content;
+            details.CStatus.Style = result.CStatus.Style;
+
+            if (result.prereqs != "")
+            {
+                string text = "";
+                var chainList = result.prereqs.Split(',');
+                int chainCnt = 1;
+                foreach (var chain in chainList)
+                {
+                    text += "• ";
+                    var cidList = chain.Split('|');
+                    int cnt = 1;
+                    foreach (var cid in cidList)
+                    {
+                        var course = cid.Split('.');
+                        text += Enum.GetName(typeof(Dept),(Dept)Convert.ToInt32(course[0])) + " " + course[1];
+                        if (cnt < cidList.Count())
+                            text += " or ";
+                        cnt++;
+                    }
+                    if(chainCnt <= chainList.Count())
+                        text += "\n";
+                    chainCnt++;
+                }
+                details.Prereqs.Text = text;
+            }
+            else
+            {
+                details.PrereqContainer.Visibility = Visibility.Collapsed;
+            }
+            if (result.antireqs != "")
+            {
+                string text = "";
+                foreach (var chain in result.antireqs.Split(','))
+                {
+                    var course = chain.Split('.');
+                    text += "• " + Enum.GetName(typeof(Dept),(Dept)Convert.ToInt32(course[0])) + " " + course[1] + "\n"; // antirequisites are AND only
+                }
+                details.Antireqs.Text = text;
+            }
+            else
+            {
+                details.AntireqContainer.Visibility = Visibility.Collapsed;
+            }
+            details.Margin = new Thickness(Mouse.GetPosition(this).X, Mouse.GetPosition(this).Y, 0, 0);
+            CourseDetailOverlay.Visibility = Visibility.Visible;
+            CourseDetailOverlay.Children.Add(details);
+        }
 
 		private void r_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
@@ -501,5 +562,11 @@ namespace OfCourse
 		{
 			ResizeItems();
 		}
+
+        private void CourseDetailOverlay_OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            CourseDetailOverlay.Children.Clear();
+            CourseDetailOverlay.Visibility = Visibility.Collapsed;
+        }
 	}
 }

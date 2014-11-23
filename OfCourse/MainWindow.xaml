@@ -240,5 +240,6 @@
 			<TextBlock Foreground="#FFB3E5FC" HorizontalAlignment="Left" FontSize="18" Margin="61,156,0,-158">... or onto the cart at the bottom!</TextBlock>
 			<TextBlock Foreground="#FF03A9F4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36">Click anywhere to get started!</TextBlock>
 		</Grid>
+        <Grid x:Name="CourseDetailOverlay" Background="#26000000" Visibility="Collapsed" MouseUp="CourseDetailOverlay_OnMouseUp" />
 	</Grid>
 </Window>
