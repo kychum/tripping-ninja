@@ -112,7 +112,7 @@ namespace OfCourse
 					r.MouseEnter += r_MouseEnter;
 					r.MouseLeave += r_MouseLeave;
 					r.MouseDoubleClick += r_MouseDoubleClick;
-                    r.DetailsButton.Click += ShowDetails;
+					r.DetailsButton.Click += ShowDetails;
 					results.Add(r);
 				} while (inFile.Peek() != -1);
 			}
@@ -133,78 +133,77 @@ namespace OfCourse
 			}
 		}
 
-        void ShowDetails(object sender, RoutedEventArgs e)
-        {
-            var details = new CourseDetails();
-            var result = (SearchResult)((Grid)((Grid)((Button)sender).Parent).Parent).Parent; // Oh god.
-            details.CName.Content = result.CName.Content;
-            details.CNum.Content = result.CNum.Content;
-            details.CProf.Content = result.CProf.Content;
-            details.CDesc.Text = result.CDesc.Text;
-            details.CTime.Content = result.CTime.Content;
-            details.CType.Content = result.CType.Content;
-            details.CStatus.Content = result.CStatus.Content;
-            details.CStatus.Style = result.CStatus.Style;
+		void ShowDetails(object sender, RoutedEventArgs e)
+		{
+			var details = new CourseDetails();
+			var result = (SearchResult)((Grid)((Grid)((Button)sender).Parent).Parent).Parent; // Oh god.
+			details.CName.Content = result.CName.Content;
+			details.CNum.Content = result.CNum.Content;
+			details.CProf.Content = result.CProf.Content;
+			details.CTime.Content = result.CTime.Content;
+			details.CType.Content = result.CType.Content;
+			details.CStatus.Content = result.CStatus.Content;
+			details.CStatus.Style = result.CStatus.Style;
 
-            if (result.prereqs != "")
-            {
-                string text = "";
-                var chainList = result.prereqs.Split(',');
-                int chainCnt = 1;
-                foreach (var chain in chainList)
-                {
-                    text += "• ";
-                    var cidList = chain.Split('|');
-                    int cnt = 1;
-                    foreach (var cid in cidList)
-                    {
-                        var course = cid.Split('.');
-                        text += Enum.GetName(typeof(Dept),(Dept)Convert.ToInt32(course[0])) + " " + course[1];
-                        if (cnt < cidList.Count())
-                            text += " or ";
-                        cnt++;
-                    }
-                    if(chainCnt <= chainList.Count())
-                        text += "\n";
-                    chainCnt++;
-                }
-                details.Prereqs.Text = text;
-            }
-            else
-            {
-                details.PrereqContainer.Visibility = Visibility.Collapsed;
-            }
-            if (result.antireqs != "")
-            {
-                string text = "";
-                foreach (var chain in result.antireqs.Split(','))
-                {
-                    var course = chain.Split('.');
-                    text += "• " + Enum.GetName(typeof(Dept),(Dept)Convert.ToInt32(course[0])) + " " + course[1] + "\n"; // antirequisites are AND only
-                }
-                details.Antireqs.Text = text;
-            }
-            else
-            {
-                details.AntireqContainer.Visibility = Visibility.Collapsed;
-            }
-            CourseDetailOverlay.Visibility = Visibility.Visible;
-            CourseDetailOverlay.Children.Add(details);
-            double width = this.LayoutGrid.ActualWidth;
-            double height = this.LayoutGrid.ActualHeight;
-            double x = Mouse.GetPosition(this).X;
-            double y = Mouse.GetPosition(this).Y;
+			if (result.prereqs != "")
+			{
+				string text = "";
+				var chainList = result.prereqs.Split(',');
+				int chainCnt = 1;
+				foreach (var chain in chainList)
+				{
+					text += "• ";
+					var cidList = chain.Split('|');
+					int cnt = 1;
+					foreach (var cid in cidList)
+					{
+						var course = cid.Split('.');
+						text += Enum.GetName(typeof(Dept), (Dept)Convert.ToInt32(course[0])) + " " + course[1];
+						if (cnt < cidList.Count())
+							text += " or ";
+						cnt++;
+					}
+					if (chainCnt <= chainList.Count())
+						text += "\n";
+					chainCnt++;
+				}
+				details.Prereqs.Text = text;
+			}
+			else
+			{
+				details.PrereqContainer.Visibility = Visibility.Collapsed;
+			}
+			if (result.antireqs != "")
+			{
+				string text = "";
+				foreach (var chain in result.antireqs.Split(','))
+				{
+					var course = chain.Split('.');
+					text += "• " + Enum.GetName(typeof(Dept), (Dept)Convert.ToInt32(course[0])) + " " + course[1] + "\n"; // antirequisites are AND only
+				}
+				details.Antireqs.Text = text;
+			}
+			else
+			{
+				details.AntireqContainer.Visibility = Visibility.Collapsed;
+			}
+			CourseDetailOverlay.Visibility = Visibility.Visible;
+			CourseDetailOverlay.Children.Add(details);
+			double width = this.LayoutGrid.ActualWidth;
+			double height = this.LayoutGrid.ActualHeight;
+			double x = Mouse.GetPosition(this).X;
+			double y = Mouse.GetPosition(this).Y;
 
-            // ActualWidth/Height of details has not been calculated yet
-            // Force measuring its size!
-            details.Measure(new Size(width, height));
-            details.Arrange(new Rect(0, 0, details.DesiredSize.Width, details.DesiredSize.Height));
-            
-            double dWidth = details.ActualWidth;
-            double dHeight = details.ActualHeight;
-            details.Margin = new Thickness((x + dWidth > width ? width - dWidth : x), y + dHeight > height ? height - dHeight : y, 0, 0);
-            
-        }
+			// ActualWidth/Height of details has not been calculated yet
+			// Force measuring its size!
+			details.Measure(new Size(width, height));
+			details.Arrange(new Rect(0, 0, details.DesiredSize.Width, details.DesiredSize.Height));
+
+			double dWidth = details.ActualWidth;
+			double dHeight = details.ActualHeight;
+			details.Margin = new Thickness((x + dWidth > width ? width - dWidth : x), y + dHeight > height ? height - dHeight : y, 0, 0);
+
+		}
 
 		private void r_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
@@ -315,9 +314,9 @@ namespace OfCourse
 				row = row,
 				col = col,
 				span = span,
-				CNum = {Content = name},
-				CTimes = {Content = (row + 6) + ":00 - " + (row + 6 + span) + ":00"},
-				CType = {Content = type}
+				CNum = { Content = name },
+				CTimes = { Content = (row + 6) + ":00 - " + (row + 6 + span) + ":00" },
+				CType = { Content = type }
 			};
 			i.MouseDoubleClick += i_MouseDoubleClick;
 
@@ -576,7 +575,6 @@ namespace OfCourse
 			{
 				if (((Regex.IsMatch(res.CName.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
 					(Regex.IsMatch(res.CProf.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
-					(Regex.IsMatch(res.CDesc.Text, query, RegexOptions.IgnoreCase)) ||
 					(Regex.IsMatch(res.CNum.Content.ToString(), query, RegexOptions.IgnoreCase))) &&
 					((faculty == 0) || ((Faculty)faculty == res.faculty)))
 				{
@@ -598,10 +596,10 @@ namespace OfCourse
 			ResizeItems();
 		}
 
-        private void CourseDetailOverlay_OnMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            CourseDetailOverlay.Children.Clear();
-            CourseDetailOverlay.Visibility = Visibility.Collapsed;
-        }
+		private void CourseDetailOverlay_OnMouseUp(object sender, MouseButtonEventArgs e)
+		{
+			CourseDetailOverlay.Children.Clear();
+			CourseDetailOverlay.Visibility = Visibility.Collapsed;
+		}
 	}
 }

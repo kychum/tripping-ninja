@@ -81,7 +81,6 @@ namespace OfCourse
 			CNum.Content = departmentNames[(int)department] + " " + courseNum;
 			CName.Content = name;
 			CProf.Content = prof;
-			CDesc.Text = desc;
 			CType.Content = (type == ClassType.Lecture ? "Lecture" : type == ClassType.Tutorial ? "Tutorial" : "Laboratory");
 
 			if (status == 1)

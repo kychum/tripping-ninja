@@ -7,7 +7,7 @@
 	mc:Ignorable="d"
 	x:Class="OfCourse.SearchResult"
 	x:Name="UserControl"
-	Height="144" Width="248">
+	Height="114" Width="248">
 	<UserControl.Resources>
 		<Storyboard x:Key="MouseOver">
 			<ColorAnimation Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="Rectangle" To="#eeeeee" Duration="00:00:00"/>
@@ -74,22 +74,21 @@
 	</UserControl.Triggers>
 
 	<Grid x:Name="LayoutRoot" Margin="0" ClipToBounds="True">
-		<Rectangle x:Name="Rectangle" Fill="#fafafa" HorizontalAlignment="Left" Height="136" VerticalAlignment="Top" Width="240" Margin="4" RadiusX="2" RadiusY="2">
+		<Rectangle x:Name="Rectangle" Fill="#fafafa" HorizontalAlignment="Left" Height="106" VerticalAlignment="Top" Width="240" Margin="4,4,0,0" RadiusX="2" RadiusY="2">
 			<Rectangle.BitmapEffect>
 				<DropShadowBitmapEffect Color="Black" Direction="270" Softness="0.2" ShadowDepth="3" Opacity="0.25" />
 			</Rectangle.BitmapEffect>
 		</Rectangle>
-		<Grid ClipToBounds="True">
+		<Grid ClipToBounds="True" Margin="0">
 			<Label x:Name="CName" Content="Course Name" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" FontSize="24" FontWeight="Light"/>
-			<StackPanel Margin="10,42,94,82" Orientation="Horizontal">
+			<StackPanel Margin="10,42,94,55" Orientation="Horizontal">
 				<Label x:Name="CNum" Content="###" HorizontalAlignment="Left" Margin="0,0,10,0" VerticalAlignment="Top" Foreground="#9111"/>
 				<Label x:Name="CType" Content="ClassType" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#9111"/>
 			</StackPanel>
 			<Label x:Name="CStatus" Content="STATUS" HorizontalAlignment="Right" Margin="0,38,10,0" VerticalAlignment="Top" Padding="8,4" FontWeight="Bold"/>
 			<Label x:Name="CProf" Content="Professor" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Foreground="#9111"/>
-			<Label x:Name="CTime" Content="Days - Time" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="#9111" Margin="0,64,10,0"/>
-			<TextBlock x:Name="CDesc" Text="Description" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" Height="22.04" Width="228" TextWrapping="Wrap" Foreground="{Binding Foreground, ElementName=CName, Mode=OneWay}"/>
-			<Button x:Name="DetailsButton" Content="DETAILS" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderBrush="{x:Null}" Margin="0,0,11,9" Foreground="#FF8F8F8F" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MinWidth="3" Padding="5,4">
+			<Label x:Name="CTime" Content="Days - Time" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#9111" Margin="10,86,0,0"/>
+			<Button x:Name="DetailsButton" Content="DETAILS" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderBrush="{x:Null}" Margin="0,0,10,10" Foreground="#FF8F8F8F" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MinWidth="3" Padding="5,4" Width="80" Height="28">
 				<Button.Style>
 					<Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
 						<Setter Property="Foreground" Value="#FFFFFF" />
