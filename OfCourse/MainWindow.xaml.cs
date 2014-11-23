@@ -140,7 +140,7 @@ namespace OfCourse
 		private void r_MouseLeave(object sender, MouseEventArgs e)
 		{
 			var result = (SearchResult)sender;
-			if (!schedItems.Any(si => si.id == result.id))
+			if (schedItems.All(si => si.id != result.id))
 			{
 				foreach (Border b in hoverBorders)
 				{
@@ -164,7 +164,7 @@ namespace OfCourse
 			int row = r.startTime - 6;
 			int span = r.duration;
 
-			if (!schedItems.Any(si => si.id == r.id))
+			if (schedItems.All(si => si.id != r.id))
 			{
 				foreach (Day d in Enum.GetValues(typeof(Day)))
 				{
@@ -201,7 +201,7 @@ namespace OfCourse
 
 		private void AddResult(SearchResult result)
 		{
-			if (!schedItems.Any(si => si.id == result.id))
+			if (schedItems.All(si => si.id != result.id))
 			{
 				result.Style = (Style)result.FindResource("PlacedOnSchedule");
 
@@ -235,20 +235,21 @@ namespace OfCourse
 
 		public void MakeScheduleItem(int newId, int row, int col, int span, string name, string type)
 		{
-			var i = new ScheduleItem();
-			i.id = newId;
-			Grid.SetRow(i, row);
-			i.row = row;
-			Grid.SetColumn(i, col);
-			i.col = col;
-			Grid.SetRowSpan(i, span);
-			i.span = span;
-
-			i.CNum.Content = name;
-			i.CTimes.Content = (row + 6) + ":00 - " + (row + 6 + span) + ":00";
-			i.CType.Content = type;
-
+			var i = new ScheduleItem
+			{
+				id = newId,
+				row = row,
+				col = col,
+				span = span,
+				CNum = {Content = name},
+				CTimes = {Content = (row + 6) + ":00 - " + (row + 6 + span) + ":00"},
+				CType = {Content = type}
+			};
 			i.MouseDoubleClick += i_MouseDoubleClick;
+
+			Grid.SetRow(i, row);
+			Grid.SetColumn(i, col);
+			Grid.SetRowSpan(i, span);
 
 			// Here's an idea for when we get classes at half-hour (or more) intervals
 			// Can also be useful for shifting things horizontally during conflicts.
@@ -281,18 +282,25 @@ namespace OfCourse
 						maxConflicts = itemsInSlot[cnt + item.row - 1, item.col - 1];
 					}
 				}
+
 				var conflictItems = schedItems.Where(si => ((si.col == item.col) && ((si.row <= item.row && (si.row + si.span - 1) >= item.row) || (item.row <= si.row && (item.row + item.span - 1) >= si.row))));
+
 				int itemNum = 0;
 				foreach (var sch in conflictItems)
 				{
 					if (sch != item)
 					{
 						if (sch.Margin.Right != 0)
+						{
 							itemNum++;
+						}
 						else
+						{
 							break;
+						}
 					}
 				}
+
 				item.Margin = new Thickness(scheduleWidth * itemNum / maxConflicts, 0, (maxConflicts - itemNum - 1) * scheduleWidth / maxConflicts, 0);
 			}
 		}
@@ -482,10 +490,14 @@ namespace OfCourse
 		private void FilterResults()
 		{
 			if (!ResultsPane.IsVisible)
+			{
 				ToggleResults(Visibility.Visible);
+			}
+
 			string query = SearchBox.Text;
 			int faculty = FacultyFilter.SelectedIndex;
 			int amountFound = 0;
+
 			foreach (SearchResult res in results)
 			{
 				if (((Regex.IsMatch(res.CName.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
