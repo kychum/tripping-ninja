@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CourseDetails.xaml.cs">
+      <DependentUpon>CourseDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShoppingCart.xaml.cs">
       <DependentUpon>ShoppingCart.xaml</DependentUpon>
     </Compile>
@@ -72,6 +75,10 @@
     <Compile Include="TimeSchedule.xaml.cs">
       <DependentUpon>TimeSchedule.xaml</DependentUpon>
     </Compile>
+    <Page Include="CourseDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ExpandTab.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
