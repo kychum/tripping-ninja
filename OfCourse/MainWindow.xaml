@@ -130,7 +130,7 @@
 			</Setter>
 		</Style>
 	</Window.Resources>
-	<Grid>
+	<Grid x:Name="LayoutGrid">
 		<DockPanel>
 			<DockPanel VerticalAlignment="Top" LastChildFill="False" DockPanel.Dock="Top" Background="#ffff" ZIndex="3">
 				<DockPanel.BitmapEffect>

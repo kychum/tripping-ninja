@@ -188,9 +188,22 @@ namespace OfCourse
             {
                 details.AntireqContainer.Visibility = Visibility.Collapsed;
             }
-            details.Margin = new Thickness(Mouse.GetPosition(this).X, Mouse.GetPosition(this).Y, 0, 0);
             CourseDetailOverlay.Visibility = Visibility.Visible;
             CourseDetailOverlay.Children.Add(details);
+            double width = this.LayoutGrid.ActualWidth;
+            double height = this.LayoutGrid.ActualHeight;
+            double x = Mouse.GetPosition(this).X;
+            double y = Mouse.GetPosition(this).Y;
+
+            // ActualWidth/Height of details has not been calculated yet
+            // Force measuring its size!
+            details.Measure(new Size(width, height));
+            details.Arrange(new Rect(0, 0, details.DesiredSize.Width, details.DesiredSize.Height));
+            
+            double dWidth = details.ActualWidth;
+            double dHeight = details.ActualHeight;
+            details.Margin = new Thickness((x + dWidth > width ? width - dWidth : x), y + dHeight > height ? height - dHeight : y, 0, 0);
+            
         }
 
 		private void r_MouseDoubleClick(object sender, MouseButtonEventArgs e)
