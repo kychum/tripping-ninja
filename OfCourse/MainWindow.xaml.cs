@@ -54,6 +54,11 @@ namespace OfCourse
 			// TODO Load draft, if any
 		}
 
+		public SearchResult GetSearchResultById(int id)
+		{
+			return results.FirstOrDefault(r => r.id == id);
+		}
+
 		private void Toggle_Click(object sender, RoutedEventArgs e)
 		{
 			ToggleResults(ResultsPane.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible);

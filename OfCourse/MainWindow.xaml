@@ -230,6 +230,7 @@
 				<TextBlock x:Name="ClassStatusButton" Foreground="#FF4CAF50" Height="48" Padding="80,14,20,14" FontSize="14" FontWeight="Bold">UNDO</TextBlock>
 			</WrapPanel>
 		</WrapPanel>
+		<local:SearchResult x:Name="HoverData" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 		<Grid x:Name="HelpOverlay" Background="#b000" MouseUp="HelpOverlay_OnMouseUp" Visibility="Hidden">
 			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="44,46,0,-45">↖ Looking for a specific course?</TextBlock>
 			<TextBlock Foreground="#FFFF" HorizontalAlignment="Left" FontSize="18" Margin="634,46,0,-45">↖ Need to see this help screen?</TextBlock>
