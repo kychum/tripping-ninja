@@ -139,21 +139,21 @@ namespace OfCourse
 
 		private void r_MouseLeave(object sender, MouseEventArgs e)
 		{
-            var result = (SearchResult)sender;
-            if (!schedItems.Any(si => si.id == result.id))
-            {
-                foreach (Border b in hoverBorders)
-                {
-                    Schedule.LayoutRoot.Children.Remove(b);
-                }
-            }
-            else
-            {
-                foreach (var item in schedItems.Where(si => si.id == result.id))
-                {
-                    ((Storyboard)item.FindResource("DoHighlight")).Stop();
-                }
-            }
+			var result = (SearchResult)sender;
+			if (!schedItems.Any(si => si.id == result.id))
+			{
+				foreach (Border b in hoverBorders)
+				{
+					Schedule.LayoutRoot.Children.Remove(b);
+				}
+			}
+			else
+			{
+				foreach (var item in schedItems.Where(si => si.id == result.id))
+				{
+					((Storyboard)item.FindResource("DoHighlight")).Stop();
+				}
+			}
 
 			hoverBorders.Clear();
 		}
@@ -164,23 +164,23 @@ namespace OfCourse
 			int row = r.startTime - 6;
 			int span = r.duration;
 
-            if (!schedItems.Any(si => si.id == r.id))
-            {
-                foreach (Day d in Enum.GetValues(typeof(Day)))
-                {
-                    if ((r.days & (int)d) > 0)
-                    {
-                        SetBorder(row, (int)(Math.Log((int)d, 2)), span);
-                    }
-                }
-            }
-            else
-            {
-                foreach (var si in schedItems.Where(item => item.id == r.id))
-                {
-                    ((Storyboard)si.FindResource("DoHighlight")).Begin();
-                }
-            }
+			if (!schedItems.Any(si => si.id == r.id))
+			{
+				foreach (Day d in Enum.GetValues(typeof(Day)))
+				{
+					if ((r.days & (int)d) > 0)
+					{
+						SetBorder(row, (int)(Math.Log((int)d, 2)), span);
+					}
+				}
+			}
+			else
+			{
+				foreach (var si in schedItems.Where(item => item.id == r.id))
+				{
+					((Storyboard)si.FindResource("DoHighlight")).Begin();
+				}
+			}
 		}
 
 		private void SetBorder(int row, int col, int span)
@@ -199,24 +199,29 @@ namespace OfCourse
 			Schedule.LayoutRoot.Children.Add(b);
 		}
 
-        private void AddResult(SearchResult result)
-        {
-            if (!schedItems.Any(si => si.id == result.id))
-            {
-                result.Style = (Style)result.FindResource("PlacedOnSchedule");
+		private void AddResult(SearchResult result)
+		{
+			if (!schedItems.Any(si => si.id == result.id))
+			{
+				result.Style = (Style)result.FindResource("PlacedOnSchedule");
 
-                foreach (Day d in Enum.GetValues(typeof(Day)))
-                {
-                    if ((result.days & (int)d) > 0)
-                    {
-                        MakeScheduleItem(result.id, result.startTime - 6, (int)Math.Log((int)d, 2), result.duration,
-                            SearchResult.departmentNames[(int)result.department] + result.courseNum, result.typeName());
-                    }
-                }
+				foreach (Day d in Enum.GetValues(typeof(Day)))
+				{
+					if ((result.days & (int)d) > 0)
+					{
+						MakeScheduleItem(result.id, result.startTime - 6, (int)Math.Log((int)d, 2), result.duration,
+							SearchResult.departmentNames[(int)result.department] + result.courseNum, result.typeName());
+					}
+				}
 
-                ResizeItems();
-            }
-        }
+				ResizeItems();
+			}
+
+			foreach (Border b in hoverBorders)
+			{
+				Schedule.LayoutRoot.Children.Remove(b);
+			}
+		}
 
 		private void Search(object sender, TextChangedEventArgs e)
 		{
@@ -243,7 +248,7 @@ namespace OfCourse
 			i.CTimes.Content = (row + 6) + ":00 - " + (row + 6 + span) + ":00";
 			i.CType.Content = type;
 
-            i.MouseDoubleClick += i_MouseDoubleClick;
+			i.MouseDoubleClick += i_MouseDoubleClick;
 
 			// Here's an idea for when we get classes at half-hour (or more) intervals
 			// Can also be useful for shifting things horizontally during conflicts.
@@ -258,10 +263,10 @@ namespace OfCourse
 			}
 		}
 
-        void i_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            RemoveCourse(((ScheduleItem)sender).id);
-        }
+		void i_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			RemoveCourse(((ScheduleItem)sender).id);
+		}
 
 		public void ResizeItems()
 		{
@@ -298,19 +303,19 @@ namespace OfCourse
 			{
 				if (i.id == id)
 				{
-                    for (int cnt = 0; cnt < i.span; cnt++)
-                    {
-                        itemsInSlot[i.row + cnt - 1, i.col - 1]--;
-                    }
+					for (int cnt = 0; cnt < i.span; cnt++)
+					{
+						itemsInSlot[i.row + cnt - 1, i.col - 1]--;
+					}
 					Schedule.LayoutRoot.Children.Remove(i);
 				}
 			}
 
 			schedItems.RemoveAll(i => i.id == id);
-            ResizeItems();
+			ResizeItems();
 
 			var result = results.Find(s => s.id == id);
-            result.Style = null;//(Style)result.FindResource("PlacedOnSchedule");
+			result.Style = null;//(Style)result.FindResource("PlacedOnSchedule");
 		}
 
 		public bool HasConflict(int row, int col, int span)
@@ -465,7 +470,7 @@ namespace OfCourse
 					Results.Children.Add(r);
 				}
 			}
-            FilterResults(); // Ensure the filters are followed
+			FilterResults(); // Ensure the filters are followed
 		}
 
 		private void ComboboxChanged(object sender, SelectionChangedEventArgs e)
@@ -494,8 +499,8 @@ namespace OfCourse
 				}
 				else
 				{
-                    if(Results.Children.Contains(res))
-                        res.Visibility = Visibility.Collapsed;
+					if (Results.Children.Contains(res))
+						res.Visibility = Visibility.Collapsed;
 				}
 			}
 
