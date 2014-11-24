@@ -37,14 +37,24 @@ namespace OfCourse
 	public partial class MainWindow
 	{
 		private readonly List<Border> hoverBorders = new List<Border>();
-		private readonly List<ScheduleItem> schedItems = new List<ScheduleItem>();
+		private readonly List<ScheduleItem> schedItems = new List<ScheduleItem>();        
 		private List<SearchResult> results = new List<SearchResult>();
-		private readonly int[,] itemsInSlot = new int[12, 5];
+
+        private bool isWinter = false;
+        private List<int> otherTermSchedule = new List<int>();
+        private List<int> otherTermCart = new List<int>();
+        private List<int> cartIDs = new List<int>();
+        private List<int> schedIDs = new List<int>();
+
+        private const String fallFile = "..\\..\\classes.txt";
+        private const String winterFile = "..\\..\\winter.txt";
+
+		private int[,] itemsInSlot = new int[12, 5];
 
 		public MainWindow()
 		{
 			InitializeComponent();
-			LoadClasses();
+            LoadClasses(fallFile);
 			Expander.Toggle.Click += Toggle_Click;
 			Schedule.Drop += SchedulePanel_Drop;
 			Cart.Cart.Drop += Cart_Drop;
@@ -81,9 +91,9 @@ namespace OfCourse
 			}
 		}
 
-		public void LoadClasses()
+		public void LoadClasses(String file)
 		{
-			var inFile = new StreamReader("..\\..\\classes.txt");
+			var inFile = new StreamReader(file);
 			try
 			{
 				if (inFile.ReadLine() != "1.3") // Get Version
@@ -279,6 +289,7 @@ namespace OfCourse
 			if (schedItems.All(si => si.id != result.id))
 			{
 				result.Style = (Style)result.FindResource("PlacedOnSchedule");
+                schedIDs.Add(result.id);
 
 				foreach (Day d in Enum.GetValues(typeof(Day)))
 				{
@@ -376,12 +387,12 @@ namespace OfCourse
 					}
 				}
 
-				item.Margin = new Thickness(scheduleWidth * itemNum / maxConflicts, 0, (maxConflicts - itemNum - 1) * scheduleWidth / maxConflicts, 0);
+				item.Margin = new Thickness(scheduleWidth * itemNum / (maxConflicts==0?1:maxConflicts), 0, (maxConflicts - itemNum - 1) * scheduleWidth / (maxConflicts==0?1:maxConflicts), 0);
 			}
             return;
 		}
 
-		public void RemoveCourse(int id)
+		public void RemoveCourse(int id,bool changingTerms = false)
 		{
             Console.Write("Woo");
 			foreach (ScheduleItem i in schedItems)
@@ -397,6 +408,8 @@ namespace OfCourse
 			}
 
 			schedItems.RemoveAll(i => i.id == id);
+            if(!changingTerms)
+                schedIDs.Remove(id);
 			ResizeItems();
 
 			var result = results.Find(s => s.id == id);
@@ -561,15 +574,20 @@ namespace OfCourse
 
 		private void Cart_Drop(object sender, DragEventArgs e)
 		{
-			var result = (SearchResult)e.Data.GetData("Object");
-			if (Results.Children.Contains(result))
-			{
-				Results.Children.Remove(result);
-				Cart.DisplayArea.Children.Add(result);
-			}
+			AddToCart((SearchResult)e.Data.GetData("Object"));
 
 			Cart.Style = null;
 		}
+
+        private void AddToCart(SearchResult result)
+        {
+            if (Results.Children.Contains(result))
+            {
+                Results.Children.Remove(result);
+                Cart.DisplayArea.Children.Add(result);
+                cartIDs.Add(result.id);
+            }
+        }
 
 		private void Trash_Drop(object sender, DragEventArgs e)
 		{
@@ -577,6 +595,7 @@ namespace OfCourse
 			if (Cart.DisplayArea.Children.Contains(result))
 			{
 				Cart.DisplayArea.Children.Remove(result);
+                cartIDs.Remove(result.id);
 				Results.Children.Clear();
 
 				// Re-sort the children of Results. Otherwise the re-added items are placed at the end.
@@ -679,6 +698,60 @@ namespace OfCourse
             }
 
             
+        }
+
+        private void SwapLists(List<int> a, List<int> b)
+        {
+            List<int> temp = new List<int>();
+            temp.AddRange(a);
+            a.Clear();
+            a.AddRange(b);
+            b.Clear();
+            b.AddRange(temp);
+        }
+
+        private void ChangeTerm(object sender, SelectionChangedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+            String file = "";
+            if (isWinter)
+            {
+                file = fallFile;
+                isWinter = false;
+            }
+            else
+            {
+                file = winterFile;
+                isWinter = true;
+            }
+
+            itemsInSlot = new int[12, 5];
+            foreach (int id in schedIDs.ToList()) // Without the ToList: Collection was modified; enumeration operation may not execute.
+            {
+                RemoveCourse(id,true);
+            }
+            results.Clear();
+            schedItems.Clear();
+            Results.Children.Clear();
+            Cart.DisplayArea.Children.Clear();
+
+            LoadClasses(file);
+
+            SwapLists(schedIDs, otherTermSchedule);
+            
+            foreach (int id in schedIDs.ToList())
+            {
+                AddResult(results.Find(r => r.id == id));
+            }
+
+            SwapLists(cartIDs, otherTermCart);
+            foreach (var result in results.Where(r=>cartIDs.Contains(r.id)))
+            {
+                AddToCart(result);
+            }
+            schedIDs = schedIDs.Distinct().ToList();
+            cartIDs = cartIDs.Distinct().ToList();
         }
 
 	}
