@@ -53,8 +53,11 @@ namespace OfCourse
 			Cart.Trash.Drop += Trash_Drop;
 			ResultsPane.Drop += Trash_Drop;
 
-			((Grid)FindName("HelpOverlay")).Visibility = Visibility.Visible;
-			// TODO Load draft, if any
+			int classesLoaded = LoadScheduleFromFile("xylophone.txt");
+			if (classesLoaded == 0)
+			{
+				((Grid)FindName("HelpOverlay")).Visibility = Visibility.Visible;
+			}
 		}
 
 		public SearchResult GetSearchResultById(int id)
@@ -178,12 +181,10 @@ namespace OfCourse
 			}
 			if (result.antireqs != "")
 			{
-				string text = "";
-				foreach (var chain in result.antireqs.Split(','))
-				{
-					var course = chain.Split('.');
-					text += "• " + Enum.GetName(typeof(Dept), (Dept)Convert.ToInt32(course[0])) + " " + course[1] + "\n"; // antirequisites are AND only
-				}
+				string text = result.antireqs
+									.Split(',')
+									.Select(chain => chain.Split('.'))
+									.Aggregate("", (current, course) => current + ("• " + Enum.GetName(typeof(Dept), (Dept)Convert.ToInt32(course[0])) + " " + course[1] + "\n"));
 				details.Antireqs.Text = text;
 			}
 			else
@@ -379,7 +380,6 @@ namespace OfCourse
 
 				item.Margin = new Thickness(scheduleWidth * itemNum / maxConflicts, 0, (maxConflicts - itemNum - 1) * scheduleWidth / maxConflicts, 0);
 			}
-			return;
 		}
 
 		public void RemoveCourse(int id)
@@ -401,8 +401,7 @@ namespace OfCourse
 			ResizeItems();
 
 			var result = results.Find(s => s.id == id);
-			result.Style = null;//(Style)result.FindResource("PlacedOnSchedule");
-			return;
+			result.Style = null; //(Style)result.FindResource("PlacedOnSchedule");
 		}
 
 		public bool HasConflict(int row, int col, int span)
@@ -410,6 +409,42 @@ namespace OfCourse
 			return schedItems
 				.Where(si => si.col == col)
 				.Any(si => (si.row <= row && (si.row + si.span - 1) >= row) || (row <= si.row && (row + span - 1) >= si.row));
+		}
+
+		private int LoadScheduleFromFile(string fileName)
+		{
+			if (!(File.Exists(fileName)))
+			{
+				File.Create(fileName);
+			}
+
+			ClearSchedule();
+
+			int numClasses = 0;
+
+			using (var sr = new StreamReader(fileName))
+			{
+				string line;
+				while ((line = sr.ReadLine()) != null)
+				{
+					int id = Convert.ToInt32(line);
+					this.AddResult(this.GetSearchResultById(id));
+					numClasses++;
+				}
+
+				sr.Close();
+			}
+
+			return numClasses;
+		}
+
+		private void ClearSchedule()
+		{
+			var itemsCopy = new List<ScheduleItem>(this.schedItems); // Allow concurrent modification
+			foreach (var si in itemsCopy)
+			{
+				this.RemoveCourse(si.id);
+			}
 		}
 
 		private void SaveDraft_OnClick(object sender, RoutedEventArgs e)
@@ -480,30 +515,9 @@ namespace OfCourse
 			statusPanel.Visibility = Visibility.Visible;
 			statusText.Text = "Loading...";
 
-			if (!(File.Exists("xylophone.txt")))
-			{
-				File.Create("xylophone.txt");
-			}
-
 			try
 			{
-				var itemsCopy = new List<ScheduleItem>(this.schedItems); // Allow concurrent modification
-				foreach (var si in itemsCopy)
-				{
-					this.RemoveCourse(si.id);
-				}
-
-				using (var sr = new StreamReader("xylophone.txt"))
-				{
-					string line;
-					while ((line = sr.ReadLine()) != null)
-					{
-						int id = Convert.ToInt32(line);
-						this.AddResult(this.GetSearchResultById(id));
-					}
-
-					sr.Close();
-				}
+				LoadScheduleFromFile("xylophone.txt");
 
 				statusText.Text = "Draft re-loaded from last saved version.";
 			}
