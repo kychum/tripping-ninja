@@ -35,11 +35,11 @@ namespace OfCourse
 	/// <summary>
 	///     Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow
-	{
-		private readonly List<Border> hoverBorders = new List<Border>();
-		private readonly List<ScheduleItem> schedItems = new List<ScheduleItem>();        
-		private List<SearchResult> results = new List<SearchResult>();
+    public partial class MainWindow
+    {
+        private readonly List<Border> hoverBorders = new List<Border>();
+        private readonly List<ScheduleItem> schedItems = new List<ScheduleItem>();
+        private List<SearchResult> results = new List<SearchResult>();
 
         private bool isWinter = false;
         private List<int> otherTermSchedule = new List<int>();
@@ -50,582 +50,587 @@ namespace OfCourse
         private const String fallFile = "..\\..\\classes.txt";
         private const String winterFile = "..\\..\\winter.txt";
 
-		private int[,] itemsInSlot = new int[12, 5];
+        private int[,] itemsInSlot = new int[12, 5];
 
-		public MainWindow()
-		{
-			InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
             LoadClasses(fallFile);
-			Expander.Toggle.Click += Toggle_Click;
-			Schedule.Drop += SchedulePanel_Drop;
-			Cart.Cart.Drop += Cart_Drop;
-			Cart.CartIcon.Drop += Cart_Drop;
-			Cart.Trash.Drop += Trash_Drop;
-			ResultsPane.Drop += Trash_Drop;
+            Expander.Toggle.Click += Toggle_Click;
+            Schedule.Drop += SchedulePanel_Drop;
+            Cart.Cart.Drop += Cart_Drop;
+            Cart.CartIcon.Drop += Cart_Drop;
+            Cart.Trash.Drop += Trash_Drop;
+            ResultsPane.Drop += Trash_Drop;
 
-			int classesLoaded = LoadScheduleFromFile("xylophone.txt");
-			if (classesLoaded == 0)
-			{
-				((Grid)FindName("HelpOverlay")).Visibility = Visibility.Visible;
-			}
-		}
+            int classesLoaded = 0;
+            try
+            {
+                classesLoaded = LoadScheduleFromFile("xylophone.txt");
+            }
+            catch (IOException) { } // No presaved classes!
+            if (classesLoaded == 0)
+            {
+                ((Grid)FindName("HelpOverlay")).Visibility = Visibility.Visible;
+            }
+        }
 
-		public SearchResult GetSearchResultById(int id)
-		{
-			return results.FirstOrDefault(r => r.id == id);
-		}
+        public SearchResult GetSearchResultById(int id)
+        {
+            return results.FirstOrDefault(r => r.id == id);
+        }
 
-		private void Toggle_Click(object sender, RoutedEventArgs e)
-		{
-			ToggleResults(ResultsPane.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible);
-		}
+        private void Toggle_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleResults(ResultsPane.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible);
+        }
 
-		private void ToggleResults(Visibility v)
-		{
-			// Animations! Because I'm bored.
-			if (v == Visibility.Visible)
-			{
-				Expander.Arrow.Content = "<";
-				((Storyboard)FindResource("ExpandResults")).Begin();
-			}
-			else
-			{
-				Expander.Arrow.Content = ">";
-				((Storyboard)FindResource("HideResults")).Begin();
-			}
-		}
+        private void ToggleResults(Visibility v)
+        {
+            // Animations! Because I'm bored.
+            if (v == Visibility.Visible)
+            {
+                Expander.Arrow.Content = "<";
+                ((Storyboard)FindResource("ExpandResults")).Begin();
+            }
+            else
+            {
+                Expander.Arrow.Content = ">";
+                ((Storyboard)FindResource("HideResults")).Begin();
+            }
+        }
 
-		public void LoadClasses(String file)
-		{
-			var inFile = new StreamReader(file);
-			try
-			{
-				if (inFile.ReadLine() != "1.3") // Get Version
-				{
-					// Version mismatch! Probably should do something here. Or not.
-				}
+        public void LoadClasses(String file)
+        {
+            var inFile = new StreamReader(file);
+            try
+            {
+                if (inFile.ReadLine() != "1.3") // Get Version
+                {
+                    // Version mismatch! Probably should do something here. Or not.
+                }
 
-				//inFile.ReadLine(); // Discard numClasses
-				do
-				{
-					var r = new SearchResult
-					{
-						id = Convert.ToInt32(inFile.ReadLine()),
-						department = (Dept)Convert.ToInt32(inFile.ReadLine()),
-						courseNum = Convert.ToInt32(inFile.ReadLine()),
-						name = inFile.ReadLine(),
-						desc = inFile.ReadLine(),
-						prof = inFile.ReadLine(),
-						type = (ClassType)Convert.ToInt32(inFile.ReadLine()),
-						days = Convert.ToInt16(inFile.ReadLine()),
-						startTime = Convert.ToInt16(inFile.ReadLine()),
-						duration = Convert.ToInt16(inFile.ReadLine()),
-						prereqs = inFile.ReadLine(),
-						antireqs = inFile.ReadLine(),
-						status = Convert.ToInt16(inFile.ReadLine())
-					};
-					r.SetLabels();
-					r.MouseEnter += r_MouseEnter;
-					r.MouseLeave += r_MouseLeave;
-					r.MouseDoubleClick += r_MouseDoubleClick;
-					r.DetailsButton.Click += ShowDetails;
-					results.Add(r);
-				} while (inFile.Peek() != -1);
-			}
-			catch
-			{
-				// Do something. Anything.
-				MessageBox.Show("Something went wrong when reading the file!");
-			}
-			finally
-			{
-				inFile.Close();
-			}
+                //inFile.ReadLine(); // Discard numClasses
+                do
+                {
+                    var r = new SearchResult
+                    {
+                        id = Convert.ToInt32(inFile.ReadLine()),
+                        department = (Dept)Convert.ToInt32(inFile.ReadLine()),
+                        courseNum = Convert.ToInt32(inFile.ReadLine()),
+                        name = inFile.ReadLine(),
+                        desc = inFile.ReadLine(),
+                        prof = inFile.ReadLine(),
+                        type = (ClassType)Convert.ToInt32(inFile.ReadLine()),
+                        days = Convert.ToInt16(inFile.ReadLine()),
+                        startTime = Convert.ToInt16(inFile.ReadLine()),
+                        duration = Convert.ToInt16(inFile.ReadLine()),
+                        prereqs = inFile.ReadLine(),
+                        antireqs = inFile.ReadLine(),
+                        status = Convert.ToInt16(inFile.ReadLine())
+                    };
+                    r.SetLabels();
+                    r.MouseEnter += r_MouseEnter;
+                    r.MouseLeave += r_MouseLeave;
+                    r.MouseDoubleClick += r_MouseDoubleClick;
+                    r.DetailsButton.Click += ShowDetails;
+                    results.Add(r);
+                } while (inFile.Peek() != -1);
+            }
+            catch
+            {
+                // Do something. Anything.
+                MessageBox.Show("Something went wrong when reading the file!");
+            }
+            finally
+            {
+                inFile.Close();
+            }
 
-			results = results.OrderBy(o => o.CNum.Content).ToList(); // Huzzah! Sorts the list of courses. LINQ.
-			foreach (SearchResult r in results)
-			{
-				Results.Children.Add(r);
-			}
-		}
+            results = results.OrderBy(o => o.CNum.Content).ToList(); // Huzzah! Sorts the list of courses. LINQ.
+            foreach (SearchResult r in results)
+            {
+                Results.Children.Add(r);
+            }
+        }
 
-		void ShowDetails(object sender, RoutedEventArgs e)
-		{
-			var details = new CourseDetails();
-			var result = (SearchResult)((Grid)((Grid)((Button)sender).Parent).Parent).Parent; // Oh god.
-			details.CName.Content = result.CName.Content;
-			details.CNum.Content = result.CNum.Content;
-			details.CProf.Content = result.CProf.Content;
-			details.CTime.Content = result.CTime.Content;
-			details.CType.Content = result.CType.Content;
-			details.CStatus.Content = result.CStatus.Content;
-			details.CStatus.Style = result.CStatus.Style;
+        void ShowDetails(object sender, RoutedEventArgs e)
+        {
+            var details = new CourseDetails();
+            var result = (SearchResult)((Grid)((Grid)((Button)sender).Parent).Parent).Parent; // Oh god.
+            details.CName.Content = result.CName.Content;
+            details.CNum.Content = result.CNum.Content;
+            details.CProf.Content = result.CProf.Content;
+            details.CTime.Content = result.CTime.Content;
+            details.CType.Content = result.CType.Content;
+            details.CStatus.Content = result.CStatus.Content;
+            details.CStatus.Style = result.CStatus.Style;
 
-			if (result.prereqs != "")
-			{
-				string text = "";
-				var chainList = result.prereqs.Split(',');
-				int chainCnt = 1;
-				foreach (var chain in chainList)
-				{
-					text += "• ";
-					var cidList = chain.Split('|');
-					int cnt = 1;
-					foreach (var cid in cidList)
-					{
-						var course = cid.Split('.');
-						text += Enum.GetName(typeof(Dept), (Dept)Convert.ToInt32(course[0])) + " " + course[1];
-						if (cnt < cidList.Count())
-							text += " or ";
-						cnt++;
-					}
-					if (chainCnt <= chainList.Count())
-						text += "\n";
-					chainCnt++;
-				}
-				details.Prereqs.Text = text;
-			}
-			else
-			{
-				details.PrereqContainer.Visibility = Visibility.Collapsed;
-			}
-			if (result.antireqs != "")
-			{
-				string text = result.antireqs
-									.Split(',')
-									.Select(chain => chain.Split('.'))
-									.Aggregate("", (current, course) => current + ("• " + Enum.GetName(typeof(Dept), (Dept)Convert.ToInt32(course[0])) + " " + course[1] + "\n"));
-				details.Antireqs.Text = text;
-			}
-			else
-			{
-				details.AntireqContainer.Visibility = Visibility.Collapsed;
-			}
-			CourseDetailOverlay.Visibility = Visibility.Visible;
-			CourseDetailOverlay.Children.Add(details);
-			double width = this.LayoutGrid.ActualWidth;
-			double height = this.LayoutGrid.ActualHeight;
-			double x = Mouse.GetPosition(this).X;
-			double y = Mouse.GetPosition(this).Y;
+            if (result.prereqs != "")
+            {
+                string text = "";
+                var chainList = result.prereqs.Split(',');
+                int chainCnt = 1;
+                foreach (var chain in chainList)
+                {
+                    text += "• ";
+                    var cidList = chain.Split('|');
+                    int cnt = 1;
+                    foreach (var cid in cidList)
+                    {
+                        var course = cid.Split('.');
+                        text += Enum.GetName(typeof(Dept), (Dept)Convert.ToInt32(course[0])) + " " + course[1];
+                        if (cnt < cidList.Count())
+                            text += " or ";
+                        cnt++;
+                    }
+                    if (chainCnt <= chainList.Count())
+                        text += "\n";
+                    chainCnt++;
+                }
+                details.Prereqs.Text = text;
+            }
+            else
+            {
+                details.PrereqContainer.Visibility = Visibility.Collapsed;
+            }
+            if (result.antireqs != "")
+            {
+                string text = result.antireqs
+                                    .Split(',')
+                                    .Select(chain => chain.Split('.'))
+                                    .Aggregate("", (current, course) => current + ("• " + Enum.GetName(typeof(Dept), (Dept)Convert.ToInt32(course[0])) + " " + course[1] + "\n"));
+                details.Antireqs.Text = text;
+            }
+            else
+            {
+                details.AntireqContainer.Visibility = Visibility.Collapsed;
+            }
+            CourseDetailOverlay.Visibility = Visibility.Visible;
+            CourseDetailOverlay.Children.Add(details);
+            double width = this.LayoutGrid.ActualWidth;
+            double height = this.LayoutGrid.ActualHeight;
+            double x = Mouse.GetPosition(this).X;
+            double y = Mouse.GetPosition(this).Y;
 
-			// ActualWidth/Height of details has not been calculated yet
-			// Force measuring its size!
-			details.Measure(new Size(width, height));
-			details.Arrange(new Rect(0, 0, details.DesiredSize.Width, details.DesiredSize.Height));
+            // ActualWidth/Height of details has not been calculated yet
+            // Force measuring its size!
+            details.Measure(new Size(width, height));
+            details.Arrange(new Rect(0, 0, details.DesiredSize.Width, details.DesiredSize.Height));
 
-			double dWidth = details.ActualWidth;
-			double dHeight = details.ActualHeight;
-			details.Margin = new Thickness((x + dWidth > width ? width - dWidth : x), y + dHeight > height ? height - dHeight : y, 0, 0);
+            double dWidth = details.ActualWidth;
+            double dHeight = details.ActualHeight;
+            details.Margin = new Thickness((x + dWidth > width ? width - dWidth : x), y + dHeight > height ? height - dHeight : y, 0, 0);
 
-		}
+        }
 
-		private void r_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			AddResult((SearchResult)sender);
-		}
+        private void r_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            AddResult((SearchResult)sender);
+        }
 
-		private void r_MouseLeave(object sender, MouseEventArgs e)
-		{
-			var result = (SearchResult)sender;
-			if (schedItems.All(si => si.id != result.id))
-			{
-				foreach (Border b in hoverBorders)
-				{
-					Schedule.LayoutRoot.Children.Remove(b);
-				}
-			}
-			else
-			{
-				foreach (var item in schedItems.Where(si => si.id == result.id))
-				{
-					((Storyboard)item.FindResource("DoHighlight")).Stop();
-				}
-			}
+        private void r_MouseLeave(object sender, MouseEventArgs e)
+        {
+            var result = (SearchResult)sender;
+            if (schedItems.All(si => si.id != result.id))
+            {
+                foreach (Border b in hoverBorders)
+                {
+                    Schedule.LayoutRoot.Children.Remove(b);
+                }
+            }
+            else
+            {
+                foreach (var item in schedItems.Where(si => si.id == result.id))
+                {
+                    ((Storyboard)item.FindResource("DoHighlight")).Stop();
+                }
+            }
 
-			hoverBorders.Clear();
-		}
+            hoverBorders.Clear();
+        }
 
-		private void r_MouseEnter(object sender, MouseEventArgs e)
-		{
-			var r = (SearchResult)sender;
-			int row = r.startTime - 6;
-			int span = r.duration;
+        private void r_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var r = (SearchResult)sender;
+            int row = r.startTime - 6;
+            int span = r.duration;
 
-			if (schedItems.All(si => si.id != r.id))
-			{
-				foreach (Day d in Enum.GetValues(typeof(Day)))
-				{
-					if ((r.days & (int)d) > 0)
-					{
-						SetBorder(row, (int)(Math.Log((int)d, 2)), span);
-					}
-				}
-			}
-			else
-			{
-				foreach (var si in schedItems.Where(item => item.id == r.id))
-				{
-					((Storyboard)si.FindResource("DoHighlight")).Begin();
-				}
-			}
-		}
+            if (schedItems.All(si => si.id != r.id))
+            {
+                foreach (Day d in Enum.GetValues(typeof(Day)))
+                {
+                    if ((r.days & (int)d) > 0)
+                    {
+                        SetBorder(row, (int)(Math.Log((int)d, 2)), span);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var si in schedItems.Where(item => item.id == r.id))
+                {
+                    ((Storyboard)si.FindResource("DoHighlight")).Begin();
+                }
+            }
+        }
 
-		private void SetBorder(int row, int col, int span)
-		{
-			var b = new Border
-			{
-				BorderThickness = new Thickness(5.0),
-				BorderBrush = HasConflict(row, col, span) ? Brushes.Red : Brushes.Pink,
-			};
+        private void SetBorder(int row, int col, int span)
+        {
+            var b = new Border
+            {
+                BorderThickness = new Thickness(5.0),
+                BorderBrush = HasConflict(row, col, span) ? Brushes.Red : Brushes.Pink,
+            };
 
-			Grid.SetColumn(b, col);
-			Grid.SetRow(b, row);
-			Grid.SetRowSpan(b, span);
-			hoverBorders.Add(b);
+            Grid.SetColumn(b, col);
+            Grid.SetRow(b, row);
+            Grid.SetRowSpan(b, span);
+            hoverBorders.Add(b);
 
-			Schedule.LayoutRoot.Children.Add(b);
-		}
+            Schedule.LayoutRoot.Children.Add(b);
+        }
 
-		private void AddResult(SearchResult result)
-		{
-			if (schedItems.All(si => si.id != result.id))
-			{
-				result.Style = (Style)result.FindResource("PlacedOnSchedule");
+        private void AddResult(SearchResult result)
+        {
+            if (schedItems.All(si => si.id != result.id))
+            {
+                result.Style = (Style)result.FindResource("PlacedOnSchedule");
                 schedIDs.Add(result.id);
 
-				foreach (Day d in Enum.GetValues(typeof(Day)))
-				{
-					if ((result.days & (int)d) > 0)
-					{
-						MakeScheduleItem(result.id, result.startTime - 6, (int)Math.Log((int)d, 2), result.duration,
-							SearchResult.departmentNames[(int)result.department] + result.courseNum, result.typeName());
-					}
-				}
+                foreach (Day d in Enum.GetValues(typeof(Day)))
+                {
+                    if ((result.days & (int)d) > 0)
+                    {
+                        MakeScheduleItem(result.id, result.startTime - 6, (int)Math.Log((int)d, 2), result.duration,
+                            SearchResult.departmentNames[(int)result.department] + result.courseNum, result.typeName());
+                    }
+                }
 
-				ResizeItems();
-			}
+                ResizeItems();
+            }
 
-			foreach (Border b in hoverBorders)
-			{
-				Schedule.LayoutRoot.Children.Remove(b);
-			}
-		}
+            foreach (Border b in hoverBorders)
+            {
+                Schedule.LayoutRoot.Children.Remove(b);
+            }
+        }
 
-		private void Search(object sender, TextChangedEventArgs e)
-		{
-			FilterResults();
-		}
+        private void Search(object sender, TextChangedEventArgs e)
+        {
+            FilterResults();
+        }
 
-		private void ClearSearch(object sender, RoutedEventArgs e)
-		{
-			SearchBox.Text = "";
-		}
+        private void ClearSearch(object sender, RoutedEventArgs e)
+        {
+            SearchBox.Text = "";
+        }
 
-		public void MakeScheduleItem(int newId, int row, int col, int span, string name, string type)
-		{
-			var i = new ScheduleItem
-			{
-				id = newId,
-				row = row,
-				col = col,
-				span = span,
-				CNum = { Content = name },
-				CTimes = { Content = (row + 6) + ":00 - " + (row + 6 + span) + ":00" },
-				CType = { Content = type }
-			};
-			i.MouseDoubleClick += i_MouseDoubleClick;
+        public void MakeScheduleItem(int newId, int row, int col, int span, string name, string type)
+        {
+            var i = new ScheduleItem
+            {
+                id = newId,
+                row = row,
+                col = col,
+                span = span,
+                CNum = { Content = name },
+                CTimes = { Content = (row + 6) + ":00 - " + (row + 6 + span) + ":00" },
+                CType = { Content = type }
+            };
+            i.MouseDoubleClick += i_MouseDoubleClick;
 
-			Grid.SetRow(i, row);
-			Grid.SetColumn(i, col);
-			Grid.SetRowSpan(i, span);
+            Grid.SetRow(i, row);
+            Grid.SetColumn(i, col);
+            Grid.SetRowSpan(i, span);
 
-			// Here's an idea for when we get classes at half-hour (or more) intervals
-			// Can also be useful for shifting things horizontally during conflicts.
-			//double h = Schedule.LayoutRoot.RowDefinitions[1].ActualHeight;
-			//i.Margin = new Thickness(0,h/2,0,h/2);
+            // Here's an idea for when we get classes at half-hour (or more) intervals
+            // Can also be useful for shifting things horizontally during conflicts.
+            //double h = Schedule.LayoutRoot.RowDefinitions[1].ActualHeight;
+            //i.Margin = new Thickness(0,h/2,0,h/2);
 
-			schedItems.Add(i);
-			Schedule.LayoutRoot.Children.Add(i);
-			for (int cnt = 0; cnt < span; cnt++)
-			{
-				itemsInSlot[row + cnt - 1, col - 1]++;
-			}
-		}
+            schedItems.Add(i);
+            Schedule.LayoutRoot.Children.Add(i);
+            for (int cnt = 0; cnt < span; cnt++)
+            {
+                itemsInSlot[row + cnt - 1, col - 1]++;
+            }
+        }
 
-		void i_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			RemoveCourse(((ScheduleItem)sender).id);
-		}
+        void i_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            RemoveCourse(((ScheduleItem)sender).id);
+        }
 
-		public void ResizeItems()
-		{
-			double scheduleWidth = Schedule.LayoutRoot.ColumnDefinitions[1].ActualWidth;
-			foreach (var item in schedItems)
-			{
-				int maxConflicts = 0;
-				for (int cnt = 0; cnt < item.span; cnt++)
-				{
-					if (itemsInSlot[cnt + item.row - 1, item.col - 1] > maxConflicts)
-					{
-						maxConflicts = itemsInSlot[cnt + item.row - 1, item.col - 1];
-					}
-				}
+        public void ResizeItems()
+        {
+            double scheduleWidth = Schedule.LayoutRoot.ColumnDefinitions[1].ActualWidth;
+            foreach (var item in schedItems)
+            {
+                int maxConflicts = 0;
+                for (int cnt = 0; cnt < item.span; cnt++)
+                {
+                    if (itemsInSlot[cnt + item.row - 1, item.col - 1] > maxConflicts)
+                    {
+                        maxConflicts = itemsInSlot[cnt + item.row - 1, item.col - 1];
+                    }
+                }
 
-				var conflictItems = schedItems.Where(si => ((si.col == item.col) && ((si.row <= item.row && (si.row + si.span - 1) >= item.row) || (item.row <= si.row && (item.row + item.span - 1) >= si.row))));
+                var conflictItems = schedItems.Where(si => ((si.col == item.col) && ((si.row <= item.row && (si.row + si.span - 1) >= item.row) || (item.row <= si.row && (item.row + item.span - 1) >= si.row))));
 
-				int itemNum = 0;
-				foreach (var sch in conflictItems)
-				{
-					if (sch != item)
-					{
-						if (sch.Margin.Right != 0)
-						{
-							itemNum++;
-						}
-						else
-						{
-							break;
-						}
-					}
-				}
+                int itemNum = 0;
+                foreach (var sch in conflictItems)
+                {
+                    if (sch != item)
+                    {
+                        if (sch.Margin.Right != 0)
+                        {
+                            itemNum++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
 
-				item.Margin = new Thickness(scheduleWidth * itemNum / (maxConflicts==0?1:maxConflicts), 0, (maxConflicts - itemNum - 1) * scheduleWidth / (maxConflicts==0?1:maxConflicts), 0);
-			}
-		}
+                item.Margin = new Thickness(scheduleWidth * itemNum / (maxConflicts == 0 ? 1 : maxConflicts), 0, (maxConflicts - itemNum - 1) * scheduleWidth / (maxConflicts == 0 ? 1 : maxConflicts), 0);
+            }
+        }
 
-		public void RemoveCourse(int id,bool changingTerms = false)
-		{
-			Console.Write("Woo");
-			foreach (ScheduleItem i in schedItems)
-			{
-				if (i.id == id)
-				{
-					for (int cnt = 0; cnt < i.span; cnt++)
-					{
-						itemsInSlot[i.row + cnt - 1, i.col - 1]--;
-					}
-					Schedule.LayoutRoot.Children.Remove(i);
-				}
-			}
+        public void RemoveCourse(int id, bool changingTerms = false)
+        {
+            Console.Write("Woo");
+            foreach (ScheduleItem i in schedItems)
+            {
+                if (i.id == id)
+                {
+                    for (int cnt = 0; cnt < i.span; cnt++)
+                    {
+                        itemsInSlot[i.row + cnt - 1, i.col - 1]--;
+                    }
+                    Schedule.LayoutRoot.Children.Remove(i);
+                }
+            }
 
-			schedItems.RemoveAll(i => i.id == id);
-            if(!changingTerms)
+            schedItems.RemoveAll(i => i.id == id);
+            if (!changingTerms)
                 schedIDs.Remove(id);
-			ResizeItems();
+            ResizeItems();
 
-			var result = results.Find(s => s.id == id);
-			result.Style = null; //(Style)result.FindResource("PlacedOnSchedule");
-		}
+            var result = results.Find(s => s.id == id);
+            result.Style = null; //(Style)result.FindResource("PlacedOnSchedule");
+        }
 
-		public bool HasConflict(int row, int col, int span)
-		{
-			return schedItems
-				.Where(si => si.col == col)
-				.Any(si => (si.row <= row && (si.row + si.span - 1) >= row) || (row <= si.row && (row + span - 1) >= si.row));
-		}
+        public bool HasConflict(int row, int col, int span)
+        {
+            return schedItems
+                .Where(si => si.col == col)
+                .Any(si => (si.row <= row && (si.row + si.span - 1) >= row) || (row <= si.row && (row + span - 1) >= si.row));
+        }
 
-		private int LoadScheduleFromFile(string fileName)
-		{
-			if (!(File.Exists(fileName)))
-			{
-				File.Create(fileName);
-			}
+        private int LoadScheduleFromFile(string fileName)
+        {
+            if (!(File.Exists(fileName)))
+            {
+                File.Create(fileName);
+            }
 
-			ClearSchedule();
+            ClearSchedule();
 
-			int numClasses = 0;
+            int numClasses = 0;
 
-			using (var sr = new StreamReader(fileName))
-			{
-				string line;
-				while ((line = sr.ReadLine()) != null)
-				{
-					int id = Convert.ToInt32(line);
-					this.AddResult(this.GetSearchResultById(id));
-					numClasses++;
-				}
+            using (var sr = new StreamReader(fileName))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    int id = Convert.ToInt32(line);
+                    this.AddResult(this.GetSearchResultById(id));
+                    numClasses++;
+                }
 
-				sr.Close();
-			}
+                sr.Close();
+            }
 
-			return numClasses;
-		}
+            return numClasses;
+        }
 
-		private void ClearSchedule()
-		{
-			var itemsCopy = new List<ScheduleItem>(this.schedItems); // Allow concurrent modification
-			foreach (var si in itemsCopy)
-			{
-				this.RemoveCourse(si.id);
-			}
-		}
+        private void ClearSchedule()
+        {
+            var itemsCopy = new List<ScheduleItem>(this.schedItems); // Allow concurrent modification
+            foreach (var si in itemsCopy)
+            {
+                this.RemoveCourse(si.id);
+            }
+        }
 
-		private void SaveDraft_OnClick(object sender, RoutedEventArgs e)
-		{
-			var statusPanel = (WrapPanel)FindName("ButtonStatus");
-			var statusText = (TextBlock)FindName("ButtonStatusText");
+        private void SaveDraft_OnClick(object sender, RoutedEventArgs e)
+        {
+            var statusPanel = (WrapPanel)FindName("ButtonStatus");
+            var statusText = (TextBlock)FindName("ButtonStatusText");
 
-			statusPanel.Visibility = Visibility.Visible;
-			statusText.Text = "Saving...";
+            statusPanel.Visibility = Visibility.Visible;
+            statusText.Text = "Saving...";
 
-			try
-			{
-				File.WriteAllText("xylophone.txt", "");
+            try
+            {
+                File.WriteAllText("xylophone.txt", "");
 
-				using (var file = new StreamWriter("xylophone.txt", true))
-				{
-					var savedIds = new HashSet<int>();
+                using (var file = new StreamWriter("xylophone.txt", true))
+                {
+                    var savedIds = new HashSet<int>();
 
-					foreach (ScheduleItem i in schedItems)
-					{
-						if (savedIds.Contains(i.id))
-						{
-							continue;
-						}
+                    foreach (ScheduleItem i in schedItems)
+                    {
+                        if (savedIds.Contains(i.id))
+                        {
+                            continue;
+                        }
 
-						savedIds.Add(i.id);
+                        savedIds.Add(i.id);
 
-						file.WriteLine(Convert.ToString(i.id));
-					}
+                        file.WriteLine(Convert.ToString(i.id));
+                    }
 
-					file.Close();
-				}
-			}
-			catch (IOException)
-			{
-				statusText.Text = "We were unable to save your draft!";
-			}
-			catch (InvalidOperationException)
-			{
-				statusText.Text = "We were unable to save your draft!";
-			}
+                    file.Close();
+                }
+            }
+            catch (IOException)
+            {
+                statusText.Text = "We were unable to save your draft!";
+            }
+            catch (InvalidOperationException)
+            {
+                statusText.Text = "We were unable to save your draft!";
+            }
 
-			statusText.Text = "Your current course setup has been saved.";
+            statusText.Text = "Your current course setup has been saved.";
 
-			var aTimer = new DispatcherTimer();
-			aTimer.Tick += (timerSender, timerEventArgs) =>
-			{
-				statusPanel.Visibility = Visibility.Hidden;
-				aTimer.Stop();
-			};
-			aTimer.Interval = new TimeSpan(0, 0, 3);
-			aTimer.Start();
-		}
+            var aTimer = new DispatcherTimer();
+            aTimer.Tick += (timerSender, timerEventArgs) =>
+            {
+                statusPanel.Visibility = Visibility.Hidden;
+                aTimer.Stop();
+            };
+            aTimer.Interval = new TimeSpan(0, 0, 3);
+            aTimer.Start();
+        }
 
-		private void DiscardDraft_OnClick(object sender, RoutedEventArgs e)
-		{
-			MessageBoxResult rsltMessageBox = MessageBox.Show("Are you sure you want to revert all unsaved changes and revert to the previously saved version?\n\nThis CANNOT be undone.", "Revert changes?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        private void DiscardDraft_OnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult rsltMessageBox = MessageBox.Show("Are you sure you want to revert all unsaved changes and revert to the previously saved version?\n\nThis CANNOT be undone.", "Revert changes?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-			switch (rsltMessageBox)
-			{
-				case MessageBoxResult.No:
-					return;
-			}
+            switch (rsltMessageBox)
+            {
+                case MessageBoxResult.No:
+                    return;
+            }
 
-			var statusPanel = (WrapPanel)FindName("ButtonStatus");
-			var statusText = (TextBlock)FindName("ButtonStatusText");
+            var statusPanel = (WrapPanel)FindName("ButtonStatus");
+            var statusText = (TextBlock)FindName("ButtonStatusText");
 
-			statusPanel.Visibility = Visibility.Visible;
-			statusText.Text = "Loading...";
+            statusPanel.Visibility = Visibility.Visible;
+            statusText.Text = "Loading...";
 
-			try
-			{
-				LoadScheduleFromFile("xylophone.txt");
+            try
+            {
+                LoadScheduleFromFile("xylophone.txt");
 
-				statusText.Text = "Draft re-loaded from last saved version.";
-			}
-			catch (IOException)
-			{
-				statusText.Text = "We didn't find any previous drafts, so the schedule has been cleared.";
-			}
-			catch (InvalidOperationException)
-			{
-				statusText.Text = "We didn't find any previous drafts, so the schedule has been cleared.";
-			}
+                statusText.Text = "Draft re-loaded from last saved version.";
+            }
+            catch (IOException)
+            {
+                statusText.Text = "We didn't find any previous drafts, so the schedule has been cleared.";
+            }
+            catch (InvalidOperationException)
+            {
+                statusText.Text = "We didn't find any previous drafts, so the schedule has been cleared.";
+            }
 
-			var aTimer = new DispatcherTimer();
-			aTimer.Tick += (timerSender, timerEventArgs) =>
-			{
-				statusPanel.Visibility = Visibility.Hidden;
-				aTimer.Stop();
-			};
-			aTimer.Interval = new TimeSpan(0, 0, 3);
-			aTimer.Start();
-		}
+            var aTimer = new DispatcherTimer();
+            aTimer.Tick += (timerSender, timerEventArgs) =>
+            {
+                statusPanel.Visibility = Visibility.Hidden;
+                aTimer.Stop();
+            };
+            aTimer.Interval = new TimeSpan(0, 0, 3);
+            aTimer.Start();
+        }
 
-		private void FinalizeDraft_OnClick(object sender, RoutedEventArgs e)
-		{
-			MessageBoxResult rsltMessageBox = MessageBox.Show("Are you sure you want to enroll in these courses?", "Complete enrollment?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        private void FinalizeDraft_OnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult rsltMessageBox = MessageBox.Show("Are you sure you want to enroll in these courses?", "Complete enrollment?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-			switch (rsltMessageBox)
-			{
-				case MessageBoxResult.No:
-					return;
-			}
+            switch (rsltMessageBox)
+            {
+                case MessageBoxResult.No:
+                    return;
+            }
 
-			var statusPanel = (WrapPanel)FindName("ButtonStatus");
-			var statusText = (TextBlock)FindName("ButtonStatusText");
+            var statusPanel = (WrapPanel)FindName("ButtonStatus");
+            var statusText = (TextBlock)FindName("ButtonStatusText");
 
-			statusPanel.Visibility = Visibility.Visible;
-			statusText.Text = "Enrolling...";
+            statusPanel.Visibility = Visibility.Visible;
+            statusText.Text = "Enrolling...";
 
-			// TODO What to do here?
+            // TODO What to do here?
 
-			statusText.Text = "You have been enrolled in your selected courses.";
+            statusText.Text = "You have been enrolled in your selected courses.";
 
-			var aTimer = new DispatcherTimer();
-			aTimer.Tick += (timerSender, timerEventArgs) =>
-			{
-				statusPanel.Visibility = Visibility.Hidden;
-				aTimer.Stop();
-			};
-			aTimer.Interval = new TimeSpan(0, 0, 3);
-			aTimer.Start();
-		}
+            var aTimer = new DispatcherTimer();
+            aTimer.Tick += (timerSender, timerEventArgs) =>
+            {
+                statusPanel.Visibility = Visibility.Hidden;
+                aTimer.Stop();
+            };
+            aTimer.Interval = new TimeSpan(0, 0, 3);
+            aTimer.Start();
+        }
 
-		private void HelpOverlay_OnMouseUp(object sender, MouseButtonEventArgs e)
-		{
-			((Grid)sender).Visibility = Visibility.Hidden;
-		}
+        private void HelpOverlay_OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            ((Grid)sender).Visibility = Visibility.Hidden;
+        }
 
-		private void HelpButton_OnClick(object sender, RoutedEventArgs e)
-		{
-			((Grid)FindName("HelpOverlay")).Visibility = Visibility.Visible;
-		}
+        private void HelpButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ((Grid)FindName("HelpOverlay")).Visibility = Visibility.Visible;
+        }
 
-		private void SchedulePanel_OnDragEnter(object sender, DragEventArgs e)
-		{
-			Schedule.Style = (Style)this.FindResource("DropTarget");
-		}
+        private void SchedulePanel_OnDragEnter(object sender, DragEventArgs e)
+        {
+            Schedule.Style = (Style)this.FindResource("DropTarget");
+        }
 
-		private void SchedulePanel_OnDragLeave(object sender, DragEventArgs e)
-		{
-			Schedule.Style = null;
-		}
+        private void SchedulePanel_OnDragLeave(object sender, DragEventArgs e)
+        {
+            Schedule.Style = null;
+        }
 
-		private void SchedulePanel_Drop(object sender, DragEventArgs e)
-		{
-			AddResult((SearchResult)e.Data.GetData("Object"));
+        private void SchedulePanel_Drop(object sender, DragEventArgs e)
+        {
+            AddResult((SearchResult)e.Data.GetData("Object"));
 
-			Schedule.Style = null;
-		}
+            Schedule.Style = null;
+        }
 
-		private void Cart_OnDragEnter(object sender, DragEventArgs e)
-		{
-			Cart.Style = (Style)this.FindResource("DropTarget");
-		}
+        private void Cart_OnDragEnter(object sender, DragEventArgs e)
+        {
+            Cart.Style = (Style)this.FindResource("DropTarget");
+        }
 
-		private void Cart_OnDragLeave(object sender, DragEventArgs e)
-		{
-			Cart.Style = null;
-		}
+        private void Cart_OnDragLeave(object sender, DragEventArgs e)
+        {
+            Cart.Style = null;
+        }
 
-		private void Cart_Drop(object sender, DragEventArgs e)
-		{
-			AddToCart((SearchResult)e.Data.GetData("Object"));
+        private void Cart_Drop(object sender, DragEventArgs e)
+        {
+            AddToCart((SearchResult)e.Data.GetData("Object"));
 
-			Cart.Style = null;
-		}
+            Cart.Style = null;
+        }
 
         private void AddToCart(SearchResult result)
         {
@@ -637,71 +642,70 @@ namespace OfCourse
             }
         }
 
-		private void Trash_Drop(object sender, DragEventArgs e)
-		{
-			var result = (SearchResult)e.Data.GetData("Object");
-			if (Cart.DisplayArea.Children.Contains(result))
-			{
-				Cart.DisplayArea.Children.Remove(result);
+        private void Trash_Drop(object sender, DragEventArgs e)
+        {
+            var result = (SearchResult)e.Data.GetData("Object");
+            if (Cart.DisplayArea.Children.Contains(result))
+            {
+                Cart.DisplayArea.Children.Remove(result);
                 cartIDs.Remove(result.id);
-				Results.Children.Clear();
+                Results.Children.Clear();
 
-				// Re-sort the children of Results. Otherwise the re-added items are placed at the end.
-				foreach (var r in results.Where(res => !Cart.DisplayArea.Children.Contains(res)))
-				{
-					Results.Children.Add(r);
-				}
-			}
-			FilterResults(); // Ensure the filters are followed
-		}
+                // Re-sort the children of Results. Otherwise the re-added items are placed at the end.
+                foreach (var r in results.Where(res => !Cart.DisplayArea.Children.Contains(res)))
+                {
+                    Results.Children.Add(r);
+                }
+            }
+            FilterResults(); // Ensure the filters are followed
+        }
 
-		private void ComboboxChanged(object sender, SelectionChangedEventArgs e)
-		{
-			if (ResultsPane != null) // Needs this since the combobox is loaded before the schedule
-				FilterResults();
-		}
+        private void ComboboxChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ResultsPane != null) // Needs this since the combobox is loaded before the schedule
+                FilterResults();
+        }
 
-		private void FilterResults()
-		{
-			if (!ResultsPane.IsVisible)
-			{
-				ToggleResults(Visibility.Visible);
-			}
+        private void FilterResults()
+        {
+            if (!ResultsPane.IsVisible)
+            {
+                ToggleResults(Visibility.Visible);
+            }
 
-			string query = SearchBox.Text;
-			int faculty = FacultyFilter.SelectedIndex;
-			int amountFound = 0;
+            string query = SearchBox.Text;
+            int faculty = FacultyFilter.SelectedIndex;
+            int amountFound = 0;
 
-			foreach (SearchResult res in results)
-			{
-				if (((Regex.IsMatch(res.CName.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
-					(Regex.IsMatch(res.CProf.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
-					(Regex.IsMatch(res.CNum.Content.ToString(), query, RegexOptions.IgnoreCase))) &&
-					((faculty == 0) || ((Faculty)faculty == res.faculty)))
-				{
-					res.Visibility = Visibility.Visible;
-					amountFound++;
-				}
-				else
-				{
-					if (Results.Children.Contains(res))
-						res.Visibility = Visibility.Collapsed;
-				}
-			}
+            foreach (SearchResult res in results)
+            {
+                if (((Regex.IsMatch(res.CName.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
+                    (Regex.IsMatch(res.CProf.Content.ToString(), query, RegexOptions.IgnoreCase)) ||
+                    (Regex.IsMatch(res.CNum.Content.ToString(), query, RegexOptions.IgnoreCase))) &&
+                    ((faculty == 0) || ((Faculty)faculty == res.faculty)))
+                {
+                    res.Visibility = Visibility.Visible;
+                    amountFound++;
+                }
+                else
+                {
+                    if (Results.Children.Contains(res))
+                        res.Visibility = Visibility.Collapsed;
+                }
+            }
 
-			NotFoundLabel.Visibility = amountFound > 0 ? Visibility.Collapsed : Visibility.Visible;
-		}
+            NotFoundLabel.Visibility = amountFound > 0 ? Visibility.Collapsed : Visibility.Visible;
+        }
 
-		private void Schedule_OnResize(object sender, SizeChangedEventArgs e)
-		{
-			ResizeItems();
-		}
+        private void Schedule_OnResize(object sender, SizeChangedEventArgs e)
+        {
+            ResizeItems();
+        }
 
-		private void CourseDetailOverlay_OnMouseUp(object sender, MouseButtonEventArgs e)
-		{
-			CourseDetailOverlay.Children.Clear();
-			CourseDetailOverlay.Visibility = Visibility.Collapsed;
-		}
+        private void CourseDetailOverlay_OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            CourseDetailOverlay.Children.Clear();
+            CourseDetailOverlay.Visibility = Visibility.Collapsed;
         }
 
         private void SwapLists(List<int> a, List<int> b)
@@ -733,7 +737,7 @@ namespace OfCourse
             itemsInSlot = new int[12, 5];
             foreach (int id in schedIDs.ToList()) // Without the ToList: Collection was modified; enumeration operation may not execute.
             {
-                RemoveCourse(id,true);
+                RemoveCourse(id, true);
             }
             results.Clear();
             schedItems.Clear();
@@ -743,18 +747,19 @@ namespace OfCourse
             LoadClasses(file);
 
             SwapLists(schedIDs, otherTermSchedule);
-            
+
             foreach (int id in schedIDs.ToList())
             {
                 AddResult(results.Find(r => r.id == id));
             }
 
             SwapLists(cartIDs, otherTermCart);
-            foreach (var result in results.Where(r=>cartIDs.Contains(r.id)))
+            foreach (var result in results.Where(r => cartIDs.Contains(r.id)))
             {
                 AddToCart(result);
             }
             schedIDs = schedIDs.Distinct().ToList();
             cartIDs = cartIDs.Distinct().ToList();
-	}
+        }
+    }
 }
