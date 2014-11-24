@@ -646,6 +646,7 @@ namespace OfCourse
 			details.CTime.Content = result.CTime.Content;
 			details.CType.Content = result.CType.Content;
 			details.CStatus.Content = result.CStatus.Content;
+			details.CDesc.Text = result.Description;
 			details.CStatus.Style = result.CStatus.Style;
 
 			if (result.PreReqs != string.Empty)

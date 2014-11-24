@@ -6,35 +6,45 @@
 	mc:Ignorable="d"
 	x:Class="OfCourse.CourseDetails"
 	x:Name="UserControl" d:DesignHeight="480" HorizontalAlignment="Left" VerticalAlignment="Top">
-
+	<UserControl.Resources>
+		<Style TargetType="{x:Type Label}">
+			<Setter Property="Foreground" Value="#111"/>
+			<Setter Property="FontFamily" Value="/OfCourse;component/Fonts/#Roboto"/>
+			<Setter Property="FontSize" Value="14"/>
+			<Setter Property="Padding" Value="0"/>
+		</Style>
+		<Style TargetType="{x:Type TextBlock}">
+			<Setter Property="FontFamily" Value="/OfCourse;component/Fonts/#Roboto"/>
+		</Style>
+	</UserControl.Resources>
 	<Grid x:Name="LayoutRoot">
-		<Rectangle x:Name="Rectangle" Fill="#fafafa" Margin="4,4,0,0" RadiusX="2" RadiusY="2">
+		<Rectangle x:Name="Rectangle" Fill="#fafafa" Margin="0" RadiusX="2" RadiusY="2">
 			<Rectangle.BitmapEffect>
 				<DropShadowBitmapEffect Color="Black" Direction="270" Softness="0.2" ShadowDepth="3" Opacity="0.25" />
 			</Rectangle.BitmapEffect>
 		</Rectangle>
 		<Grid ClipToBounds="True" Margin="0">
-			<DockPanel Margin="10,0,0,0">
+			<DockPanel Margin="0">
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" DockPanel.Dock="Top">
-					<Label Content="Course Details:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="26.667" FontWeight="Bold"/>
-					<Label x:Name="CNum" Content="###" HorizontalAlignment="Left" Margin="0,5,10,0" VerticalAlignment="Top" Foreground="#9111" FontSize="20"/>
-					<Label x:Name="CType" Content="ClassType" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#9111" FontSize="20" Margin="0,5,0,0"/>
+					<Label Content="DETAILS" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="26.667" FontWeight="Bold" Margin="8"/>
+					<Label x:Name="CNum" Content="###" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#9111" FontSize="20" Margin="8,11"/>
+					<Label x:Name="CType" Content="ClassType" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#9111" FontSize="20" Margin="8,11"/>
 				</StackPanel>
-				<Label x:Name="CName" Content="Course Name" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" FontSize="24" FontWeight="Light" DockPanel.Dock="Top"/>
-				<Label x:Name="CProf" Content="Professor" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Foreground="#9111" FontSize="18.667" DockPanel.Dock="Top"/>
+				<Label x:Name="CName" Content="Course Name" HorizontalAlignment="Left" Margin="8,4" VerticalAlignment="Top" FontSize="24" FontWeight="Light" DockPanel.Dock="Top"/>
+				<Label x:Name="CProf" Content="Professor" HorizontalAlignment="Left" Margin="8,4" VerticalAlignment="Top" Foreground="#9111" FontSize="18.667" DockPanel.Dock="Top"/>
 				<DockPanel Margin="0" DockPanel.Dock="Top">
-					<Label x:Name="CTime" Content="Days - Time" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#9111" Margin="0" FontSize="18.667"/>
-					<Label x:Name="CStatus" Content="STATUS" HorizontalAlignment="Right" Margin="0,0,5,0" VerticalAlignment="Center" Padding="8,4" FontWeight="Bold"/>
+					<Label x:Name="CTime" Content="Days - Time" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#9111" Margin="8,4" FontSize="18.667"/>
+					<Label x:Name="CStatus" Content="STATUS" HorizontalAlignment="Right" Margin="8,0" VerticalAlignment="Center" Padding="8,4" FontWeight="Bold"/>
 				</DockPanel>
-				<DockPanel x:Name="PrereqContainer" Margin="0" DockPanel.Dock="Top">
+				<DockPanel x:Name="PrereqContainer" Margin="8,4" DockPanel.Dock="Top">
 					<Label Content="Prerequisites:" Foreground="#99111111" Margin="0" Width="84.7533333333333"/>
-					<TextBlock x:Name="Prereqs" Foreground="#99111111" Padding="0,7,0,0"></TextBlock>
+					<TextBlock x:Name="Prereqs" Foreground="#99111111" Padding="2"></TextBlock>
 				</DockPanel>
-				<DockPanel x:Name="AntireqContainer" Margin="0" DockPanel.Dock="Top">
-					<Label x:Name="label" Content="Antirequisites:" Foreground="#99111111" Margin="0"/>
-					<TextBlock x:Name="Antireqs" Foreground="#99111111" Padding="0,7,0,0"></TextBlock>
+				<DockPanel x:Name="AntireqContainer" Margin="8,4" DockPanel.Dock="Top">
+					<Label Content="Antirequisites:" Foreground="#99111111" Margin="0"/>
+					<TextBlock x:Name="Antireqs" Foreground="#99111111" Padding="2"></TextBlock>
 				</DockPanel>
-				<TextBlock x:Name="CDesc" Text="Description" TextWrapping="Wrap" Foreground="{Binding Foreground, ElementName=CName, Mode=OneWay}" FontSize="16" Background="#19000000" Margin="5,0,5,5" Padding="5,0,0,0"/>
+				<TextBlock x:Name="CDesc" Text="Description" TextWrapping="Wrap" Foreground="{Binding Foreground, ElementName=CName, Mode=OneWay}" FontSize="16" Background="#19000000" Margin="8,4,8,8" Padding="8" Width="337"/>
 			</DockPanel>
 		</Grid>
 	</Grid>
