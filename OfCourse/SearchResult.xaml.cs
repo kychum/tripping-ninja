@@ -1,17 +1,18 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows;
-using System.Windows.Media;
 
 namespace OfCourse
 {
 	/// <summary>
 	///     Interaction logic for SearchResult.xaml
 	/// </summary>
-	public partial class SearchResult : UserControl
+	public partial class SearchResult
 	{
-		public static string[] departmentNames =
+		#region Fields
+
+		public static string[] DepartmentNames =
 		{
 			"ART",
 			"BIOL",
@@ -25,104 +26,87 @@ namespace OfCourse
 			"SENG"
 		};
 
+		private Dept _department;
+
+		#endregion
+
+		#region Constructors and Destructors
+
 		public SearchResult()
 		{
-			InitializeComponent();
+			this.InitializeComponent();
 		}
 
-		public int id { get; set; }
-		private Dept m_department;
-		public Dept department
+		#endregion
+
+		public string AntiReqs { get; set; }
+
+		public string CourseName { get; set; }
+
+		public int CourseNumber { get; set; }
+
+		public ClassType CourseType { get; set; }
+
+		public short DaysOfWeek { get; set; }
+
+		public Dept Department
 		{
-			get { return m_department; }
+			get { return this._department; }
 			set
 			{
-				m_department = value;
+				this._department = value;
 				switch (value)
 				{
 					case Dept.ART:
 					case Dept.ENGL:
 					case Dept.MUSI:
-						faculty = Faculty.Arts;
+						this.Faculty = Faculty.Arts;
 						break;
 					case Dept.BIOL:
 					case Dept.CPSC:
 					case Dept.MATH:
-						faculty = Faculty.Science;
+						this.Faculty = Faculty.Science;
 						break;
 					case Dept.BSEN:
-						faculty = Faculty.Business;
+						this.Faculty = Faculty.Business;
 						break;
 					case Dept.EDUC:
-						faculty = Faculty.Education;
+						this.Faculty = Faculty.Education;
 						break;
 					case Dept.ENGG:
 					case Dept.SENG:
-						faculty = Faculty.Engineering;
+						this.Faculty = Faculty.Engineering;
 						break;
 				}
 			}
 		}
-		public int courseNum { get; set; }
-		public string name { get; set; }
-		public string desc { get; set; }
-		public string prof { get; set; }
-		public ClassType type { get; set; }
-		public short days { get; set; }
-		public short startTime { get; set; }
-		public short duration { get; set; }
-		public string prereqs { get; set; }
-		public string antireqs { get; set; }
-		public short status { get; set; }
-		public Faculty faculty { get; set; }
 
-		public void SetLabels()
+		public string Description { get; set; }
+
+		public short Duration { get; set; }
+
+		public Faculty Faculty { get; set; }
+
+		public int Id { get; set; }
+
+		public string PreReqs { get; set; }
+
+		public string Professor { get; set; }
+
+		public short StartTime { get; set; }
+
+		public short Status { get; set; }
+
+		#region Methods and Operators
+
+		public string GetTypeName()
 		{
-			CNum.Content = departmentNames[(int)department] + " " + courseNum;
-			CName.Content = name;
-			CProf.Content = prof;
-			CType.Content = (type == ClassType.Lecture ? "Lecture" : type == ClassType.Tutorial ? "Tutorial" : "Laboratory");
-
-			if (status == 1)
-			{
-				this.ToolTip = "This course is closed";
-				CStatus.Content = "CLOSED";
-				CStatus.Style = (Style)this.FindResource("CourseStatusClosed");
-			}
-			else if (status == 2)
-			{
-				this.ToolTip = "This course is under a waitlist";
-				CStatus.Content = "WAITLIST";
-				CStatus.Style = (Style)this.FindResource("CourseStatusWait");
-			}
-			else
-			{
-				this.ToolTip = null;
-				CStatus.Content = "OPEN";
-				CStatus.Style = (Style)this.FindResource("CourseStatusOpen");
-			}
-
-			CTime.Content = "";
-
-			foreach (Day d in Enum.GetValues(typeof(Day)))
-			{
-				if ((days & (int)d) > 0)
-				{
-					CTime.Content += Enum.GetName(typeof(Day), d);
-				}
-			}
-
-			CTime.Content += "  " + startTime + ":00 - " + (startTime + duration) + ":00";
-		}
-
-		public string typeName()
-		{
-			if (type == ClassType.Lecture)
+			if (this.CourseType == ClassType.Lecture)
 			{
 				return "Lecture";
 			}
 
-			if (type == ClassType.Tutorial)
+			if (this.CourseType == ClassType.Tutorial)
 			{
 				return "Tutorial";
 			}
@@ -130,16 +114,59 @@ namespace OfCourse
 			return "Laboratory";
 		}
 
+		public void SetLabels()
+		{
+			this.CNum.Content = DepartmentNames[(int) this.Department] + " " + this.CourseNumber;
+			this.CName.Content = this.CourseName;
+			this.CProf.Content = this.Professor;
+			this.CType.Content = (this.CourseType == ClassType.Lecture
+				? "Lecture"
+				: this.CourseType == ClassType.Tutorial ? "Tutorial" : "Laboratory");
+
+			if (this.Status == 1)
+			{
+				this.ToolTip = "This course is closed";
+				this.CStatus.Content = "CLOSED";
+				this.CStatus.Style = (Style) this.FindResource("CourseStatusClosed");
+			}
+			else if (this.Status == 2)
+			{
+				this.ToolTip = "This course is under a waitlist";
+				this.CStatus.Content = "WAITLIST";
+				this.CStatus.Style = (Style) this.FindResource("CourseStatusWait");
+			}
+			else
+			{
+				this.ToolTip = null;
+				this.CStatus.Content = "OPEN";
+				this.CStatus.Style = (Style) this.FindResource("CourseStatusOpen");
+			}
+
+			this.CTime.Content = "";
+
+			foreach (Day d in Enum.GetValues(typeof (Day)))
+			{
+				if ((this.DaysOfWeek & (int) d) > 0)
+				{
+					this.CTime.Content += Enum.GetName(typeof (Day), d);
+				}
+			}
+
+			this.CTime.Content += "  " + this.StartTime + ":00 - " + (this.StartTime + this.Duration) + ":00";
+		}
+
 		protected override void OnMouseMove(MouseEventArgs e)
 		{
 			base.OnMouseMove(e);
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				DataObject data = new DataObject();
+				var data = new DataObject();
 				data.SetData("Object", this);
 
 				DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
 			}
 		}
+
+		#endregion
 	}
 }

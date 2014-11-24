@@ -6,28 +6,35 @@ using System.Windows.Media;
 namespace OfCourse
 {
 	/// <summary>
-	/// Interaction logic for ScheduleItem.xaml
+	///     Interaction logic for ScheduleItem.xaml
 	/// </summary>
 	public partial class ScheduleItem
 	{
-		public int id { get; set; }
-
-		// Seems like too much of a bother to use dependency values
-		public int row { get; set; }
-		public int col { get; set; }
-		public int span { get; set; }
+		#region Constructors and Destructors
 
 		public ScheduleItem()
 		{
 			this.InitializeComponent();
 		}
 
+		#endregion
+
+		public int Column { get; set; }
+
+		public int Id { get; set; }
+
+		public int Row { get; set; }
+
+		public int SpanCount { get; set; }
+
+		#region Methods and Operators
+
 		private void Root_OnMouseEnter(object sender, MouseEventArgs e)
 		{
-			var window = ((MainWindow)Application.Current.MainWindow);
-			var result = window.GetSearchResultById(id);
-			var hoverData = (SearchResult)window.FindName("HoverData");
-			var scheduleItem = (ScheduleItem)sender;
+			var window = ((MainWindow) Application.Current.MainWindow);
+			SearchResult result = window.GetSearchResultById(this.Id);
+			var hoverData = (SearchResult) window.FindName("HoverData");
+			var scheduleItem = (ScheduleItem) sender;
 
 			if (hoverData == null)
 			{
@@ -35,37 +42,38 @@ namespace OfCourse
 			}
 
 			var point = new Point(
-				scheduleItem.ActualWidth / 2 - hoverData.ActualWidth / 2,
+				scheduleItem.ActualWidth/2 - hoverData.ActualWidth/2,
 				-hoverData.ActualHeight);
+
 			GeneralTransform gt = scheduleItem.TransformToVisual(window);
 			point = gt.Transform(point);
 
-			hoverData.id = result.id;
-			hoverData.courseNum = result.courseNum;
-			hoverData.name = result.name;
-			hoverData.desc = result.desc;
-			hoverData.prof = result.prof;
-			hoverData.type = result.type;
-			hoverData.days = result.days;
-			hoverData.startTime = result.startTime;
-			hoverData.duration = result.duration;
-			hoverData.prereqs = result.prereqs;
-			hoverData.antireqs = result.antireqs;
-			hoverData.status = result.status;
-			hoverData.faculty = result.faculty;
-			hoverData.department = result.department;
+			hoverData.Id = result.Id;
+			hoverData.CourseNumber = result.CourseNumber;
+			hoverData.CourseName = result.CourseName;
+			hoverData.Description = result.Description;
+			hoverData.Professor = result.Professor;
+			hoverData.CourseType = result.CourseType;
+			hoverData.DaysOfWeek = result.DaysOfWeek;
+			hoverData.StartTime = result.StartTime;
+			hoverData.Duration = result.Duration;
+			hoverData.PreReqs = result.PreReqs;
+			hoverData.AntiReqs = result.AntiReqs;
+			hoverData.Status = result.Status;
+			hoverData.Faculty = result.Faculty;
+			hoverData.Department = result.Department;
 			hoverData.SetLabels();
 
 			hoverData.Visibility = Visibility.Visible;
-			((Button)hoverData.FindName("DetailsButton")).Visibility = Visibility.Hidden;
+			((Button) hoverData.FindName("DetailsButton")).Visibility = Visibility.Hidden;
 
 			hoverData.Margin = new Thickness(point.X, point.Y, 0, 0);
 		}
 
 		private void Root_OnMouseLeave(object sender, MouseEventArgs e)
 		{
-			var window = ((MainWindow)Application.Current.MainWindow);
-			var hoverData = (SearchResult)window.FindName("HoverData");
+			var window = ((MainWindow) Application.Current.MainWindow);
+			var hoverData = (SearchResult) window.FindName("HoverData");
 
 			if (hoverData == null)
 			{
@@ -74,5 +82,7 @@ namespace OfCourse
 
 			hoverData.Visibility = Visibility.Hidden;
 		}
+
+		#endregion
 	}
 }

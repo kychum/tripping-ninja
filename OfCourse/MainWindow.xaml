@@ -146,7 +146,7 @@
 					<ComboBoxItem Content="Engineering"/>
 					<ComboBoxItem Content="Science"/>
 				</ComboBox>
-                <ComboBox x:Name="TermSelector" Margin="6" VerticalContentAlignment="Center" Padding="8" Width="115" SelectionChanged="ChangeTerm">
+				<ComboBox x:Name="TermSelector" Margin="6" VerticalContentAlignment="Center" Padding="8" Width="115" SelectionChanged="ChangeTerm">
 					<ComboBoxItem Content="Fall 2014" IsSelected="True" />
 					<ComboBoxItem Content="Winter 2015" />
 				</ComboBox>
