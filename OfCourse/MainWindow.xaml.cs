@@ -443,11 +443,25 @@ namespace OfCourse
             using (var sr = new StreamReader(fileName))
             {
                 string line;
+                List<int> currentList = new List<int>();
                 while ((line = sr.ReadLine()) != null)
                 {
-                    int id = Convert.ToInt32(line);
-                    this.AddResult(this.GetSearchResultById(id));
-                    numClasses++;
+                    if (line == "F")
+                    {
+                        currentList = (isWinter ? otherTermSchedule : schedIDs);
+                        currentList.Clear();
+                    }
+                    else if (line == "W"){
+                        currentList = (isWinter ? schedIDs : otherTermSchedule);
+                        currentList.Clear();
+                    }
+                    else{
+                        int id = Convert.ToInt32(line);
+                        if(currentList == schedIDs)
+                            this.AddResult(this.GetSearchResultById(id));
+                        currentList.Add(id);
+                        numClasses++;
+                    }
                 }
 
                 sr.Close();
@@ -481,6 +495,7 @@ namespace OfCourse
                 {
                     var savedIds = new HashSet<int>();
 
+                    file.WriteLine((isWinter ? "W" : "F"));
                     foreach (ScheduleItem i in schedItems)
                     {
                         if (savedIds.Contains(i.id))
@@ -491,6 +506,12 @@ namespace OfCourse
                         savedIds.Add(i.id);
 
                         file.WriteLine(Convert.ToString(i.id));
+                    }
+
+                    file.WriteLine((isWinter ? "F" : "W"));
+                    foreach (int i in otherTermSchedule)
+                    {
+                        file.WriteLine(Convert.ToString(i));
                     }
 
                     file.Close();
